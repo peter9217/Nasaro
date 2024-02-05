@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../css/signUp.css">
+	<title>나사로의 집</title>
+	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
+</head>
+<body id="asd">
+	<th:block th:replace="~{top/top.html}"></th:block>
+	<section id="signUpFrame">
+		<form action="">
+			<div id="signUpTitle">회원가입</div>
+			<table id="signUpForm">
+				<tr>
+					<th class="signUp-menu">아이디</th>
+					<td id="signUpId"><input type="text" placeholder="아이디를 입력해주세요"></td>
+				</tr>
+				<tr>
+					<th class="signUp-menu">이름</th>
+					<td id="signUpName"><input type="text" placeholder="아이디를 입력해주세요"></td>
+				</tr>
+				<tr>
+					<th class="signUp-menu">비밀번호</th>
+					<td id="signUpPassword"><input type="text" placeholder="비밀번호를 입력해주세요"></td>
+				</tr>
+				<tr>
+					<th class="signUp-menu">비밀번호확인</th>
+					<td id="signUpPasswordConfirm"><input type="text" placeholder="비밀번호를 다시 입력해주세요"></td>
+				</tr>
+				<tr>
+					<th class="signUp-menu">전화번호</th>
+					<td id="signUpTel"><input type="text" placeholder="전화번호를 입력해주세요"></td>
+				</tr>
+			</table>
+			<div>※전화번호는 아이디 및 비밀번호를 찾을때만 사용됩니다.</div>
+			<div id="signUpBtn">
+				<input type="submit" value="회원가입" id="signUpConfirm">
+			</div>
+		</form>
+	</section>
+</body>
+<script>
+</script>
+</html>

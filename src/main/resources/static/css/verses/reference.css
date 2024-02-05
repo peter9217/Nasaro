@@ -1,0 +1,127 @@
+
+
+
+
+
+
+
+/* aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa referenceMiddle */
+
+#referenceMain{
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aquamarine;
+  width: 80%;
+  height: 100px;
+
+}
+#referenceMiddle{
+}
+
+
+
+
+
+
+#referencePic{
+  width: 200px;
+  height: 500px;
+  background-color: aquamarine;
+}
+
+#referenceMiddleContent{
+  display: flex;
+  margin: 0 10%;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+#referenceMiddleContent > div{
+}
+
+.reference-content{
+  width: 90%;
+  border: 0.5px solid #ccc;
+}
+
+.reference-content th{
+  background-color: hsl(0, 4%, 84%);
+}
+.reference-content td{
+  text-align: center;
+  background-color: beige;
+}
+.reference-content th:nth-child(1){
+  width: 10%;
+}
+.reference-content th:nth-child(2){
+  white-space: nowrap;       /* 한 줄로 표시 */
+  overflow: hidden;          /* 넘치는 부분을 숨김 */
+  text-overflow: ellipsis;   /* 초과된 부분에 대한 생략 표시 (...) */
+  max-width: 100px;  
+  width: 40%;
+}
+.reference-content th:nth-child(3){
+  width: 10%;
+}
+.reference-content th:nth-child(4){
+  width: 10%;
+}
+
+
+
+
+#pagenation{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+#pagenation > div{
+  display: flex;
+  justify-content: center;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px
+}
+#versesContent{
+  display: flex;
+  justify-content: center;
+}
+#versesDetail{
+  width: 800px;
+  border : 1px solid #ccc;
+  border-radius: 10px;
+}
+#versesDetail td{
+  border : 1px solid #ccc;
+  
+}
+
+#versesDetail tr > td:nth-child(1){
+  text-align: center;
+  width: 150px;
+  height: 50px;
+  background-color: antiquewhite;
+}
+#versesDetail tr > td:nth-child(2){
+  padding-left: 30px;
+}
+#versesDetail tr:nth-child(5) > td{
+  padding-left: 30px;
+  text-align: left;
+  background-color: white;
+}
+#versesButton{
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+#versesButton > button{
+  margin-right: 700px;
+}

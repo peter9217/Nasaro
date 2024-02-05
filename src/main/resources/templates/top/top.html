@@ -1,0 +1,93 @@
+<head>
+    <link rel="stylesheet" href="../../css/top.css">
+</head>
+<body>
+    <section id="topFrame">
+		<div id="topMain">
+			<div>
+				<a href="/">
+					<img id="topLogo" src="../../img/나사로 로고.png" alt="">
+				</a>
+			</div>
+			<div id="topRight">
+				<div id="topSign" th:unless="${session.loginMember}">
+					<div id="login">로그인</div>
+					<a href="/sign/signUp">회원가입</a>
+				</div>
+				<div id="topSign" th:if="${session.loginMember}">
+					<div id="login" th:text="|${session.loginMember.memberName} 님 안녕하세요|">로그인</div>
+					<button type="none">
+						<a href="/logout">로그아웃</a>
+					</button>
+				</div>
+				<div id="topLogin" th:unless="${session.loginMember}">
+					<form action="/login" method="post">
+						<div>아이디　<input type="text" size="15" name="memberId"></div>
+						<div>비밀번호<input type="text" size="15" name="memberPw"></div>
+						<button>로그인</button>
+					</form>
+				</div>
+				<nav class="top-nav">
+					<div>
+						<div class="top-nav-menu">
+							<ul class="top-menu-content">
+								<li>나사로의집 소개</li>
+							</ul>
+							<div class="top-menu-hover">
+								<div><a href="/intro/home">나사로의 집</a></div>
+								<div><a href="/intro/consultation">상담방문안내</a></div>
+								<div><a href="/intro/map">교통안내</a></div>
+							</div>
+						</div>
+						<div class="top-nav-menu">
+							<ul class="top-menu-content">
+								<li>말씀/신앙자료실</li>
+							</ul>
+							<div class="top-menu-hover">
+								<div><a href="/verses/verses">말씀</a></div>
+								<div><a href="/verses/column">컬럼</a></div>
+								<div><a href="/verses/reference">신앙자료실</a></div>
+							</div>
+						</div>
+						<div class="top-nav-menu">
+							<ul class="top-menu-content">
+								<li>기도의삶</li>
+							</ul>
+							<div class="top-menu-hover">
+								<div><a href="/pray/prayer">기도문</a></div>
+								<div><a href="/pray/nations">열방을위한기도</a></div>
+								<div><a href="/pray/family">가족기도방</a></div>
+							</div>
+						</div>
+						<div class="top-nav-menu">
+							<ul class="top-menu-content">
+								<li>갤러리</li>
+							</ul>
+							<div class="top-menu-hover">
+								<div><a href="/gallery/gallery">나사로의집풍경</a></div>
+								<div><a href="/gallery/gallery">거금도풍경</a></div>
+								<div><a href="/gallery/gallery">농특산물소개</a></div>
+							</div>
+						</div>
+						<div class="top-nav-menu">
+							<ul class="top-menu-content">
+								<li>커뮤니티</li>
+							</ul>
+							<div class="top-menu-hover">
+								<div><a href="/community/notice">공지사항</a></div>
+								<div><a href="/community/sharing">나눔게시판</a></div>
+								<div><a href="/community/free">자유게시판</a></div>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</section>
+</body>
+<script th:inline="javascript">
+	const message = /*[[${message}]]*/ "message";
+	if(message !=null ) alert(message);
+</script>
+<script src="/../js/top.js"></script>
+</html>

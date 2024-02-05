@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nasaro.verses.model.mapper.VersesMapper">
+
+	<!-- verses 목록 조회 -->
+	<select id="versesList">
+		SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			v.VERSES_NO, 
+			v.VERSES_TITLE, 
+			v.VERSES_CONTENT, 
+			DATE_FORMAT(v.VERSES_DATE, '%m-%d') VERSES_DATE 
+		FROM `verses` v join `member` m on v.MEMBER_NO =m.MEMBER_NO  
+		ORDER BY v.verses_no desc;
+	</select>
+	
+	<!-- verses 상세 조회-->
+	<select id="detailedVerses">
+		SELECT * FROM `verses` WHERE verses_no = #{No};
+	</select>
+
+	<!-- verses 작성 -->
+    <insert id="insertVerses" parameterType="verses" >
+        INSERT INTO verses VALUES (default, #{memberNo}, #{versesTitle}, #{versesContent}, DEFAULT, DEFAULT)
+    </insert>
+</mapper>
+

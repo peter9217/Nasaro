@@ -1,0 +1,114 @@
+
+
+
+
+
+
+/* aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa prayMiddle */
+
+#prayMain{
+margin: 30px auto;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: aquamarine;
+width: 80%;
+height: 100px;
+
+}
+#prayMiddle{
+  width: 100%;
+}
+#prayMiddle > img{
+  margin: 0 auto;
+  display: flex;
+
+}
+
+#prayLink{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#prayLink div{
+border: 1px solid #ccc;
+width: 20%;
+height: 30px;
+background-color: bisque;
+}
+#prayContents{
+margin: 50px 20%;
+display: flex;
+justify-content: center;
+}
+
+.pray-prayMenu{
+display: flex;
+justify-content: center;
+align-items: center;
+width: 25%;
+height: 60px;
+margin-left: 2%;
+margin-right: 2%;
+background-color: aqua;
+}
+
+#prayPic{
+width: 200px;
+height: 500px;
+background-color: aquamarine;
+}
+
+#prayMiddleContent{
+display: flex;
+margin: 0 10%;
+justify-content: center;
+
+
+}
+
+#prayMiddleContent > div{
+}
+
+.pray-content{
+width: 90%;
+border: 0.5px solid #ccc;
+}
+
+.pray-content th{
+background-color: hsl(0, 4%, 84%);
+}
+.pray-content td{
+text-align: center;
+background-color: beige;
+}
+.pray-content th:nth-child(1){
+width: 8%;
+}
+.pray-content th:nth-child(2){
+width: 10%;
+}
+.pray-content th:nth-child(3){
+width: 10%;
+}
+.pray-content th:nth-child(4){
+width: 10%;
+}
+.pray-content th:nth-child(5){
+width: 10%;
+}
+
+#pagenation{
+display: flex;
+justify-content: center;
+margin-top: 30px;
+}
+#pagenation > div{
+display: flex;
+justify-content: center;
+margin: 0 5px;
+border: 1px solid #ccc;
+width: 22px;
+height: 22px;
+border-radius: 5px
+}

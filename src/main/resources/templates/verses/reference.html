@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../css/verses/reference.css">
+	<title>나사로의 집</title>
+	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
+</head>
+<body id="asd">
+	<th:block th:replace="~{top/top.html}"></th:block>
+	<section>
+		<div id="referenceMain">신앙자료실</div>
+	</section>
+	<section id="referenceMiddle">
+		<th:block th:replace="~{verses/button.html}"></th:block>
+		<div id="referenceMiddleContent">
+			<table class="reference-content">
+				<th>순서</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>날짜</th>
+				<tr th:each="r, index:${referenceList}"  th:value="${r.referenceNo}" class="reference-content">
+					<td th:text="${r.referenceNo}"></td>
+					<td th:text="${r.referenceTitle}"></td>
+					<td th:text="${r.memberName}"></td>
+					<td th:text="${r.referenceDate}"></td>
+				</tr>
+			</table>
+		</div>
+		<div id="versesButton">
+			<button > <a href="/verses/reference">목록</a></button>
+			<div>
+				<button>글쓰기</button>
+			</div>
+		</div>
+		<div id="pagenation">
+			<div>◁</div>
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>5</div>
+			<div>▷</div>
+		</div>
+	</section>
+</body>
+<script>
+	</script>
+<script src="../js/verses/reference.js"></script>
+</html>

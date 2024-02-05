@@ -1,14 +1,50 @@
-HELP.md
-.gradle
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+### Installation Files ###
+00_tools/
 
-### STS ###
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+# Spring Project
+.gradle/
+build/
+**/src/main/**/build/
+**/src/test/**/build/
+**/src/main/**/bin/
+**/src/test/**/bin/
+target/
+/target/
+.springBeans
+pom.properties
+MANIFEST.MF
+*.log
+SESSION.ser
+.factorypath
+settings.json
+
+# Spring-Boot Project
+config.properties
+db.properties
+
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+HELP.md
+.idea/
+/shelf/
+/workspace.xml
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
 .apt_generated
 .classpath
 .factorypath
+.metadata
 .project
 .settings
 .springBeans
@@ -17,15 +53,6 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -33,5 +60,19 @@ out/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
-.vscode/
+### 그 외 ###
+*.class
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.iml
+*.bin
+*.lock
+*.probe
+
+### Server 관련 ###
+Servers/
+*_jsp.java

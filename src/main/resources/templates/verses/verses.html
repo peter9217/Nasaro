@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../css/verses/verses.css">
+	<title>나사로의 집</title>
+	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
+</head>
+<body id="asd">
+	<th:block th:replace="~{top/top.html}"></th:block>
+	<section>
+		<div id="versesMain">말씀1</div>
+	</section>
+	<section id="versesMiddle" th:with="versesList=${versesList}">
+		<th:block th:replace="~{verses/button.html}"></th:block>
+		<div id="versesMiddleContent">
+			<table class="verses-content">
+				<th>순서</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>날짜</th>
+				<tr th:each="v, index:${versesList}" th:value="${v.versesNo}" class="verses-content">
+					<td th:text="${v.versesNo}" style="overflow: hidden;"></td>
+					<td th:text="${v.versesTitle}"  style="width: 200px; overflow: hidden;"></td>
+					<td th:text="${v.memberName}"></td>
+					<td th:text="${v.versesDate}" ></td>
+				</tr>
+			</table>
+		</div>
+		<div id="versesButton">
+			<button > <a href="/verses/verses">목록</a></button>
+			<div>
+				<button><a href="/verses/versesWrite">글쓰기</a></button>
+			</div>
+		</div>
+		<div id="pagenation">
+			<div>◁</div>
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>5</div>
+			<div>▷</div>
+		</div>
+	</section>
+</body>
+<script src="../js/verses/verses.js"></script>
+</html>

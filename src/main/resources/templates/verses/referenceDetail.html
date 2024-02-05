@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../css/verses/verses.css">
+	<title>나사로의 집</title>
+	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
+</head>
+<body id="asd">
+	<th:block th:replace="~{top/top.html}"></th:block>
+	<section>
+		<div id="prayMain">말씀2</div>
+	</section>
+	<section id="prayMiddle" th:with="reference=${reference}">
+		<div id="versesContent">
+			<table id="versesDetail">
+				<tr>
+					<td>제목</td>
+					<td th:text="${reference.referenceTitle}">s</td>
+				</tr>
+				<tr>
+					<td>글쓴이</td>
+					<td th:text="${reference.memberNo}">d</td>
+				</tr>
+				<tr>
+					<td>작성시간</td>
+					<td th:text="${reference.referenceDate}">d</td>
+				</tr>
+				<tr>
+					<td colspan="2">내　　　용</td>
+				</tr>
+				<tr>
+					<td colspan="2" th:text="${reference.referenceContent}">내용</td>
+				</tr>
+			</table>
+		</div>
+		<div id="versesButton">
+			<button > <a href="/verses/verses">목록</a></button>
+			<div>
+				<button>수정</button>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

@@ -1,0 +1,286 @@
+
+/* 중간 컨텐츠 */
+#middleSlide{
+}
+
+
+#middleContent{
+  margin: 0 auto;
+  text-align: center;
+}
+/* 중간 타이틀 */
+#middleTitle > div:nth-child(1){
+  margin-top: 50px;
+  font-size: 30px;
+  font-weight: bold;
+}
+#middleTitle > div:nth-child(2){
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#middleTag{
+  width: 100%;
+  display: flex;
+}
+#middleTag>div{
+  display: flex;
+  margin: 0 30px;
+  
+  width: 30%;
+  display: block;
+  background-color: aqua;
+  height: 200px;
+  text-align: center;
+}
+
+#middleImg{
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* 중간 타이틀 */
+#middleImg > div:nth-child(1){
+  margin-top: 50px;
+  font-size: 30px;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+#middleImg > div:nth-child(2){
+  height: 300px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.middleImg-img{
+  margin: 20px 20px;
+  width: 170px;
+  height: 100px;
+}
+
+#bottomContent{
+  display: flex;
+  justify-content: center;
+  flex-wrap:wrap;
+  
+}
+
+#bottomLeft{
+  margin: 0 30px 30px 30px;
+  display: block;
+  justify-content: center;
+  min-width: 600px;
+}
+#bottomLeft>div:nth-child(1){
+  display: flex;
+  justify-content: center;
+}
+.bottom-LeftMenu{
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #fafafa;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  width: 50%;
+  height: 100px;
+  align-items: center;
+}
+.bottom-LeftMenu:nth-child(1){
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+.bottom-LeftMenu:nth-child(2){
+  border-bottom: 1px solid #ccc;
+}
+#bottomLeftMenuNotice > div{
+  padding: 15px;
+  border-bottom: 1px solid #fafafa;
+}
+#bottomLeftMenuBoard > div{
+  padding: 15px;
+  border-bottom: 1px solid #fafafa;
+}
+#bottomLeftMenuBoard{
+  display: none;
+}
+
+#bottomRight{
+  margin: 0 30px 30px 30px;
+  display:flex;
+  justify-content: center;
+  min-width: 800px;
+}
+.bottom-RightMenu{
+  display:flex;
+}
+
+.bottom-RightMenu{
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #fafafa;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  width: 50%;
+  height: 400px;
+  align-items: center;
+  border: 1px solid #ccc;
+}
+.bottom-RightMenu>div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+}
+.bottom-RightMenu:nth-child(2){
+  display: block;
+  
+
+}
+
+
+
+
+
+
+
+/* aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa prayMiddle */
+
+#prayMain{
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aquamarine;
+  width: 80%;
+  height: 100px;
+
+}
+#prayMiddle{
+}
+
+#prayLink{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#prayLink div{
+  border: 1px solid #ccc;
+  width: 20%;
+  height: 30px;
+  background-color: bisque;
+}
+#prayContents{
+  margin: 50px 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.pray-prayMenu{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  height: 60px;
+  margin-left: 2%;
+  margin-right: 2%;
+  background-color: aqua;
+}
+
+#prayPic{
+  width: 200px;
+  height: 500px;
+  background-color: aquamarine;
+}
+
+#prayMiddleContent{
+  display: flex;
+  margin: 0 10%;
+  justify-content: center;
+
+
+}
+
+#prayMiddleContent > div{
+}
+
+.pray-content{
+  width: 90%;
+  border: 0.5px solid #ccc;
+}
+
+.pray-content th{
+  background-color: hsl(0, 4%, 84%);
+}
+.pray-content td{
+  text-align: center;
+  background-color: beige;
+}
+.pray-content th:nth-child(1){
+  width: 8%;
+}
+.pray-content th:nth-child(2){
+  width: 10%;
+}
+.pray-content th:nth-child(3){
+  width: 10%;
+}
+.pray-content th:nth-child(4){
+  width: 10%;
+}
+.pray-content th:nth-child(5){
+  width: 10%;
+}
+
+#pagenation{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+#pagenation > div{
+  display: flex;
+  justify-content: center;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px
+}
+#sharingContent{
+  display: flex;
+  justify-content: center;
+}
+#sharingDetail{
+  width: 800px;
+  border : 1px solid #ccc;
+  border-radius: 10px;
+}
+#sharingDetail td{
+  border : 1px solid #ccc;
+  
+}
+
+#sharingDetail tr > td:nth-child(1){
+  text-align: center;
+  width: 150px;
+  height: 50px;
+  background-color: antiquewhite;
+}
+#sharingDetail tr > td:nth-child(2){
+  padding-left: 30px;
+}
+#sharingDetail tr:nth-child(5) > td{
+  padding-left: 30px;
+  text-align: left;
+  background-color: white;
+}
+#sharingButton{
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+#sharingButton > button{
+  margin-right: 700px;
+}

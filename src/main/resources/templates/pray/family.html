@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../css/pray/family.css">
+	<title>나사로의 집</title>
+	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
+</head>
+<body id="asd">
+	<th:block th:replace="~{top/top.html}"></th:block>
+	<section>
+		<div id="prayMain">가족기도방</div>
+	</section>
+	<section id="prayMiddle">
+		<!-- <div id="prayLink">
+			<div>링크</div>
+			<div>링크</div>
+			<div>링크</div>
+		</div> -->
+		<div id="prayContents">
+			<div class="pray-prayMenu"><a href="/pray/prayer">기도문</a></div>
+			<div class="pray-prayMenu"><a href="/pray/nations">열방을 위한 기도</a></div>
+			<div class="pray-prayMenu"><a href="/pray/family">가족기도방</a></div>
+		</div>
+		<div id="prayMiddleContent">
+			<table class="pray-content">
+				<th>순서</th>
+				<th>제목</th>
+				<th>내용</th>
+				<th>작성자</th>
+				<th>날짜</th>
+				<tr th:each="f, index:${familyList}"  th:value="${f.familyNo}" class="family-content"> 
+					<td th:text="${f.familyNo}">번호</td>
+					<td th:text="${f.familyTitle}">제목</td>
+					<td th:text="${f.familyContent}">내용</td>
+					<td th:text="${f.memberNo}">작성자</td>
+					<td th:text="${f.familyDate}">날짜</td>
+				</tr>
+			</table>
+		</div>
+		<div id="pagenation">
+			<div>◁</div>
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>5</div>
+			<div>▷</div>
+		</div>
+	</section>
+</body>
+<script src="../js/pray/family.js"></script>
+</html>
