@@ -4,11 +4,11 @@
 
 	<!-- faq 목록 조회 -->
 	<select id="freeList">
-		SELECT * FROM `free` ORDER BY free_no DESC
+		SELECT * FROM `FREE` ORDER BY free_no DESC
 	</select>
 
 	<select id="detailedFree">
-		SELECT * FROM `free` WHERE free_no = #{No};
+		SELECT * FROM `FREE` WHERE free_no = #{No};
 	</select>
 
 	

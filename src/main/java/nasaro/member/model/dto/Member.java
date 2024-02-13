@@ -17,5 +17,9 @@ public class Member {
 	private String memberPw;
 	private String memberRank;
 	private String memberEmail;
+	public Object getMemberNo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

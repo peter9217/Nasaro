@@ -4,12 +4,12 @@
 
 	<!-- faq 목록 조회 -->
 	<select id="columnList">
-		SELECT * FROM `column` ORDER BY column_no DESC
+		SELECT * FROM `COLUMN` ORDER BY column_no DESC
 	</select>
 	
 		<!-- verses-->
 	<select id="detailedColumn">
-		SELECT * FROM `column` WHERE column_no = #{No} 
+		SELECT * FROM `COLUMN` WHERE column_no = #{No} 
 	</select>
 
 </mapper>

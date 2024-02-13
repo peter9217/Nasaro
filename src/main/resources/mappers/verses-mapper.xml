@@ -10,18 +10,18 @@
 			v.VERSES_TITLE, 
 			v.VERSES_CONTENT, 
 			DATE_FORMAT(v.VERSES_DATE, '%m-%d') VERSES_DATE 
-		FROM `verses` v join `member` m on v.MEMBER_NO =m.MEMBER_NO  
+		FROM `VERSES` v join `member` m on v.MEMBER_NO =m.MEMBER_NO  
 		ORDER BY v.verses_no desc;
 	</select>
 	
 	<!-- verses 상세 조회-->
 	<select id="detailedVerses">
-		SELECT * FROM `verses` WHERE verses_no = #{No};
+		SELECT * FROM `VERSES` WHERE verses_no = #{No};
 	</select>
 
 	<!-- verses 작성 -->
     <insert id="insertVerses" parameterType="verses" >
-        INSERT INTO verses VALUES (default, #{memberNo}, #{versesTitle}, #{versesContent}, DEFAULT, DEFAULT)
+        INSERT INTO VERSES VALUES (default, #{memberNo}, #{versesTitle}, #{versesContent}, DEFAULT, DEFAULT)
     </insert>
 </mapper>
 

@@ -10,13 +10,13 @@
 			r.REFERENCE_TITLE, 
 			r.REFERENCE_CONTENT, 
 			DATE_FORMAT(r.REFERENCE_DATE, '%m-%d') REFERENCE_DATE 
-		FROM `reference` r join `member` m on r.MEMBER_NO =m.MEMBER_NO  
+		FROM `REFERENCE` r join `member` m on r.MEMBER_NO =m.MEMBER_NO  
 		ORDER BY r.REFERENCE_NO desc;
 	
 	</select>
 	
 	<select id="detailedReference">
-		SELECT * FROM `reference` WHERE reference_no = #{No};
+		SELECT * FROM `REFERENCE` WHERE reference_no = #{No};
 	</select>
 	
 

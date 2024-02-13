@@ -13,5 +13,9 @@ public class Verses {
 	private String versesTitle;
 	private String versesContent;
 	private String versesDate;
+	public void setMemberNo(Object memberNo2) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

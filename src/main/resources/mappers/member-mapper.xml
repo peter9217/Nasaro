@@ -5,7 +5,7 @@
      <!-- 로그인 -->
      <select id="login">
 		  SELECT *
-		  FROM `member`
+		  FROM `MEMBER`
 		  WHERE MEMBER_DEL_FL = 'N'
 		  AND MEMBER_ID = #{memberId}
 		  AND MEMBER_PW = #{memberPw}

@@ -4,11 +4,11 @@
 
 	<!-- faq 목록 조회 -->
 	<select id="sharingList">
-		SELECT * FROM `sharing` ORDER BY sharing_no DESC
+		SELECT * FROM `SHARING` ORDER BY sharing_no DESC
 	</select>
 
 	<select id="detailedSharing">
-		SELECT * FROM `sharing` WHERE sharing_no = #{No};
+		SELECT * FROM `SHARING` WHERE sharing_no = #{No};
 	</select>
 
 	
