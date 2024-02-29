@@ -1,4 +1,4 @@
-package nasaro.common;
+package nasaro.common.config;
 
 import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -47,8 +47,9 @@ public class DBConfig {
 				+ "nasaro.pray.model.dto,"
 				+ "nasaro.member.model.dto,"
 				+ "nasaro.intro.model.dto,"
-				+ "nasaro.gallery.model.dto"
-				+ "nasaro.community.model.dto"
+				+ "nasaro.gallery.model.dto,"
+				+ "nasaro.community.model.dto,"
+				
 		);
 		
 		return sessionFactoryBean.getObject();

@@ -25,6 +25,18 @@
 //     })
 // });
 
+
+function autoResize(textarea) {
+    textarea.style.height = 'auto'; // 기본 높이로 초기화
+    textarea.style.height = textarea.scrollHeight + 'px'; // 스크롤 높이로 설정
+}
+if(document.getElementById('myTextarea')!=null){
+    document.getElementById('myTextarea').addEventListener('keydown', function(event) {
+        if (KeyboardEvent.keyCode === 13) { // 13은 엔터 키의 keyCode입니다.
+            event.preventDefault(); // 기본 동작(폼 제출)을 막습니다.
+        }
+    });
+}
 document.getElementById("login").addEventListener("click", e => {
     const topLogin = document.getElementById("topLogin");
     let rightValue = parseInt(topLogin.style.right);

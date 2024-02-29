@@ -9,6 +9,7 @@ import lombok.*;
 public class Notice {
 	private long noticeNo;
 	private long memberNo;
+	private String memberName;
 	private String noticeTitle;
 	private String noticeContent;
 	private String noticeDate;

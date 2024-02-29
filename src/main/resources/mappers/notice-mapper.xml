@@ -2,14 +2,102 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="nasaro.community.model.mapper.NoticeMapper">
 
-	<!-- faq 목록 조회 -->
-	<select id="noticeList">
-		SELECT * FROM `NOTICE` ORDER BY notice_no DESC
+		<!-- 공지사항 count-->
+    <select id="noticeListCount">
+        SELECT count(*) 
+        FROM `NOTICE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+        WHERE notice_delete_fl='N' 
+    </select>
+    
+    <!-- 검색어를 포함한 전체 목록 조회(count)-->
+    <select id="noticeListCountSearch" resultType="_int">
+		SELECT COUNT(*) 
+		FROM `NOTICE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+		<!-- 작성자 검색 -->
+		WHERE notice_delete_fl='N'
+		<choose>
+			<when test='key=="t"'>
+				AND notice_title LIKE '%${query}%'
+			</when> 
+			<when test='key=="c"'>
+				AND notice_content LIKE '%${query}%' 
+			</when>
+			<when test='key=="tc"'>
+				AND (notice_title LIKE '%${query}%' OR notice_content LIKE '%${query}%')
+			</when>
+		</choose> 
 	</select>
+	
+	<!--공지사항 목록 조회-->
+    <select id="noticeList" resultType="Notice">
+        SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			v.NOTICE_NO, 
+			v.NOTICE_TITLE, 
+			v.NOTICE_CONTENT, 
+			DATE_FORMAT(v.notice_DATE, '%m-%d') notice_DATE 
+        FROM `NOTICE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+        WHERE notice_delete_fl='N' 
+        ORDER BY NOTICE_NO DESC;
+    </select>
+    
+    <!-- 검색어를 포함한  공지사항 조회결과  -->
+    <select id="searchNoticeList" resultType="Notice">
+        SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			v.NOTICE_NO, 
+			v.NOTICE_TITLE, 
+			v.NOTICE_CONTENT, 
+			DATE_FORMAT(v.NOTICE_DATE, '%m-%d') notice_DATE 
+        FROM `NOTICE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+		<!-- 작성자 검색 -->
+		WHERE notice_delete_fl='N'
+		<choose>
+			<when test='key=="t"'>
+				AND notice_title LIKE '%${query}%'
+			</when> 
+			<when test='key=="c"'>
+				AND notice_content LIKE '%${query}%' 
+			</when>
+			<when test='key=="tc"'>
+				AND (notice_title LIKE '%${query}%' OR notice_content LIKE '%${query}%')
+			</when>
+		</choose> 
+		ORDER BY NOTICE_NO DESC;
+    </select>
+
 
 	<select id="detailedNotice">
-		SELECT * FROM `NOTICE` WHERE notice_no = #{No};
+		SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			v.NOTICE_NO, 
+			v.NOTICE_TITLE, 
+			v.NOTICE_CONTENT, 
+			DATE_FORMAT(v.notice_DATE, '%m-%d') notice_DATE 
+        FROM `NOTICE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+        WHERE notice_no = #{No};
 	</select>
+	
+		<!-- 작성 -->
+    <insert id="insertNotice" parameterType="Notice" >
+        INSERT INTO `NOTICE` 
+        VALUES (default, #{memberNo}, #{noticeTitle}, #{noticeContent}, DEFAULT, DEFAULT)
+    </insert>
+	
+		<!-- 삭제 -->
+    <update id="deleteNotice" parameterType="Notice" >
+		UPDATE `NOTICE` 
+		SET notice_delete_fl ='Y' 
+		WHERE notice_no=#{noticeNo}
+    </update>
+	
+		<!-- 수정 -->
+    <update id="updateNotice" parameterType="Notice" >
+		UPDATE `NOTICE` 
+		SET notice_title = #{noticeTitle}, notice_content=#{noticeContent} 
+		WHERE notice_no=#{noticeNo}
+    </update>
+	
 
 	
 </mapper>

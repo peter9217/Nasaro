@@ -7,3 +7,36 @@ for(let n of free) {
     });
   
 };
+
+//  공지 수정하기 버튼
+if(document.getElementById("freeModify")!=null){
+  document.getElementById("freeModify").addEventListener("click", e=>{
+    const freeNo = document.getElementById("freeModify").getAttribute("value")
+    document.location.href="/free/modify/"+freeNo
+  })
+}
+
+
+
+
+
+/* 공지사항 삭제 버튼 */
+if (document.getElementById("freeDelete") != null) {
+  document.getElementById("freeDelete").addEventListener("click", e=>{
+    const freeNo = e.target.value;
+    if (confirm("삭제하시겠습니까?")) {
+      fetch("/free/delete?freeNo="+freeNo)  
+      .then(response => response.text()) 
+      .then(() => {
+      }) 
+      .catch (e => { console.log(e)}); 
+  
+      setTimeout(function(){
+        document.location.href="/community/free"
+      },500);
+    } else {
+      e.preventDefault()
+    }
+    
+  })
+}

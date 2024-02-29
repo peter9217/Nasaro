@@ -9,6 +9,7 @@ import lombok.*;
 public class Column {
 	private long columnNo;
 	private long memberNo;
+	private String memberName;
 	private String columnTitle;
 	private String columnContent;
 	private String columnDate;

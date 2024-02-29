@@ -10,7 +10,10 @@
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="prayMain">말씀2</div>
+		<div id="communityMain">
+			<img src="../../img/middleBanner/14.jpg" alt="">
+			<div>나눔게시판</div>
+		</div>
 	</section>
 	<section id="prayMiddle" th:with="sharing=${sharing}">
 		<div id="sharingContent">
@@ -37,10 +40,12 @@
 		</div>
 		<div id="sharingButton">
 			<button > <a href="/community/sharing">목록</a></button>
-			<div>
-				<button>수정</button>
+			<div th:if="${sharing.memberNo==session.loginMember?.memberNo ||session.loginMember?.memberGrade=='A'}">
+				<button id="sharingModify" type="button" th:value="${sharing.sharingNo}">수정</button>
+				<button id="sharingDelete" type="button" th:value="${sharing.sharingNo}">삭제</button>
 			</div>
 		</div>
 	</section>
 </body>
+<script src="../../js/community/sharing.js"></script>
 </html>

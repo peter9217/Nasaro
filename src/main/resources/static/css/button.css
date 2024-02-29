@@ -1,0 +1,115 @@
+#prayMiddleContent{
+    display: flex;
+    margin: 0 10%;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#versesLink{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#versesLink div{
+    border: 1px solid #ccc;
+    width: 20%;
+    height: 30px;
+    background-color: bisque;
+}
+
+#versesContents{
+    margin: 50px 20%;
+    display: flex;
+    justify-content: center;
+}
+.intro-introMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: #fefefe;
+    border: 1px solid #ccc;
+  }
+.intro-introMenu-cho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: hsl(348, 83%, 93%);
+    border: 1px solid #fefefe;
+  }
+.verses-versesMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: #fefefe;
+    border: 1px solid #ccc;
+
+}
+.verses-versesMenu-cho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: hsl(348, 83%, 93%);
+    border: 1px solid #fefefe;
+}
+
+.pray-prayMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: #fefefe;
+    border: 1px solid #ccc;
+}
+.pray-prayMenu-cho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: hsl(348, 83%, 93%);
+    border: 1px solid #fefefe;
+}
+.community-communityMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: #fefefe;
+    border: 1px solid #ccc;
+}
+.community-communityMenu-cho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: hsl(348, 83%, 93%);
+    border: 1px solid #fefefe;
+}
+

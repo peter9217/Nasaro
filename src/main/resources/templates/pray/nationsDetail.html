@@ -10,7 +10,10 @@
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="prayMain">열방을위한기도</div>
+		<div id="prayMain">
+			<img src="../../img/middleBanner/8.jpg" alt="">
+			<div>열방을위한기도</div>
+		</div>
 	</section>
 	<section id="prayMiddle" th:with="nations=${nations}">
 		<div id="versesContent">
@@ -37,10 +40,12 @@
 		</div>
 		<div id="versesButton">
 			<button > <a href="/pray/nations">목록</a></button>
-			<div>
-				<button>수정</button>
+			<div th:if="${nations.memberNo==session.loginMember?.memberNo ||session.loginMember?.memberGrade=='A'}">
+				<button id="nationsModify" type="button" th:value="${nations.nationsNo}">수정</button>
+				<button id="nationsDelete" type="button" th:value="${nations.nationsNo}">삭제</button>
 			</div>
 		</div>
 	</section>
 </body>
+<script src="../../js/pray/nations.js"></script>
 </html>

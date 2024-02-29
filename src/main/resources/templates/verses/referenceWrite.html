@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../css/verses/reference.css">
+	<title>나사로의 집</title>
+	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
+</head>
+<body id="asd">
+	<th:block th:replace="~{top/top.html}"></th:block>
+	<section>
+		<div id="versesMain">
+			<img src="../../img/middleBanner/6.jpg" alt="">
+			<div>신앙자료실</div>
+		</div>
+	</section>
+	<form action="/reference/insert" >
+		
+		<section id="referenceMiddle" th:with="reference=${reference}">
+			<div id="referenceContent">
+				<table id="referenceDetail">
+					<tr>
+						<td>제목</td>
+						<td style="padding-left: 0;">
+							<input type="text" style="width: 99%; height: 50px; border:none;" name="referenceTitle" required>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">내　　　용</td>
+					</tr>
+					<tr>
+						<td colspan="2" > <textarea id="myTextarea" style="height:300px; width: 99%; border:none" name="referenceContent" required></textarea></td>
+					</tr>
+				</table>
+			</div>
+			<div id="referenceButton">
+				<button > <a href="/verses/reference">목록</a></button>
+				<div>
+					<button>확인</button>
+				</div>
+			</div>
+		</section>
+	</form>
+</body>
+</html>

@@ -274,7 +274,27 @@ REFERENCES `MEMBER` (
 	`MEMBER_NO`
 );
 
-insert  into `reference`  value (default, '1', '참고제목입니다3', '참고내용입니다3', 'n', default);
-select * from verses;
-insert  into intro value (default, '1', '안녕하세요');
-select * from intro;
+insert  into `MEMBER`  value (default, 'gaya123', '강가야', '123', 'A', '', default);
+insert  into `NATIONS`  value (default, 1, '열방을 위한 기도1', '내용입니다', 'N', default);
+select * from `COLUMN` c  ;
+select * from `MEMBER` m  ;
+select * from `MEMBER` m  ;
+select * from `NOTICE` m  ;
+select * from GALLERY g JOIN GALLERYIMG gi on g.GALLERY_NO = gi.GALLERY_NO JOIN MEMBER m on g.member_no=m.member_no;
+SELECT * FROM `FREE` WHERE free_no = 1;
+insert  into `GALLERY`  value (default, #{memberId}, #{galleryContent}, default, default, #{galleryCategory});
+insert  into `GALLERYIMG`  value (default, #{GalleryNo}, #{galleryPath}, #{galleryOrder});
+
+select * from `GALLERYIMG` g ;
+select * from `GALLERYIMG` g ;
+
+        SELECT g.gallery_NO, 
+			m.MEMBER_NAME, 
+			g.gallery_CONTENT, 
+			g.gallery_category, 
+			DATE_FORMAT(g.gallery_DATE, '%m-%d') gallery_DATE 
+        FROM GALLERY g 
+        JOIN MEMBER m on g.member_no=m.member_no
+        WHERE gallery_delete_fl='N' 
+        AND gallery_category=1
+        ORDER BY gallery_NO DESC;

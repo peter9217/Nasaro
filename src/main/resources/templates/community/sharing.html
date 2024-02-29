@@ -3,14 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../css/community.css">
+	<link rel="stylesheet" href="../css/community/sharing.css">
+	<link rel="stylesheet" href="../../css/utility/pagination.css">
+	<link rel="stylesheet" href="../../css/button.css">
 	<title>나사로의 집</title>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
-<body id="asd">
+<body id="asd" th:with="pagination=${resultMap.pagination}, sharingList=${resultMap.sharingList}">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="communityMain">나눔게시판</div>
+		<div id="communityMain">
+			<img src="../../img/middleBanner/14.jpg" alt="">
+			<div>나눔게시판</div>
+		</div>
 	</section>
 	<section id="communityMiddle">
 		<!-- <div id="communityLink">
@@ -19,9 +24,9 @@
 			<div>링크</div>
 		</div> -->
 		<div id="communityContents">
-			<div class="community-communityMenu"><a href="/community/notice">공지사항</a></div>
-			<div class="community-communityMenu"><a href="/community/sharing">나눔게시판</a></div>
-			<div class="community-communityMenu"><a href="/community/free">자유게시판</a></div>
+			<a class="community-communityMenu" href="/community/notice">공지사항</a>
+			<a class="community-communityMenu-cho" href="/community/sharing">나눔게시판</a>
+			<a class="community-communityMenu" href="/community/free">자유게시판</a>
 		</div>
 		<div id="communityMiddleContent">
 			<table class="community-content">
@@ -37,15 +42,99 @@
 				</tr>
 			</table>
 		</div>
-		<div id="pagenation">
-			<div>◁</div>
-			<div>1</div>
-			<div>2</div>
-			<div>3</div>
-			<div>4</div>
-			<div>5</div>
-			<div>▷</div>
+		<div id="sharingButton">
+			<button > <a href="/community/sharing">목록</a></button>
+			<div>
+				<button><a href="/community/sharingWrite">글쓰기</a></button>
+			</div>
 		</div>
+		<!-- 하단 버튼 영역 -->
+		<div th:if="${#lists.size(sharingList) > 0}" class="pagination-area" >
+			<ul th:unless="${param.query}" class="pagination" id="pagination">
+				<!-- 첫 페이지로 이동 -->
+				<li>
+					<a th:href="@{sharing(cp=1)}">
+						<!-- <img th:src="@{/images/common/paging/first-page.svg}"> -->
+						<div>&lt;&lt;</div>
+					</a>
+				</li>
+				<!-- 이전 목록 마지막 번호로 이동 -->
+				<li>
+					<a th:href="@{sharing(cp=${pagination.prevPage})}">
+						<!-- <img th:src="@{/images/common/paging/prev-page.svg}"> -->
+						<div>&lt;</div>
+					</a>
+				</li>
+				<!-- 특정 페이지로 이동 -->
+				<!-- #numbers.sequence(시작, 끝 [, step]) 시작 이상 , 끝 이하 까지 step만큼 증가하는 숫자를 발생-->
+				<th:block th:each=" i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+				<!-- 현재 보고 있는 페이지 -->
+				<li th:if="${i == pagination.currentPage}">
+					<a class="current" th:text="${i}">현재페이지</a>
+				</li>
+				<li th:unless="${i == pagination.currentPage}">
+					<a th:href="@{sharing(cp=${i})}" th:text="${i}">현재페이지</a>
+				</li>
+				
+				</th:block>
+				
+				<!-- 다음 목록 시작 번호로 이동 -->
+				<li>
+					<a th:href="@{sharing(cp=${pagination.nextPage})}">
+						<!-- <img th:src="@{/images/common/paging/next-page.svg}"> -->
+						<div>&gt;</div>
+					</a>	
+				</li>
+				
+				<!-- 끝 페이지로 이동 -->
+				<li>
+					<a th:href="@{sharing(cp=${pagination.maxPage})}">
+						<!-- <img th:src="@{/images/common/paging/last-page.svg}"> -->
+						<div>&gt;&gt;</div>
+					</a>
+				</li>
+
+			</ul>
+			<!-- 검색 O인 경우의 페이지네이션 -->
+			<ul th:if="${param.query}" class="pagination" id="pagination">
+			
+				<!-- 첫 페이지로 이동 -->
+				<li><a th:href="@{sharing(cp=1, key=${param.key}, query=${param.query})}">&lt;&lt;</a></li>
+
+				<!-- 이전 목록 마지막 번호로 이동 -->
+				<li><a th:href="@{sharing(cp=${pagination.prevPage}, key=${param.key}, query=${param.query})}">&lt;</a></li>
+
+				<!-- #numbers.sequence(시작, 끝 [,step]) -->
+				<!-- 특정 페이지로 이동 -->
+				<th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+					<!-- 현재 보고있는 페이지 -->
+					<li th:if="${i == pagination.currentPage}">
+						<a class="current" th:text="${i}">현재 페이지</a>
+					</li>
+
+					<!-- 현재 페이지를 제외한 나머지 -->
+					<li th:unless="${i == pagination.currentPage}">
+						<a th:href="@{sharing(cp=${i}, key=${param.key}, query=${param.query})}" th:text="${i}">현재 페이지</a>
+					</li>
+				</th:block>
+
+				<!-- 다음 목록 시작 번호로 이동 -->
+				<li><a th:href="@{sharing(cp=${pagination.nextPage}, key=${param.key}, query=${param.query})}">&gt;</a></li>
+
+				<!-- 끝 페이지로 이동 -->
+				<li><a th:href="@{sharing(cp=${pagination.maxPage}, key=${param.key}, query=${param.query})}">&gt;&gt;</a></li>
+			</ul>
+		</div>
+		<!-- 검색창 -->
+		<form th:action="${sharing}" method="get" id="boardSearch">
+			<select name="key" id="searchKey">
+				<option value="t">제목</option>
+				<option value="c">내용</option>
+				<option value="tc">제목+내용</option>
+			</select>
+			<input type="text" name="query" id="searchQuery" >
+			<button>검색</button>
+		</form>
 	</section>
 </body>
 <script src="../js/community/sharing.js"></script>

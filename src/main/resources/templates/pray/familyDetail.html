@@ -10,7 +10,10 @@
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="prayMain">말씀2</div>
+		<div id="prayMain">
+			<img src="../../img/middleBanner/9.jpg" alt="">
+			<div>기도노트</div>
+		</div>
 	</section>
 	<section id="prayMiddle" th:with="family=${family}">
 		<div id="versesContent">
@@ -37,10 +40,12 @@
 		</div>
 		<div id="versesButton">
 			<button > <a href="/verses/verses">목록</a></button>
-			<div>
-				<button>수정</button>
+			<div th:if="${family.memberNo==session.loginMember?.memberNo ||session.loginMember?.memberGrade=='A'}">
+				<button id="familyModify" type="button" th:value="${family.familyNo}">수정</button>
+				<button id="familyDelete" type="button" th:value="${family.familyNo}">삭제</button>
 			</div>
 		</div>
 	</section>
 </body>
+<script src="../../js/pray/family.js"></script>
 </html>

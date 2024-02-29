@@ -100,7 +100,8 @@ body{
   }
 
 /* 중간 컨텐츠 */
-#middleSlide{
+.slide_box{
+  margin-top: -10px;
 }
 
 
@@ -111,13 +112,13 @@ body{
 /* 중간 타이틀 */
 #middleTitle > div:nth-child(1){
   margin-top: 50px;
-  font-size: 30px;
+  font-size: 50px;
   font-weight: bold;
 }
 #middleTitle > div:nth-child(2){
   margin-top: 20px;
   font-size: 20px;
-  font-weight: bold;
+  margin-bottom: 30px;
 }
 
 #middleTag{
@@ -125,21 +126,38 @@ body{
   display: flex;
 }
 #middleTag>div{
+  width: 33%;
+}
+#middleTag>div>a{
+  position: relative;
   display: flex;
-  margin: 0 30px;
-  
-  width: 30%;
-  display: block;
-  background-color: aqua;
-  height: 200px;
   text-align: center;
+  flex-direction: column;
+  margin: 0 30px;
+}
+#middleTag>div>a>div{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
 }
 
 #middleImg{
   margin: 0 auto;
   text-align: center;
 }
-
+.iw_inner{
+  font-size: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center
+}
 /* 중간 타이틀 */
 #middleImg > div:nth-child(1){
   margin-top: 50px;
@@ -149,17 +167,24 @@ body{
   padding-bottom: 10px;
 }
 #middleImg > div:nth-child(2){
-  height: 300px;
-  overflow: hidden;
   margin-top: 20px;
 }
 .middleImg-img{
-  margin: 20px 20px;
-  width: 170px;
-  height: 100px;
+  margin: 13px 13px;
+  width: 18.5%;
+  height: 250px;
+}
+
+#middleImgContent{
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #ccc;
+  justify-content: flex-start;
+  padding-bottom: 20px;
 }
 
 #bottomContent{
+  padding-top: 80px;
   display: flex;
   justify-content: center;
   flex-wrap:wrap;

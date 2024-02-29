@@ -10,9 +10,12 @@
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="prayMain">말씀2</div>
+		<div id="versesMain">
+			<img src="../../img/middleBanner/4.jpg" alt="">
+			<div>말씀</div>
+		</div>
 	</section>
-	<form action="/verses/insert">
+	<form action="/verses/insert" >
 		
 		<section id="prayMiddle" th:with="verses=${verses}">
 			<div id="versesContent">
@@ -20,21 +23,23 @@
 					<tr>
 						<td>제목</td>
 						<td style="padding-left: 0;">
-							<input type="text" style="width: 99%; height: 50px; border:none;" name="versesTitle">
+							<input type="text" style="width: 99%; height: 50px; border:none;" name="versesTitle" required>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">내　　　용</td>
 					</tr>
 					<tr>
-						<td colspan="2" > <input type="textarea"  style="height:300px; width: 99%; border:none" name="versesContent"></td>
+						<td colspan="2" > 
+							<textarea id="myTextarea" style="height:300px; width: 99%; border:none" name="versesContent" oninput="autoResize(this)" required></textarea>
+						</td>
 					</tr>
 				</table>
 			</div>
 			<div id="versesButton">
 				<button > <a href="/verses/verses">목록</a></button>
 				<div>
-					<button>확인</button>
+					<button type="submit">확인</button>
 				</div>
 			</div>
 		</section>

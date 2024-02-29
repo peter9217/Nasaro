@@ -3,14 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../../css/community/notice.css">
+	<link rel="stylesheet" href="../../css/community/free.css">
 	<title>나사로의 집</title>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="prayMain">말씀2</div>
+		<div id="communityMain">
+			<img src="../../img/middleBanner/15.jpg" alt="">
+			<div>자유게시판</div>
+		</div>
 	</section>
 	<section id="prayMiddle" th:with="free=${free}">
 		<div id="freeContent">
@@ -37,10 +40,12 @@
 		</div>
 		<div id="freeButton">
 			<button > <a href="/community/free">목록</a></button>
-			<div>
-				<button>수정</button>
+			<div th:if="${free.memberNo==session.loginMember?.memberNo ||session.loginMember?.memberGrade=='A'}">
+				<button id="freeModify" type="button" th:value="${free.freeNo}">수정</button>
+				<button id="freeDelete" type="button" th:value="${free.freeNo}">삭제</button>
 			</div>
 		</div>
 	</section>
 </body>
+<script src="../../js/community/free.js"></script>
 </html>

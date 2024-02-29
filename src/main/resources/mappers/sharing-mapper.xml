@@ -2,15 +2,95 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="nasaro.community.model.mapper.SharingMapper">
 
-	<!-- faq 목록 조회 -->
-	<select id="sharingList">
-		SELECT * FROM `SHARING` ORDER BY sharing_no DESC
+	<!-- 공지사항 count-->
+    <select id="sharingListCount">
+        SELECT count(*) 
+        FROM `SHARING` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+        WHERE sharing_delete_fl='N' 
+    </select>
+    
+    <!-- 검색어를 포함한 전체 목록 조회(count)-->
+    <select id="sharingListCountSearch" resultType="_int">
+		SELECT COUNT(*) 
+		FROM `SHARING` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+		<!-- 작성자 검색 -->
+		WHERE sharing_delete_fl='N'
+		<choose>
+			<when test='key=="t"'>
+				AND sharing_title LIKE '%${query}%'
+			</when> 
+			<when test='key=="c"'>
+				AND sharing_content LIKE '%${query}%' 
+			</when>
+			<when test='key=="tc"'>
+				AND (sharing_title LIKE '%${query}%' OR sharing_content LIKE '%${query}%')
+			</when>
+		</choose> 
 	</select>
+	
+	<!--공지사항 목록 조회-->
+    <select id="sharingList" resultType="sharing">
+        SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			v.sharing_NO, 
+			v.sharing_TITLE, 
+			v.sharing_CONTENT, 
+			DATE_FORMAT(v.sharing_DATE, '%m-%d') sharing_DATE 
+        FROM `SHARING` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+        WHERE sharing_delete_fl='N' 
+        ORDER BY sharing_NO DESC;
+    </select>
+    
+    <!-- 검색어를 포함한  공지사항 조회결과  -->
+    <select id="searchsharingList" resultType="sharing">
+        SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			v.sharing_NO, 
+			v.sharing_TITLE, 
+			v.sharing_CONTENT, 
+			DATE_FORMAT(v.sharing_DATE, '%m-%d') sharing_DATE 
+        FROM `SHARING` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+		<!-- 작성자 검색 -->
+		WHERE sharing_delete_fl='N'
+		<choose>
+			<when test='key=="t"'>
+				AND sharing_title LIKE '%${query}%'
+			</when> 
+			<when test='key=="c"'>
+				AND sharing_content LIKE '%${query}%' 
+			</when>
+			<when test='key=="tc"'>
+				AND (sharing_title LIKE '%${query}%' OR sharing_content LIKE '%${query}%')
+			</when>
+		</choose> 
+		ORDER BY sharing_NO DESC;
+    </select>
 
 	<select id="detailedSharing">
 		SELECT * FROM `SHARING` WHERE sharing_no = #{No};
 	</select>
+	
+			<!-- 작성 -->
+    <insert id="insertSharing" parameterType="Sharing" >
+        INSERT INTO `SHARING` 
+        VALUES (default, #{memberNo}, #{sharingTitle}, #{sharingContent}, DEFAULT, DEFAULT)
+    </insert>
 
+
+			<!-- 삭제 -->
+    <update id="deleteSharing" parameterType="Sharing" >
+		UPDATE `SHARING` 
+		SET sharing_delete_fl ='Y' 
+		WHERE sharing_no=#{sharingNo}
+    </update>
+	
+		<!-- 수정 -->
+    <update id="updateSharing" parameterType="Sharing" >
+		UPDATE `SHARING` 
+		SET sharing_title = #{sharingTitle}, sharing_content=#{sharingContent} 
+		WHERE sharing_no=#{sharingNo}
+    </update>
+	
 	
 </mapper>
 

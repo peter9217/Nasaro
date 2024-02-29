@@ -3,20 +3,35 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../../css/pray/pray.css">
+	<link rel="stylesheet" href="../../css/pray/prayer.css">
+	<link rel="stylesheet" href="../../css/button.css">
 	<title>나사로의 집</title>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="prayMain">나사로의 집 기도문</div>
+		<div id="prayMain">
+			<img src="../../img/middleBanner/7.jpg" alt="">
+			<div>교회를 위한 기도</div>
+		</div>
 	</section>
 	<section id="prayMiddle">
+		<div id="versesLink">
+			<div><a href="https://goodtvbible.goodtv.co.kr/bible.asp">온라인 성경찬송</a></div>
+			<div><a href="http://prayer24365.org/">기도 24·365</a></div>
+			<div><a href="https://www.praywithjesus.org/">매일 한시간 기도</a></div>
+		</div>
 		<div id="prayContents">
-			<div class="pray-prayMenu"><a href="/pray/prayer">기도문</a></div>
-			<div class="pray-prayMenu"><a href="/pray/nations">열방을 위한 기도</a></div>
-			<div class="pray-prayMenu"><a href="/pray/family">가족기도방</a></div>
+			<div class="pray-prayMenu-cho">
+				<a href="/pray/prayer">교회를 위한 기도</a>
+			</div>
+			<div class="pray-prayMenu">
+				<a href="/pray/nations">열방을 위한 기도</a>
+			</div>
+			<div class="pray-prayMenu">
+				<a href="/pray/family">기도노트</a>
+			</div>
 		</div>
 		<div id="prayer">
 			<img src="../img/prayer.png" alt="" id="prayer-img">

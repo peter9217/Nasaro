@@ -3,26 +3,37 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../../css/intro.css">
+	<link rel="stylesheet" href="../../css/intro/consultation.css">
+	<link rel="stylesheet" href="../../css/button.css">
 	<title>나사로의 집</title>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="introMain">나사로의 집 교회</div>
+		<div id="introMain">
+			<img src="../../img/middleBanner/2.jpg" alt="">
+			<div>상담방문안내</div>
+		</div>
 	</section>
 	<section id="introMiddle">
 		<div id="introContents">
-			<div class="intro-introMenu">나사로의 집 소개</div>
-			<div class="intro-introMenu">상담예약안내</div>
-			<div class="intro-introMenu">교통안내</div>
+			<a class="intro-introMenu" href="/intro/home">나사로의 집 소개</a>
+			<a class="intro-introMenu-cho" href="/intro/consultation">상담예약안내</a>
+			<a class="intro-introMenu" href="/intro/map">교통안내</a>
 		</div>
 		<div id="introMiddleContent">
-			<div id="introPic"></div>
+			<div id="introPic">
+				<img src="../../img/sideBanner/1.png" alt="">
+				<img src="../../img/sideBanner/2.png" alt="">
+				<img src="../../img/sideBanner/3.png" alt="">
+				<img src="../../img/sideBanner/4.png" alt="">
+				<img src="../../img/sideBanner/5.png" alt="">
+				<img src="../../img/sideBanner/6.png" alt="">
+			</div>
 			<div id="introContent">
-				<div class="intro-content">상담예약안내</div>
-				<div class="intro-content">나나나나나나나나나나나나나나나나나나나나나나나나나</div>
+				<!-- <div class="intro-content">교통 안내</div> -->
+				<img id="introContentImg" src="../../img/상담방문안내본문.png" alt="">
 			</div>
 		</div>
 	</section>

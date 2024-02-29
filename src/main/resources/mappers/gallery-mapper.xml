@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nasaro.gallery.model.mapper.GalleryMapper">
+
+	<!-- 공지사항 count-->
+    <select id="galleryListCount">
+        SELECT count(*) 
+        FROM `GALLERY` g 
+        WHERE gallery_delete_fl='N' 
+        <if test='galleryCategory!=null'>AND gallery_category=#{galleryCategory}</if>
+        
+    </select>
+    
+    <!-- 검색어를 포함한 전체 목록 조회(count)-->
+    <select id="galleryListCountSearch" resultType="_int">
+		SELECT COUNT(*) 
+		FROM `NATIONS` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+		<!-- 작성자 검색 -->
+		WHERE nations_delete_fl='N'
+		<choose>
+			<when test='key=="t"'>
+				AND nations_title LIKE '%${query}%'
+			</when> 
+			<when test='key=="c"'>
+				AND nations_content LIKE '%${query}%' 
+			</when>
+			<when test='key=="tc"'>
+				AND (nations_title LIKE '%${query}%' OR nations_content LIKE '%${query}%')
+			</when>
+		</choose> 
+	</select>
+	
+	<!--공지사항 목록 조회-->
+    <select id="galleryList" resultType="gallery">
+        SELECT g.gallery_NO, 
+			m.MEMBER_NAME, 
+			g.gallery_CONTENT, 
+			g.gallery_category, 
+			DATE_FORMAT(g.gallery_DATE, '%m-%d') gallery_DATE 
+        FROM GALLERY g 
+        JOIN MEMBER m on g.member_no=m.member_no
+        WHERE gallery_delete_fl='N' 
+        <if test='galleryCategory!=null'>AND gallery_category=#{galleryCategory}</if>
+        ORDER BY gallery_NO DESC;
+    </select>
+    
+    <!-- 검색어를 포함한  공지사항 조회결과  -->
+    <select id="searchGalleryList" resultType="nations">
+        SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			v.nations_NO, 
+			v.nations_TITLE, 
+			v.nations_CONTENT, 
+			DATE_FORMAT(v.nations_DATE, '%m-%d') nations_DATE 
+        FROM `NATIONS` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+		<!-- 작성자 검색 -->
+		WHERE nations_delete_fl='N'
+		<choose>
+			<when test='key=="t"'>
+				AND nations_title LIKE '%${query}%'
+			</when> 
+			<when test='key=="c"'>
+				AND nations_content LIKE '%${query}%' 
+			</when>
+			<when test='key=="tc"'>
+				AND (nations_title LIKE '%${query}%' OR nations_content LIKE '%${query}%')
+			</when>
+		</choose> 
+		ORDER BY nations_NO DESC;
+    </select>
+
+
+
+     	<!-- 갤러리 이미지 조회 -->
+    <select id="galleryImg" resultType="galleryImg">
+	    SELECT * FROM `GALLERYIMG` WHERE gallery_no=#{galleryNo}
+	</select>
+
+
+
+
+
+	<select id="detailedNations">
+		SELECT * FROM `NATIONS` WHERE nations_no = #{no};
+	</select>
+	
+	
+	
+	
+			<!-- 작성 -->
+    <insert id="insertGallery" useGeneratedKeys="true" keyProperty="galleryNo" >
+		INSERT INTO `GALLERY`  
+		VALUES (default, 1, #{galleryContent}, default, default, #{galleryCategory});
+    </insert>
+    <insert id="insertImage" parameterType="Gallery" >
+		INSERT INTO `GALLERYIMG`  
+		VALUES (default, #{galleryNo}, #{galleryPath}, #{galleryImgOrder});
+    </insert>
+    
+    
+	
+</mapper>
+

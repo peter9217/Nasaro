@@ -10,7 +10,10 @@
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="prayMain">말씀2</div>
+		<div id="versesMain">
+			<img src="../../img/middleBanner/4.jpg" alt="">
+			<div>말씀</div>
+		</div>
 	</section>
 	<section id="prayMiddle" th:with="verses=${verses}">
 		<div id="versesContent">
@@ -31,16 +34,20 @@
 					<td colspan="2">내　　　용</td>
 				</tr>
 				<tr>
-					<td colspan="2" th:text="${verses.versesContent}">내용</td>
+					<td colspan="2">
+						<pre th:text="${verses.versesContent}" >내용</pre>
+					</td>
 				</tr>
 			</table>
 		</div>
 		<div id="versesButton">
 			<button > <a href="/verses/verses">목록</a></button>
-			<div>
-				<button>수정</button>
+			<div th:if="${verses.memberNo==session.loginMember?.memberNo ||session.loginMember?.memberGrade=='A'}">
+				<button id="versesModify" type="button" th:value="${verses.versesNo}">수정</button>
+				<button id="versesDelete" type="button" th:value="${verses.versesNo}">삭제</button>
 			</div>
 		</div>
 	</section>
 </body>
+<script src="../../js/verses/verses.js"></script>
 </html>

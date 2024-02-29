@@ -1,6 +1,24 @@
 
 /* 중간 컨텐츠 */
-#middleSlide{
+#prayMain{
+  position: relative;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100px;
+}
+#prayMain>div {
+  position: absolute;
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100px;
+  font-size: 40px;
+  color: white;
 }
 
 
@@ -148,16 +166,6 @@
 
 /* aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa prayMiddle */
 
-#prayMain{
-  margin: 30px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: aquamarine;
-  width: 80%;
-  height: 100px;
-
-}
 #prayMiddle{
 }
 
@@ -232,6 +240,15 @@
 }
 .pray-content th:nth-child(5){
   width: 10%;
+}
+
+#nationsButton{
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+#nationsButton > button{
+  margin-right: 600px;
 }
 
 #pagenation{

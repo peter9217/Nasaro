@@ -1,162 +1,27 @@
 
-/* 중간 컨텐츠 */
-#middleSlide{
-}
-
-
-#middleContent{
-  margin: 0 auto;
-  text-align: center;
-}
-/* 중간 타이틀 */
-#middleTitle > div:nth-child(1){
-  margin-top: 50px;
-  font-size: 30px;
-  font-weight: bold;
-}
-#middleTitle > div:nth-child(2){
-  margin-top: 20px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-#middleTag{
-  width: 100%;
-  display: flex;
-}
-#middleTag>div{
-  display: flex;
-  margin: 0 30px;
-  
-  width: 30%;
-  display: block;
-  background-color: aqua;
-  height: 200px;
-  text-align: center;
-}
-
-#middleImg{
-  margin: 0 auto;
-  text-align: center;
-}
-
-/* 중간 타이틀 */
-#middleImg > div:nth-child(1){
-  margin-top: 50px;
-  font-size: 30px;
-  font-weight: bold;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
-}
-#middleImg > div:nth-child(2){
-  height: 300px;
-  overflow: hidden;
-  margin-top: 20px;
-}
-.middleImg-img{
-  margin: 20px 20px;
-  width: 170px;
-  height: 100px;
-}
-
-#bottomContent{
-  display: flex;
-  justify-content: center;
-  flex-wrap:wrap;
-  
-}
-
-#bottomLeft{
-  margin: 0 30px 30px 30px;
-  display: block;
-  justify-content: center;
-  min-width: 600px;
-}
-#bottomLeft>div:nth-child(1){
-  display: flex;
-  justify-content: center;
-}
-.bottom-LeftMenu{
-  font-size: 25px;
-  font-weight: bold;
-  background-color: #fafafa;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  width: 50%;
-  height: 100px;
-  align-items: center;
-}
-.bottom-LeftMenu:nth-child(1){
-  border-right: 1px solid #ccc;
-  border-top: 1px solid #ccc;
-}
-.bottom-LeftMenu:nth-child(2){
-  border-bottom: 1px solid #ccc;
-}
-#bottomLeftMenuNotice > div{
-  padding: 15px;
-  border-bottom: 1px solid #fafafa;
-}
-#bottomLeftMenuBoard > div{
-  padding: 15px;
-  border-bottom: 1px solid #fafafa;
-}
-#bottomLeftMenuBoard{
-  display: none;
-}
-
-#bottomRight{
-  margin: 0 30px 30px 30px;
-  display:flex;
-  justify-content: center;
-  min-width: 800px;
-}
-.bottom-RightMenu{
-  display:flex;
-}
-
-.bottom-RightMenu{
-  font-size: 25px;
-  font-weight: bold;
-  background-color: #fafafa;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  width: 50%;
-  height: 400px;
-  align-items: center;
-  border: 1px solid #ccc;
-}
-.bottom-RightMenu>div{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50%;
-}
-.bottom-RightMenu:nth-child(2){
-  display: block;
-  
-
-}
-
-
-
-
-
 
 
 /* aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa versesMiddle */
 
 #versesMain{
+  position: relative;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100px;
+}
+#versesMain>div {
+  position: absolute;
   margin: 30px auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: aquamarine;
   width: 80%;
   height: 100px;
-
+  font-size: 40px;
+  color: white;
 }
 #versesMiddle{
 }
@@ -268,4 +133,8 @@ align-items: center;
   overflow: hidden;          /* 넘치는 부분을 숨김 */
   text-overflow: ellipsis;   /* 초과된 부분에 대한 생략 표시 (...) */
   max-width: 100px;  
+}
+
+#prayMiddle{
+  /* margin-top: 80px; */
 }
