@@ -27,6 +27,8 @@ settings.json
 # Spring-Boot Project
 config.properties
 db.properties
+application-prod.properties
+keystore.p12
 
 ### IntelliJ IDEA ###
 out/
