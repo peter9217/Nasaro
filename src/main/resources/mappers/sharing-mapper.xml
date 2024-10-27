@@ -7,6 +7,7 @@
         SELECT count(*) 
         FROM `SHARING` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
         WHERE sharing_delete_fl='N' 
+        	AND SHARING_notice='N'
     </select>
     
     <!-- 검색어를 포함한 전체 목록 조회(count)-->
@@ -15,6 +16,7 @@
 		FROM `SHARING` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
 		<!-- 작성자 검색 -->
 		WHERE sharing_delete_fl='N'
+			AND SHARING_notice='N'
 		<choose>
 			<when test='key=="t"'>
 				AND sharing_title LIKE '%${query}%'
@@ -31,13 +33,16 @@
 	<!--공지사항 목록 조회-->
     <select id="sharingList" resultType="sharing">
         SELECT m.MEMBER_NO, 
-			m.MEMBER_NAME, 
+			m.MEMBER_NAME,
+			m.MEMBER_RANK, 
+			m.MEMBER_NICKNAME,  
 			v.sharing_NO, 
 			v.sharing_TITLE, 
 			v.sharing_CONTENT, 
 			DATE_FORMAT(v.sharing_DATE, '%m-%d') sharing_DATE 
         FROM `SHARING` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
-        WHERE sharing_delete_fl='N' 
+        WHERE sharing_delete_fl='N'
+        	AND SHARING_notice='N' 
         ORDER BY sharing_NO DESC;
     </select>
     
@@ -45,6 +50,8 @@
     <select id="searchsharingList" resultType="sharing">
         SELECT m.MEMBER_NO, 
 			m.MEMBER_NAME, 
+			m.MEMBER_RANK, 
+			m.MEMBER_NICKNAME, 
 			v.sharing_NO, 
 			v.sharing_TITLE, 
 			v.sharing_CONTENT, 
@@ -52,6 +59,7 @@
         FROM `SHARING` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
 		<!-- 작성자 검색 -->
 		WHERE sharing_delete_fl='N'
+			AND SHARING_notice='N'
 		<choose>
 			<when test='key=="t"'>
 				AND sharing_title LIKE '%${query}%'
@@ -65,15 +73,40 @@
 		</choose> 
 		ORDER BY sharing_NO DESC;
     </select>
+    
+        	<!--베스트 공지 조회-->
+    <select id="bestSharingList" resultType="SHARING">
+        SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			m.MEMBER_RANK, 
+			m.MEMBER_NICKNAME, 
+			v.SHARING_NO, 
+			v.SHARING_TITLE, 
+			v.SHARING_CONTENT, 
+			DATE_FORMAT(v.SHARING_DATE, '%m-%d') SHARING_DATE 
+        FROM `SHARING` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+        WHERE SHARING_delete_fl='N'
+        	AND SHARING_notice='Y'
+        ORDER BY SHARING_NO DESC;
+    </select>
 
 	<select id="detailedSharing">
-		SELECT * FROM `SHARING` WHERE sharing_no = #{No};
+		SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			m.MEMBER_RANK, 
+			m.MEMBER_NICKNAME, 
+			v.SHARING_NO, 
+			v.SHARING_TITLE, 
+			v.SHARING_CONTENT, 
+			DATE_FORMAT(v.SHARING_DATE, '%m-%d') SHARING_DATE 
+        FROM `SHARING` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO  
+        WHERE sharing_no = #{No};
 	</select>
 	
 			<!-- 작성 -->
     <insert id="insertSharing" parameterType="Sharing" >
         INSERT INTO `SHARING` 
-        VALUES (default, #{memberNo}, #{sharingTitle}, #{sharingContent}, DEFAULT, DEFAULT)
+        VALUES (default, #{memberNo}, #{sharingTitle}, #{sharingContent}, DEFAULT, DEFAULT, DEFAULT)
     </insert>
 
 

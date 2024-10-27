@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import nasaro.common.utility.Pagination;
+import nasaro.pray.model.dto.Family;
 import nasaro.pray.model.dto.Nations;
 import nasaro.pray.model.mapper.NationsMapper;
 import nasaro.verses.model.dto.Column;
@@ -41,6 +42,9 @@ public class NationsServiceImpl implements NationsService {
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("pagination", pagination);
 		resultMap.put("nationsList", nationsList);
+		List<Nations> nationsBestList = mapper.bestNationsList();
+		resultMap.put("nationsBestList", nationsBestList);
+		
 		
 		return resultMap;
 	}
@@ -66,6 +70,9 @@ public class NationsServiceImpl implements NationsService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
 		map.put("natonsList", nationsList);
+		List<Nations> nationsBestList = mapper.bestNationsList();
+		map.put("nationsBestList", nationsBestList);
+		
 		return map;
 	}
 
@@ -86,7 +93,7 @@ public class NationsServiceImpl implements NationsService {
 
 	@Override
 	public int updatenations(Nations nations) {
-		return mapper.updatenations(nations);
+		return mapper.updateNations(nations);
 	}
 	
 

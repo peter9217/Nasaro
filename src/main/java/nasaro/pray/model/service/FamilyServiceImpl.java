@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import nasaro.common.utility.Pagination;
+import nasaro.community.model.dto.Sharing;
 import nasaro.pray.model.dto.Family;
 import nasaro.pray.model.dto.Nations;
 import nasaro.pray.model.mapper.FamilyMapper;
@@ -39,10 +40,12 @@ public class FamilyServiceImpl implements FamilyService {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		List<Family> familyList = mapper.familyList(rowBounds);
+		List<Family> familyBestList = mapper.bestFamilyList();
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("pagination", pagination);
 		resultMap.put("familyList", familyList);
+		resultMap.put("familyBestList", familyBestList);
 		
 		return resultMap;
 	}
@@ -63,12 +66,14 @@ public class FamilyServiceImpl implements FamilyService {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		List<Family> familyList = mapper.searchFamilyList(paramMap, rowBounds);
+		List<Family> familyBestList = mapper.bestFamilyList();
 		
 		// 4. pagination, boardList를 Map에 담아서 반환
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pagination", pagination);
-		map.put("familyList", familyList);
-		return map;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("pagination", pagination);
+		resultMap.put("familyList", familyList);
+		resultMap.put("familyBestList", familyBestList);
+		return resultMap;
 	}
 
 	@Override
@@ -90,6 +95,7 @@ public class FamilyServiceImpl implements FamilyService {
 	public int updateFamily(Family family) {
 		return mapper.updateFamily(family);
 	}
+
 
 	
 

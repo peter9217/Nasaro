@@ -55,7 +55,8 @@ public class GalleryServiceImpl implements GalleryService {
 	@Override
 	public Map<String, Object> galleryList(Map<String, Object> paramMap,int cp) {
 		int listCount = mapper.galleryListCount(paramMap);
-		
+		System.out.println(paramMap);
+		System.out.println(listCount);
 		Pagination pagination = new Pagination(listCount, cp, 10);
 		
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();

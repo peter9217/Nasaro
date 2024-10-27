@@ -78,19 +78,28 @@
   width: 90%;
   border: 0.5px solid #ccc;
 }
+.notice-content{
+  width: 90%;
+  border: 0.5px solid #ccc;
+}
 
 .community-content th{
   background-color: hsl(0, 4%, 84%);
+  
 }
 .community-content td{
   text-align: center;
-  background-color: beige;
+  padding: 0;
 }
 .community-content th:nth-child(1){
-  width: 8%;
+  width: 10%;
 }
 .community-content th:nth-child(2){
-  width: 10%;
+  white-space: nowrap;       /* 한 줄로 표시 */
+  overflow: hidden;          /* 넘치는 부분을 숨김 */
+  text-overflow: ellipsis;   /* 초과된 부분에 대한 생략 표시 (...) */
+  max-width: 100px;  
+  width: 40%;
 }
 .community-content th:nth-child(3){
   width: 10%;
@@ -121,7 +130,7 @@
   justify-content: center;
 }
 #noticeDetail{
-  width: 800px;
+  width: 1000px;
   border : 1px solid #ccc;
   border-radius: 10px;
 }

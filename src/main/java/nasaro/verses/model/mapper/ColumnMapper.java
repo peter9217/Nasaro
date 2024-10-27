@@ -50,5 +50,7 @@ public interface ColumnMapper {
 
 	int updateColumn(Column column);
 
+	List<Column> bestColumnList();
+
 }
 

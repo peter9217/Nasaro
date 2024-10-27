@@ -4,19 +4,30 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../../css/community/sharing.css">
+	<link rel="stylesheet" href="../../css/button.css">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+	<script src="/js/summernote/summernote-lite.js"></script>
+	<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 	<title>나사로의 집</title>
-	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="communityMain">
+		<div id="communityMain" class="topbanner">
 			<img src="../../img/middleBanner/14.jpg" alt="">
 			<div>나눔게시판</div>
 		</div>
+		<div id="communityContents">
+			<a class="community-communityMenu" href="/community/notice">공지사항</a>
+			<a class="community-communityMenu-cho" href="/community/sharing">나눔게시판</a>
+			<!-- <a class="community-communityMenu" href="/community/free">자유게시판</a> -->
+		</div>
 	</section>
-	<form action="/sharing/insert" >
-		
+	<form action="/sharing/insert"method="post">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 		<section id="prayMiddle" th:with="verses=${verses}">
 			<div id="sharingContent">
 				<table id="sharingDetail">
@@ -31,7 +42,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" > 
-							<textarea id="myTextarea" style="height:300px; width: 99%; border:none" name="sharingContent" oninput="autoResize(this)" required></textarea>
+							<textarea id="summernote" name="sharingContent" required></textarea>
 						</td>
 					</tr>
 				</table>
@@ -43,6 +54,7 @@
 				</div>
 			</div>
 		</section>
+		<th:block th:replace="~{top/bottom.html}"></th:block>
 	</form>
 </body>
 </html>

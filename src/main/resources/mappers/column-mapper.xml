@@ -7,6 +7,7 @@
         SELECT count(*) 
         FROM `COLUMN` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
         WHERE column_delete_fl='N' 
+        	AND COLUMN_notice='N'
     </select>
     
     <!-- 검색어를 포함한 전체 목록 조회(count)-->
@@ -15,6 +16,7 @@
 		FROM `COLUMN` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
 		<!-- 작성자 검색 -->
 		WHERE column_delete_fl='N'
+			AND COLUMN_notice='N'
 		<choose>
 			<when test='key=="t"'>
 				AND column_title LIKE '%${query}%'
@@ -31,13 +33,15 @@
 	<!--공지사항 목록 조회-->
     <select id="columnList" resultType="Column">
         SELECT m.MEMBER_NO, 
-			m.MEMBER_NAME, 
+			m.MEMBER_NAME,
+			m.MEMBER_NICKNAME,  
 			v.column_NO, 
 			v.column_TITLE, 
 			v.column_CONTENT, 
 			DATE_FORMAT(v.column_DATE, '%m-%d') column_DATE 
         FROM `COLUMN` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
         WHERE column_delete_fl='N' 
+        	AND COLUMN_notice='N'
         ORDER BY column_NO DESC;
     </select>
     
@@ -45,6 +49,7 @@
     <select id="searchcolumnList" resultType="Column">
         SELECT m.MEMBER_NO, 
 			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
 			v.column_NO, 
 			v.column_TITLE, 
 			v.column_CONTENT, 
@@ -52,6 +57,7 @@
         FROM `COLUMN` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
 		<!-- 작성자 검색 -->
 		WHERE column_delete_fl='N'
+			AND COLUMN_notice='N'
 		<choose>
 			<when test='key=="t"'>
 				AND column_title LIKE '%${query}%'
@@ -65,16 +71,41 @@
 		</choose> 
 		ORDER BY column_NO DESC;
     </select>
+    
+    
+        	<!--베스트 공지 조회-->
+    <select id="bestColumnList" resultType="Column">
+        SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
+			v.column_NO, 
+			v.column_TITLE, 
+			v.column_CONTENT, 
+			DATE_FORMAT(v.column_DATE, '%m-%d') COLUMN_DATE 
+        FROM `COLUMN` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+        WHERE COLUMN_delete_fl='N'
+        	AND COLUMN_notice='Y'
+        ORDER BY COLUMN_NO DESC;
+    </select>
+    
 	
 		<!-- column-->
 	<select id="detailedColumn">
-		SELECT * FROM `COLUMN` WHERE column_no = #{No} 
+		SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
+			v.column_NO, 
+			v.column_TITLE, 
+			v.column_CONTENT, 
+			DATE_FORMAT(v.column_DATE, '%m-%d') COLUMN_DATE 
+        FROM `COLUMN` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+        WHERE column_no = #{No} 
 	</select>
 	
 		<!-- column 작성 -->
     <insert id="insertColumn" parameterType="Column" >
         INSERT INTO `COLUMN`
-        VALUES (DEFAULT, #{memberNo}, #{columnTitle}, #{columnContent}, DEFAULT, DEFAULT)
+        VALUES (DEFAULT, #{memberNo}, #{columnTitle}, #{columnContent}, DEFAULT, DEFAULT, DEFAULT)
     </insert>
     
     

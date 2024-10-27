@@ -3,18 +3,23 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../css/community/sharing.css">
+	<link rel="stylesheet" href="/css/community/sharing.css">
 	<link rel="stylesheet" href="../../css/utility/pagination.css">
 	<link rel="stylesheet" href="../../css/button.css">
 	<title>나사로의 집</title>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
-<body id="asd" th:with="pagination=${resultMap.pagination}, sharingList=${resultMap.sharingList}">
+<body id="asd" th:with="pagination=${resultMap.pagination}, sharingList=${resultMap.sharingList}, bestNoticeList=${resultMap.sharingBestList}">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="communityMain">
+		<div id="communityMain" class="topbanner">
 			<img src="../../img/middleBanner/14.jpg" alt="">
 			<div>나눔게시판</div>
+		</div>
+		<div id="communityContents">
+			<a class="community-communityMenu" href="/community/notice">공지사항</a>
+			<a class="community-communityMenu-cho" href="/community/sharing">나눔게시판</a>
+			<!-- <a class="community-communityMenu" href="/community/free">자유게시판</a> -->
 		</div>
 	</section>
 	<section id="communityMiddle">
@@ -23,29 +28,30 @@
 			<div>링크</div>
 			<div>링크</div>
 		</div> -->
-		<div id="communityContents">
-			<a class="community-communityMenu" href="/community/notice">공지사항</a>
-			<a class="community-communityMenu-cho" href="/community/sharing">나눔게시판</a>
-			<a class="community-communityMenu" href="/community/free">자유게시판</a>
-		</div>
 		<div id="communityMiddleContent">
 			<table class="community-content">
 				<th>순서</th>
 				<th>제목</th>
 				<th>작성자</th>
 				<th>날짜</th>
-				<tr th:each="s, index:${sharingList}"  th:value="${s.sharingNo}" class="sharing-content"> 
+				<tr  th:each="b, index:${bestNoticeList}"  th:value="${b.sharingNo}" class="sharing-content" style="height: 30px;background-color: bisque;"> 
+					<td th:text="${b.sharingNo}">번호</td>
+					<td th:text="${b.sharingTitle}">제목</td>
+					<td th:text="${b.memberNickname}">작성자</td>
+					<td th:text="${b.sharingDate}">날짜</td>
+				</tr>
+				<tr th:each="s, index:${sharingList}"  th:value="${s.sharingNo}" class="sharing-content" style="height: 30px;"> 
 					<td th:text="${s.sharingNo}">번호</td>
 					<td th:text="${s.sharingTitle}">제목</td>
-					<td th:text="${s.memberNo}">작성자</td>
+					<td th:text="${s.memberNickname}">작성자</td>
 					<td th:text="${s.sharingDate}">날짜</td>
 				</tr>
 			</table>
 		</div>
 		<div id="sharingButton">
 			<button > <a href="/community/sharing">목록</a></button>
-			<div>
-				<button><a href="/community/sharingWrite">글쓰기</a></button>
+			<div th:if="${session.loginMember?.memberRank=='A'}">
+				<button ><a href="/community/sharingWrite">글쓰기</a></button>
 			</div>
 		</div>
 		<!-- 하단 버튼 영역 -->
@@ -136,6 +142,7 @@
 			<button>검색</button>
 		</form>
 	</section>
+	<th:block th:replace="~{top/bottom.html}"></th:block>
 </body>
 <script src="../js/community/sharing.js"></script>
 </html>

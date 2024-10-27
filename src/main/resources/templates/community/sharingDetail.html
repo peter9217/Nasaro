@@ -3,19 +3,31 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../../css/community/sharing.css">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+	<script src="/js/summernote/summernote-lite.js"></script>
+	<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+	<link rel="stylesheet" href="/css/community/sharing.css">
+	<link rel="stylesheet" href="../../css/button.css">
 	<title>나사로의 집</title>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="communityMain">
+		<div id="communityMain" class="topbanner">
 			<img src="../../img/middleBanner/14.jpg" alt="">
 			<div>나눔게시판</div>
 		</div>
+		<div id="communityContents">
+			<a class="community-communityMenu" href="/community/notice">공지사항</a>
+			<a class="community-communityMenu-cho" href="/community/sharing">나눔게시판</a>
+			<!-- <a class="community-communityMenu" href="/community/free">자유게시판</a> -->
+		</div>
 	</section>
-	<section id="prayMiddle" th:with="sharing=${sharing}">
+	<section id="communityMiddle" th:with="sharing=${sharing}">
 		<div id="sharingContent">
 			<table id="sharingDetail">
 				<tr>
@@ -24,7 +36,7 @@
 				</tr>
 				<tr>
 					<td>글쓴이</td>
-					<td th:text="${sharing.sharingNo}">d</td>
+					<td th:text="${sharing.memberNickname}">d</td>
 				</tr>
 				<tr>
 					<td>작성시간</td>
@@ -34,18 +46,21 @@
 					<td colspan="2">내　　　용</td>
 				</tr>
 				<tr>
-					<td colspan="2" th:text="${sharing.sharingContent}">내용</td>
+					<td colspan="2" th:utext="${sharing.sharingContent}">내용</td>
 				</tr>
 			</table>
 		</div>
 		<div id="sharingButton">
 			<button > <a href="/community/sharing">목록</a></button>
 			<div th:if="${sharing.memberNo==session.loginMember?.memberNo ||session.loginMember?.memberGrade=='A'}">
+				<input id="csrf" type="hidden" th:value="${_csrf.token}">
+				<input id="csrfName" type="hidden" th:value="${_csrf.parameterName}">
 				<button id="sharingModify" type="button" th:value="${sharing.sharingNo}">수정</button>
 				<button id="sharingDelete" type="button" th:value="${sharing.sharingNo}">삭제</button>
 			</div>
 		</div>
 	</section>
+	<th:block th:replace="~{top/bottom.html}"></th:block>
 </body>
 <script src="../../js/community/sharing.js"></script>
 </html>

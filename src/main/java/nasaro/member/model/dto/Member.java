@@ -14,8 +14,11 @@ public class Member {
 	private long memberNo;
 	private String memberId;
 	private String memberName;
+	private String memberNickname;
 	private String memberPw;
 	private String memberRank;
 	private String memberEmail;
+	private String memberTel;
+	private String memberDelFl;
 
 }

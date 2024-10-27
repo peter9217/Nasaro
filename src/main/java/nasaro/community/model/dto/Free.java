@@ -9,6 +9,7 @@ import lombok.*;
 public class Free {
 	private long freeNo;
 	private long memberNo;
+	private String memberNickname;
 	private String memberName;
 	private String freeTitle;
 	private String freeContent;

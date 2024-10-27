@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -65,7 +67,7 @@ public class VersesController {
 		return "verses/versesWrite";
 	}
 	
-	@GetMapping("/verses/insert")
+	@PostMapping("/verses/insert")
 	public String versesInsert(
 			@SessionAttribute(name="loginMember", required = false) Member loginMember
 			,Verses verses
@@ -81,11 +83,11 @@ public class VersesController {
 	
 	
 	// 공지사항 삭제
-	@GetMapping(value="/verses/delete",produces = "application/text; charset=UTF-8")
+	@PostMapping(value="/verses/delete",produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public String delete(
 			RedirectAttributes ra
-			,@RequestParam(name="versesNo") long versesNo
+			,@RequestBody long versesNo
 			){
 		int i=service.deleteVerses(versesNo);
 		if(i==1) {
@@ -95,7 +97,7 @@ public class VersesController {
 	}
 	
 	// 공지사항 수정페이지
-	@GetMapping("/verses/modify/{no:[0-9]+}")
+	@PostMapping("/verses/modify/{no:[0-9]+}")
 	public String modify(@PathVariable(name="no") String no
 			,Model model) {
 		Verses verses = service.detailedVerses(no);
@@ -104,7 +106,7 @@ public class VersesController {
 	}
 
 	// 공지사항 수정
-	@GetMapping("/verses/update")
+	@PostMapping("/verses/update")
 	public String update(Verses verses,
 			Model model
 			){

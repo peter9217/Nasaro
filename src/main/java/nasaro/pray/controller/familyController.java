@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -62,7 +64,7 @@ public class familyController {
 		return "pray/familyWrite";
 	}
 	
-	@GetMapping("/family/insert")
+	@PostMapping("/family/insert")
 	public String familyInsert(
 			@SessionAttribute(name="loginMember", required = false) Member loginMember
 			,Family family
@@ -77,11 +79,11 @@ public class familyController {
 	}
 	
 	// 공지사항 삭제
-	@GetMapping(value="/family/delete",produces = "application/text; charset=UTF-8")
+	@PostMapping(value="/family/delete",produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public String delete(
 			RedirectAttributes ra
-			,@RequestParam(name="familyNo") long familyNo
+			,@RequestBody long familyNo
 			){
 		int i=service.deleteFamily(familyNo);
 		if(i==1) {
@@ -91,7 +93,7 @@ public class familyController {
 	}
 	
 	// 공지사항 수정페이지
-	@GetMapping("/family/modify/{no:[0-9]+}")
+	@PostMapping("/family/modify/{no:[0-9]+}")
 	public String modify(@PathVariable(name="no") String no
 			,Model model) {
 		Family family = service.detailedFamily(no);
@@ -100,7 +102,7 @@ public class familyController {
 	}
 
 	// 공지사항 수정
-	@GetMapping("/family/update")
+	@PostMapping("/family/update")
 	public String update(Family family,
 			Model model
 			){

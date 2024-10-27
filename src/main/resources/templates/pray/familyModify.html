@@ -4,6 +4,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../../css/pray/family.css">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+	<script src="/js/summernote/summernote-lite.js"></script>
+	<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 	<title>나사로의 집</title>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
@@ -15,12 +21,12 @@
 			<div>기도노트</div>
 		</div>
 	</section>
-	<form action="/family/update" >
-		
+	<form action="/family/update" method="post">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 		<section id="prayMiddle" th:with="family=${family}">
 			<input type="hidden" name="familyNo" th:value="${family.familyNo}">
-			<div id="familyContent">
-				<table id="familyDetail">
+			<div id="versesContent">
+				<table id="versesDetail">
 					<tr>
 						<td>제목</td>
 						<td style="padding-left: 0;">
@@ -32,7 +38,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" > 
-							<textarea id="myTextarea" style="height:300px; width: 99%; border:none" name="familyContent" oninput="autoResize(this)" th:text="${family.familyContent}" required></textarea>
+							<textarea id="summernote" name="familyContent" th:utext="${family.familyContent}" required></textarea>
 						</td>
 					</tr>
 				</table>
@@ -40,11 +46,12 @@
 			<div id="familyButton">
 				<button > <a href="/pray/family">목록</a></button>
 				<div th:if="${family.memberNo==session.loginMember?.memberNo ||session.loginMember?.memberGrade=='A'}">
-					<button id="familyModify" type="button" th:value="${family.familyNo}">수정</button>
+					<button id="Modify" th:value="${family.familyNo}">수정</button>
 					<button id="familyDelete" type="button" th:value="${family.familyNo}">삭제</button>
 				</div>
 			</div>
 		</section>
+		<th:block th:replace="~{top/bottom.html}"></th:block>
 	</form>
 </body>
 <script src="../../js/pray/family.js"></script>

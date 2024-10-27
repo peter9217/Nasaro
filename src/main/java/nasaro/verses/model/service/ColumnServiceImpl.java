@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import nasaro.common.utility.Pagination;
+import nasaro.pray.model.dto.Nations;
 import nasaro.verses.model.dto.Column;
 import nasaro.verses.model.dto.Reference;
 import nasaro.verses.model.dto.Verses;
@@ -36,6 +37,8 @@ public class ColumnServiceImpl implements ColumnService {
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("pagination", pagination);
 		resultMap.put("columnList", columnList);
+		List<Column> columnBestList = mapper.bestColumnList();
+		resultMap.put("columnBestList", columnBestList);
 		
 		return resultMap;
 	}
@@ -61,6 +64,9 @@ public class ColumnServiceImpl implements ColumnService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
 		map.put("columnList", columnList);
+		List<Column> columnBestList = mapper.bestColumnList();
+		map.put("columnBestList", columnBestList);
+		
 		return map;
 	}
 

@@ -1,20 +1,47 @@
-#prayMiddleContent{
-    display: flex;
-    margin: 0 10%;
-    justify-content: center;
-    flex-direction: column;
+#introContents a:hover{
+    text-decoration: none;
+    color: hsl(0, 0%, 16%);
+    background-color: antiquewhite;
+    font-size: 16px;
+    border: 0.5px solid #ccc;
+}
+#prayContents a:hover{
+    text-decoration: none;
+    color: hsl(0, 0%, 16%);
+    background-color: antiquewhite;
+    font-size: 16px;
+    border: 0.5px solid #ccc;
+}
+#versesContents a:hover{
+    text-decoration: none;
+    color: hsl(0, 0%, 16%);
+    background-color: antiquewhite;
+    font-size: 16px;
+    border: 0.5px solid #ccc;
+}
+#communityContents a:hover{
+    text-decoration: none;
+    color: hsl(0, 0%, 16%);
+    background-color: antiquewhite;
+    font-size: 16px;
+    border: 0.5px solid #ccc;
 }
 
 #versesLink{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 #versesLink div{
+    display: flex;
     border: 1px solid #ccc;
-    width: 20%;
+    width: 170px;
     height: 30px;
     background-color: bisque;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    margin:10px 10px 0 10px;
 }
 
 #versesContents{
@@ -113,3 +140,48 @@
     border: 1px solid #fefefe;
 }
 
+.sign-signMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: #fefefe;
+    border: 1px solid #ccc;
+}
+.sign-signMenu-cho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: hsl(348, 83%, 93%);
+    border: 1px solid #fefefe;
+}
+
+.sign-signMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: #fefefe;
+    border: 1px solid #ccc;
+}
+.sign-signMenu-cho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: hsl(348, 83%, 93%);
+    border: 1px solid #fefefe;
+}

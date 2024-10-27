@@ -8,6 +8,6 @@ import nasaro.member.model.dto.Member;
 public interface MemberMapper {
 
 	Member login(Member inputMember);
-
-
+	
+	void signOut(Member member);
 }

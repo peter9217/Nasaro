@@ -274,18 +274,24 @@ REFERENCES `MEMBER` (
 	`MEMBER_NO`
 );
 
-insert  into `MEMBER`  value (default, 'gaya123', '강가야', '123', 'A', '', default);
-insert  into `NATIONS`  value (default, 1, '열방을 위한 기도1', '내용입니다', 'N', default);
-select * from `COLUMN` c  ;
-select * from `MEMBER` m  ;
-select * from `MEMBER` m  ;
-select * from `NOTICE` m  ;
+insert  into `MEMBER`  value (default, 'gge', '손님', '123', 'N', '', default);
+insert  into `INTRO`  value (default, 1, '인트로');
+insert  into `CHURCH`  value (default, 1, 'CHURCH');
+insert  into `CONSULTATION`  value (default, 1, 'CONSULTATION');
+insert  into `MAP`  value (default, 1, 'MAP');
+select * from `SLIDE` c  ;
+insert  into `SLIDE`  value (default, 1, 'CONON', default);
+select * from NOTICE n  ;
+select * from VERSES v  ;
 select * from GALLERY g JOIN GALLERYIMG gi on g.GALLERY_NO = gi.GALLERY_NO JOIN MEMBER m on g.member_no=m.member_no;
 SELECT * FROM `FREE` WHERE free_no = 1;
 insert  into `GALLERY`  value (default, #{memberId}, #{galleryContent}, default, default, #{galleryCategory});
 insert  into `GALLERYIMG`  value (default, #{GalleryNo}, #{galleryPath}, #{galleryOrder});
 
-select * from `GALLERYIMG` g ;
+asd;
+select * from `NOTICE` m  ;
+INSERT INTO `MEMBER` VALUES (default, "memberId", "memberNickname", "memberName", "memberPw", DEFAULT, DEFAULT);
+select * from `GALLERY` g ;
 select * from `GALLERYIMG` g ;
 
         SELECT g.gallery_NO, 

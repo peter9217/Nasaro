@@ -1,3 +1,5 @@
+const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
+const csrfToken = document.querySelector('meta[name="_csrf"]').content;
 // const menuClick = document.getElementsByClassName("bottom-LeftMenu");
 // const menuArray = Array.from(menuClick);
 // menuArray.forEach(e => {
@@ -42,13 +44,13 @@ document.getElementById("login").addEventListener("click", e => {
     let rightValue = parseInt(topLogin.style.right);
     
     if (isNaN(rightValue)) {
-        rightValue = -220;
+        rightValue = -290;
         
     }
     
-    if (rightValue === -220) {
-        topLogin.style.right = "0";
+    if (rightValue === -290) {
+        topLogin.style.right = "-70px";
     } else {
-        topLogin.style.right = "-220px";
+        topLogin.style.right = "-290px";
     }
 });

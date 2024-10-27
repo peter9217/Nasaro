@@ -1,86 +1,139 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<meta name="_csrf" th:content="${_csrf.token}">
+  	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 	<title>나사로의 집</title>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
-<body id="asd" th:with="noticeList=${resultMap.noticeList}, familyList=${resultMap.familyList}, galleryList=${resultMap.galleryList}">
+<body id="asd" th:with="noticeList=${resultMap.noticeList}, sharingList=${resultMap.sharingList}, galleryList=${resultMap.galleryList}, slideList=${resultMap.slideList}" >
 	<th:block th:replace="~{top/top.html}"></th:block>
-	<section id="middleSlide">
+	<section >
+		<!-- Slider main container -->
+		<div class="swiper">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+				<!-- Slides -->
+				<div class="swiper-slide" th:each="s:${slideList}" if="">
+					<div  >
+						<textarea class="slideText" th:style="'width: 100%; left:'+${s.slideTextLeft}+'%; top:'+${s.slideTextTop}+'%; color: '+${s.slideTextColor}+';'" th:text="${s.slideText}" readonly="readonly" disabled></textarea>
+					</div>
+					<img  class="slide-contents" th:src="${s.slideImgPath}" alt="">
+				</div>
+			</div>
+			<!-- If we need pagination -->
+			<div class="swiper-pagination"></div>
+		
+			<!-- If we need navigation buttons -->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+		
+		</div>
+		
+	
+	
+	</section>
+	<!-- <section id="middleSlide">
+		
 		<div class="slide_box">
 			<ul class="slide_list clearfix">
 			
 			<li class="slide_content">
-				<img class="main-banner-img" src="../img/나사로.jpg" alt="">
 			</li>
 			<li class="slide_content">
-				<img class="main-banner-img" src="../img/나사로2.jpg" alt="">
 			</li>
 			
 			</ul>
-		</div> <!-- slide_box -->
+		</div> 
 		<button class="slide_btn_prev" type="button">
 		</button>
 		
 		<button class="slide_btn_next" type="button">
 		</button>
-		
-		<!-- slide_pagination -->
 		<ul class="slide_pagination"></ul>
 	
-		<!-- banner 슬라이드 관련 js -->
-	</section>
+	</section> -->
 	<section id="middleContent">
 		<div id="middleTitle">
-			<div>나사로의 집</div>
+			<div style="color: #4641D9;">나사로의집 사역</div>
 			<div>나는 치유하는 하나님이니라.</div>
+			<div style="font-size: 22px; display: flex; justify-content: center; ">
+				<div class="middleContentBtn">
+					나사로의집교회&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					치유상담사역&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					중보기도사역
+				</div>
+			</div>
 		</div>
 		<div id="middleTag">
 			<div>
-				<a href="/intro/home">
-					<img  src="../img/말씀.jpg" alt="">
-					<div>십자가 치유의 능력</div>
+				<a href="/intro/intro">
+					<img style="height:100%" src="../img/main/말씀.jpg" alt="">
+					<div>나사로의집 소개</div>
 				</a>
 			</div>
 			<div>
 				<a href="/verses/verses">
-					<img  src="../img/교회를위한기도.jpg" alt="">
-					<div>은혜와 진리안에 거하라</div>
+					<img style="height:100%" src="../img/main/교회를위한기도.jpg" alt="">
+					<div>말씀의 삶</div>
 				</a>
 			</div>
 			<div>
 				<a href="/pray/prayer">
-					<img  src="../img/나사로의집소개.jpg" alt="">
-					<div>쉬지 말고 기도하라</div>
+					<img style="height:100%" src="../img/main/나사로의집소개.jpg" alt="">
+					<div>기도의 삶</div>
 				</a>
 			</div>
 		</div>
 	</section>
 	<section id="middleImg">
-		<div>GALLERY</div>
-		<div id="middleImgContent">
-			<img th:each="g:${galleryList}" th:if="${g.galleryImg.size()!=0}" class="middleImg-img" th:src="${g.galleryImg[0].galleryPath}" alt="">
-			<img th:each="g:${galleryList}" th:if="${g.galleryImg.size()==0}" class="middleImg-img" src="https://s3.ap-northeast-2.amazonaws.com/lazarus.bucket/images/gallery/12%EC%8B%9C%EC%98%A8%EC%94%A8.jpg">
+		<div  style="color: #4641D9;">GALLERY</div>
+		<div style="display: flex; justify-content: space-between; position: absolute; z-index: 200;width: 90%;left: 5%;margin: 150px 0">
+			<div class="swiper-img-button-prev">◀◀</div>
+			<div class="swiper-img-button-next">▶▶</div>
+		</div>
+		<div class="swiper-img" id="img-slide" >
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+				<!-- Slides -->
+				<div class="swiper-slide" th:each="g, index:${galleryList}" if="">
+					<img  class="slide-contents model-Img" th:if="${g.galleryImg.size()!=0}" th:src="${g.galleryImg[0].galleryPath}" alt=""  th:data-modal="${index.count}">
+					<img  class="slide-contents model-Img" th:if="${g.galleryImg.size()==0}" src="https://s3.ap-northeast-2.amazonaws.com/lazarus.bucket/images/gallery/12%EC%8B%9C%EC%98%A8%EC%94%A8.jpg" alt="" th:data-modal="${index.count}">
+				</div>
+			</div>
+			<!-- If we need pagination -->
+			<div class="swiper-img-pagination"></div>
+			
+			<!-- If we need navigation buttons -->
+
+			<!-- <div id="modal-set">
+				<div  th:each="g, index:${galleryList}" th:id="${index.count}" class="modal">
+					<span class="close-button">&times;</span>
+					<img th:each="gi:${g.galleryImg}" th:if="${gi.galleryPath!=null}" th:src="${gi.galleryPath}" class="modal-content" alt="">
+					<div th:text="${g.galleryContent}" class="modal-content">
+				</div>
+			</div> -->
 		</div>
 	</section>
-
 	<section id="bottomContent">
 		<div id="bottomLeft">
 			<div>
 				<div class="bottom-LeftMenu">공지사항</div>
-				<div class="bottom-LeftMenu">기도노트</div>
+				<div class="bottom-LeftMenu">나눔게시판</div>
 			</div>
 			<div class="bottomLeftMenuContent" id="bottomLeftMenuNotice">
 				<div th:each="n:${noticeList}" th:value="${n.noticeNo}"  class="notice-content">
-					<div class="bottomNotice" th:text="${n.noticeTitle}">공지사항1</div>
+					<div class="bottomNotice noticeContent" th:text="${n.noticeTitle}">공지사항1</div>
 				</div>
 			</div>
 			<div class="bottomLeftMenuContent" id="bottomLeftMenuBoard">
-				<div th:each="f:${familyList}" th:value="${f.familyNo}"  class="family-content">
-					<div class="bottomNotice" th:text="${f.familyTitle}">기도노트</div>
+				<div th:each="s:${sharingList}" th:value="${s.sharingNo}"  class="family-content">
+					<div class="bottomNotice sharingContent" th:text="${s.sharingTitle}">기도노트</div>
 				</div>
 			</div>
 		</div>
@@ -89,15 +142,86 @@
 				<div id="map" style="width:100%;height:400px;"></div>
 			</div>
 			<div class="bottom-RightMenu">
-				<img src="../img/나사로주소전화.jpg" alt="">
+				<img src="../img/main/나사로하단주소전화.png" style="width:100%;height:400px;" alt="">
 			</div>
 		</div>
-	</section>
-	<section>
-		바텀끝
-	</section>
 
+	</section>
+	<th:block th:replace="~{top/bottom.html}"></th:block>
 </body>
+<script>
+	const swiper = new Swiper('.swiper', {
+		// Optional parameters
+		//   effect : 'fade', // 페이드 효과 사용
+		direction: 'horizontal',
+		loop: true,
+		autoplay: {     //자동슬라이드 (false-비활성화)          
+			delay: 3500, // 시간 설정          
+			disableOnInteraction: false, // false-스와이프 후 자동 재생        
+	},
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+  on:{
+	  slideChange: function(){
+		const currentSlide = this.slides[this.activeIndex];
+		const textContainer = currentSlide.querySelector('.slideText');
+		// 텍스트가 천천히 나오는 애니메이션을 위한 클래스 추가
+		setTimeout(() => {
+			textContainer.classList.add('show');
+		}, 100);
+	},
+	  
+	  slideChangeTransitionEnd: function () {
+        const prevSlide = this.slides[this.previousIndex];
+        const textContainer = prevSlide.querySelector('.slideText');
+        
+        // 이전 슬라이드의 텍스트 숨기기
+        textContainer.classList.remove('show');
+      },
+  }
+});
+const swiperImg = new Swiper('#img-slide', {
+  // Optional parameters
+//   effect : 'fade', // 페이드 효과 사용
+
+  direction: 'horizontal',
+  loop: true,
+	// autoplay: {     //자동슬라이드 (false-비활성화)          
+	// delay: 3500, // 시간 설정          
+	// disableOnInteraction: false, // false-스와이프 후 자동 재생        
+	// },
+	slidesPerView: 5, // 한번에 보여줄 슬라이드 개수
+  spaceBetween: 20, // 슬라이드 사이 여백
+  // If we need pagination
+  pagination: {
+    el: '.swiper-img-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-img-button-next',
+    prevEl: '.swiper-img-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-img-scrollbar',
+  }
+});
+</script>
 <script>
 	// var mapOptions = {
 	// 	center: new naver.maps.LatLng(34.48054449999998, 127.16895197903432),
@@ -137,7 +261,7 @@
 
 	infowindow.open(map, marker);
 	</script>
-<script src="../js/home/banner.js"></script>
-<script src="../js/home/intro.js"></script>
+<!-- <script src="../js/home/banner.js"></script> -->
+<script src="../js/home/home.js"></script>
 
 </html>

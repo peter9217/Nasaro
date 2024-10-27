@@ -9,6 +9,7 @@ import lombok.*;
 public class Reference {
 	private long referenceNo;
 	private long memberNo;
+	private String memberNickname;
 	private String memberName;
 	private String referenceTitle;
 	private String referenceContent;

@@ -54,7 +54,6 @@ align-items: center;
 }
 .verses-content td{
   text-align: center;
-  background-color: beige;
 }
 .verses-content th:nth-child(1){
   width: 10%;
@@ -92,7 +91,7 @@ align-items: center;
   justify-content: center;
 }
 #versesDetail{
-  width: 800px;
+  width: 1000px;
   border : 1px solid #ccc;
   border-radius: 10px;
 }

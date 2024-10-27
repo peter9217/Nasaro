@@ -46,5 +46,7 @@ public interface ReferenceMapper {
 
 	int updateReference(Reference reference);
 
+	List<Reference> bestReferenceList();
+
 }
 

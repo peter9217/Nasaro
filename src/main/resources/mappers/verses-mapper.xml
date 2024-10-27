@@ -6,7 +6,8 @@
     <select id="versesListCount">
         SELECT count(*) 
         FROM `VERSES` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
-        WHERE verses_delete_fl='N' 
+        WHERE verses_delete_fl='N'
+        	AND verses_notice='N' 
     </select>
     
     <!-- 검색어를 포함한 전체 목록 조회(count)-->
@@ -15,6 +16,7 @@
 		FROM `VERSES` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
 		<!-- 작성자 검색 -->
 		WHERE verses_delete_fl='N'
+			AND verses_notice='N'
 		<choose>
 			<when test='key=="t"'>
 				AND verses_title LIKE '%${query}%'
@@ -32,12 +34,14 @@
     <select id="versesList" resultType="Verses">
         SELECT m.MEMBER_NO, 
 			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
 			v.VERSES_NO, 
 			v.VERSES_TITLE, 
 			v.VERSES_CONTENT, 
 			DATE_FORMAT(v.VERSES_DATE, '%m-%d') VERSES_DATE 
         FROM `VERSES` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
         WHERE verses_delete_fl='N' 
+        	AND verses_notice='N'
         ORDER BY VERSES_NO DESC;
     </select>
     
@@ -45,6 +49,7 @@
     <select id="searchVersesList" resultType="Verses">
         SELECT m.MEMBER_NO, 
 			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
 			v.VERSES_NO, 
 			v.VERSES_TITLE, 
 			v.VERSES_CONTENT, 
@@ -52,6 +57,7 @@
         FROM `VERSES` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
 		<!-- 작성자 검색 -->
 		WHERE verses_delete_fl='N'
+		     AND verses_notice='N'
 		<choose>
 			<when test='key=="t"'>
 				AND verses_title LIKE '%${query}%'
@@ -67,15 +73,38 @@
     </select>
 
 
+    <!--베스트 공지 조회-->
+    <select id="bestVersesList" resultType="verses">
+        SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
+			v.verses_NO, 
+			v.verses_TITLE, 
+			v.verses_CONTENT, 
+			DATE_FORMAT(v.verses_DATE, '%m-%d') verses_DATE 
+        FROM `VERSES` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+        WHERE verses_delete_fl='N'
+        	AND verses_notice='Y'
+        ORDER BY VERSES_NO DESC;
+    </select>
+
 	<!-- verses 상세 조회-->
 	<select id="detailedVerses">
-		SELECT * FROM `VERSES` WHERE verses_no = #{No};
+		SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
+			v.verses_NO, 
+			v.verses_TITLE, 
+			v.verses_CONTENT, 
+			DATE_FORMAT(v.verses_DATE, '%m-%d') verses_DATE 
+        FROM `VERSES` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO  
+        WHERE verses_no = #{No};
 	</select>
 
 	<!-- verses 작성 -->
     <insert id="insertVerses" parameterType="Verses" >
         INSERT INTO `VERSES` 
-        VALUES (default, #{memberNo}, #{versesTitle}, #{versesContent}, DEFAULT, DEFAULT)
+        VALUES (default, #{memberNo}, #{versesTitle}, #{versesContent}, DEFAULT, DEFAULT, DEFAULT)
     </insert>
     
     

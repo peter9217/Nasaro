@@ -51,5 +51,7 @@ public interface SharingMapper {
 
 	int updateSharing(Sharing sharing);
 
+	List<Sharing> bestSharingList();
+
 }
 

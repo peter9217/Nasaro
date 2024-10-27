@@ -23,20 +23,21 @@
 			<div><a href="https://www.praywithjesus.org/">매일 한시간 기도</a></div>
 		</div>
 		<div id="prayContents">
-			<div class="pray-prayMenu-cho">
-				<a href="/pray/prayer">교회를 위한 기도</a>
-			</div>
-			<div class="pray-prayMenu">
-				<a href="/pray/nations">열방을 위한 기도</a>
-			</div>
-			<div class="pray-prayMenu">
-				<a href="/pray/family">기도노트</a>
-			</div>
+			<a class="pray-prayMenu-cho" href="/pray/prayer">교회를 위한 기도</a>
+			<a class="pray-prayMenu" href="/pray/nations">열방을 위한 기도</a>
+			<a class="pray-prayMenu" href="/pray/family">기도노트</a>
 		</div>
-		<div id="prayer">
-			<img src="../img/prayer.png" alt="" id="prayer-img">
+		<div id="prayMiddleContent">
+			<div id="prayPic">
+				<img th:src="${prayer.prayerImg}" alt="" >
+			</div>
+			<div id="prayContent">
+				<!-- <div class="intro-content">교통 안내</div> -->
+				<div id="prayContentImg" th:utext="${prayer.prayerContent}" readonly></div>
+			</div>
 		</div>
 	</section>
+	<th:block th:replace="~{top/bottom.html}"></th:block>
 </body>
 <script>
 	</script>

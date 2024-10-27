@@ -45,7 +45,9 @@ public interface NationsMapper {
 
 	int deleteNations(long nationsNo);
 
-	int updatenations(Nations nations);
+	int updateNations(Nations nations);
+
+	List<Nations> bestNationsList();
 
 }
 

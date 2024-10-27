@@ -50,5 +50,7 @@ public interface FreeMapper {
 
 	int updateFree(Free free);
 
+	List<Free> bestFreeList();
+
 }
 

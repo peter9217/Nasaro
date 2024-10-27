@@ -1,5 +1,12 @@
+a{
+    border-radius: 5px;
+}
+div{
+    border-radius: 5px;
+}
 ul{
     padding-inline-start: 0;
+    margin: 20px 0;
 }
 li{
     list-style: none;
@@ -7,21 +14,54 @@ li{
 body{
     margin: 0;
 }
+p{
+    width: 1000px;
+    white-space: normal; /* 일반적인 줄바꿈 */
+    word-wrap: break-word; /* 긴 단어 줄바꿈 */
+    word-break: break-all; /* 모든 단어 줄바꿈 */
+    overflow-wrap: break-word; /* 텍스트 줄바꿈 처리 */
+}
 a{
     text-decoration: none;
     color: black;
+    transition-duration: 1s;
 }
+a:hover{
+    text-decoration: none;
+    color: black;
+    transition-duration: 1s;
+}
+
 .hidden{
     display: none;
 }
+table{
+    border-collapse: collapse;
+}
+th{
+    height: 40px;
+    border: 1px solid hsl(0, 0%, 56%);
+}
+td{
+    font-size: 15px;
+}
 @font-face {
-    font-family: 'SokchoBadaBatang';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_1@1.0/SokchoBadaBatang.woff2') format('woff2');
+    font-family: 'SOGANGUNIVERSITYTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/SOGANGUNIVERSITYTTF.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 div{
-    font-family: 'SokchoBadaBatang';
+    font-family: 'SOGANGUNIVERSITYTTF';
+}
+p{
+    font-family: 'SOGANGUNIVERSITYTTF';
+}
+span{
+    font-family: 'SOGANGUNIVERSITYTTF';
+}
+textarea{
+    font-family: 'SOGANGUNIVERSITYTTF';
 }
 /* 중앙정렬 */
 #topFrame{
@@ -40,6 +80,7 @@ div{
 }
 /* 로고 */
 #topLogo{
+    
   margin-top: 10px;
     z-index: 999;
     position:absolute;
@@ -64,13 +105,14 @@ div{
 }
 
 #topLogin{
+    width: 210px;
     background-color: #ccc;
     border-radius: 5px;
     z-index: 300;
     border: 1px solid black;
     transition: right 2s;
     position: relative;
-    right: -220px;
+    right: -290px;
     
 }
 #topLogin > div{
@@ -143,7 +185,12 @@ div{
     font-size: 20px;
 }
 
-@media screen and (max-width:1300px) {
+
+
+
+
+
+@media screen and (max-width:1180px) {
     .top-nav{
         width: 100%;
          z-index:200;
@@ -154,5 +201,9 @@ div{
         justify-content: flex-end;
         border-bottom: 1px solid #ccc;
         margin-top: 50px;
+    }
+
+    .topbanner{
+        padding-top: 50px;
     }
 }

@@ -9,6 +9,7 @@ import lombok.*;
 public class Verses {
 	private long versesNo;
 	private long memberNo;
+	private String memberNickname;
 	private String memberName;
 	private String versesTitle;
 	private String versesContent;

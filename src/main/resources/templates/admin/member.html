@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/admin.css">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+	<script src="/js/summernote/summernote-lite.js"></script>
+	<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+    <title>Document</title>
+</head>
+<body  th:with="pagination=${resultMap.pagination}, memberList=${resultMap.memberList}">
+    <th:block th:replace="~{top/top.html}"></th:block>
+    <section id="admin-section"  >
+        <nav id="admin-section-nav">
+            <a href="/admin/slide">
+                <li class="admin-nav-li">메인 슬라이드</li>
+            </a>
+            <a href="/admin/intro">
+                <li class="admin-nav-li">나사로의집 소개</li>
+            </a>
+            <a href="/admin/consultation">
+                <li class="admin-nav-li">상담방문예약</li>
+            </a>
+            <a href="/admin/guide">
+                <li class="admin-nav-li">교통안내</li>
+            </a>
+            <a href="/admin/prayer">
+                <li class="admin-nav-li">교회를 위한 기도</li>
+            </a>
+            <a href="/admin/board">
+                <li class="admin-nav-li">게시판관리</li>
+            </a>
+            <a href="/admin/member">
+                <li class="admin-nav-li">멤버관리</li>
+            </a>
+        </nav>
+        <div id="admin-section-div">
+            <form action="/admin/modifyMember" method="post">
+                <table id="adminMemberTable">
+                    <tr  class="adminMember" style="background-color: hsl(320, 100%, 89%);">
+                        <td>회원 번호</td>
+                        <td>회원 아이디</td>
+                        <td>회원 이름</td>
+                        <td>회원 등급</td>
+                        <td>회원 이메일</td>
+                        <td>회원 탈퇴여부</td>
+                        <td>수정</td>
+                    </tr>
+                    <tr class="adminMember" th:each="m, index:${memberList}">
+                        <td th:text="${m.memberNo}">asd</td>
+                        <td th:text="${m.memberId}">asd</td>
+                        <td th:text="${m.memberName}">asd</td>
+                        <td >
+                            <select name="" id="">
+                                <option th:selected="${m.memberRank}=='M'" value="M">M(매니저)</option>
+                                <option th:selected="${m.memberRank}=='F'" value="F">F(회원)</option>
+                                <option th:selected="${m.memberRank}=='N'" value="N">N(손님)</option>
+                            </select>
+                        </td>
+                        <td th:text="${m.memberEmail}">asd</td>
+                        <td >
+                            <select name="" id="">
+                                <option th:selected="${m.memberDelFl}=='Y'" value="Y">Y(탈퇴)</option>
+                                <option th:selected="${m.memberDelFl}=='N'" value="N">N(활성화)</option>
+                            </select>
+                        <td>
+                            <button type="button" class="adminMember-button">수정</button>
+                        </td>
+                    </tr>
+                </table>
+                <div >
+                    <div></div>
+
+                </div>
+            </form>
+        </div>
+    </section>
+    <th:block th:replace="~{top/bottom.html}"></th:block>
+</body>
+<script src="/js/admin/admin.js"></script>
+</html>

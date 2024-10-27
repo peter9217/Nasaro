@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/admin.css">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+	<script src="/js/summernote/summernote-lite.js"></script>
+	<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+    <title>Document</title>
+</head>
+<body th:with="intro=${intro}">
+    <th:block th:replace="~{top/top.html}"></th:block>
+    <section id="admin-section"  >
+        <nav id="admin-section-nav">
+            <a href="/admin/slide">
+                <li class="admin-nav-li">메인 슬라이드</li>
+            </a>
+            <a href="/admin/intro">
+                <li class="admin-nav-li">나사로의집 소개</li>
+            </a>
+            <a href="/admin/consultation">
+                <li class="admin-nav-li">상담방문예약</li>
+            </a>
+            <a href="/admin/guide">
+                <li class="admin-nav-li">교통안내</li>
+            </a>
+            <a href="/admin/prayer">
+                <li class="admin-nav-li">교회를 위한 기도</li>
+            </a>
+            <a href="/admin/board">
+                <li class="admin-nav-li">게시판관리</li>
+            </a>
+            <a href="/admin/member">
+                <li class="admin-nav-li">멤버관리</li>
+            </a>
+        </nav>
+        <div id="admin-section-div">
+            <form action="/admin/modifyIntroImg"  method="post" id="admin-div-banner" enctype="multipart/form-data">
+                <label for="img">
+                    <img class="preview" th:src="${intro.introImg}" alt="" style="width: 200px;">
+                    <span class="deleteImg">&times;</span>
+                    <input style="content-visibility: hidden;" type="file" class="introImg" id="img" name="images" multiple>
+                </label>
+                <button style="width: 100%; height: 50px; font-size: 20px;">수정</button>
+            </form>
+            <form action="/admin/modifyIntro" method="post">
+                <textarea  id="summernote" name="introContent" th:utext="${intro.introContent}" required></textarea>
+                <button style="width: 100%; height: 50px; font-size: 20px;">수정</button>
+            </form>
+        </div>
+    </section>
+    <th:block th:replace="~{top/bottom.html}"></th:block>
+</body>
+<script src="/js/admin/admin.js"></script>
+</html>

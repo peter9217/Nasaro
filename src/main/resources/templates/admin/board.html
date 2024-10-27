@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/admin.css">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+	<script src="/js/summernote/summernote-lite.js"></script>
+	<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+    <title>Document</title>
+</head>
+<body  th:with="pagination=${resultMap.pagination}, boardList=${resultMap[board + 'List']}, bestBoardList=${resultMap[board + 'BestList']}">
+    <th:block th:replace="~{top/top.html}"></th:block>
+    <section id="admin-section"  >
+        <nav id="admin-section-nav">
+            <a href="/admin/slide">
+                <li class="admin-nav-li">메인 슬라이드</li>
+            </a>
+            <a href="/admin/intro">
+                <li class="admin-nav-li">나사로의집 소개</li>
+            </a>
+            <a href="/admin/consultation">
+                <li class="admin-nav-li">상담방문예약</li>
+            </a>
+            <a href="/admin/guide">
+                <li class="admin-nav-li">교통안내</li>
+            </a>
+            <a href="/admin/prayer">
+                <li class="admin-nav-li">교회를 위한 기도</li>
+            </a>
+            <a href="/admin/board">
+                <li class="admin-nav-li">게시판관리</li>
+            </a>
+            <a href="/admin/member">
+                <li class="admin-nav-li">멤버관리</li>
+            </a>
+        </nav>
+        <div id="admin-section-div" style="display: block;">
+            <div>
+                <a th:href="@{board(board=verses)}"><button>말씀</button></a>
+                <a th:href="@{board(board=column)}"><button>컬럼</button></a>
+                <a th:href="@{board(board=reference)}"><button>신앙자료실</button></a>
+                <a th:href="@{board(board=nations)}"><button>열방을 위한 기도</button></a>
+                <a th:href="@{board(board=family)}"><button>기도노트</button></a>
+                <a th:href="@{board(board=notice)}"><button>공지사항</button></a>
+                <a th:href="@{board(board=sharing)}"><button>나눔게시판</button></a>
+                <a th:href="@{board(board=free)}"><button>자유게시판</button></a>
+            </div>
+            <div id="communityMiddleContent" style="display: flex;">
+                <div>
+
+                    <table class="community-content" style="width: 700px; border: 1px solid hsl(0, 0%, 56%);">
+                        <tr>
+                            <td colspan="5" style="text-align: center; border: 1px solid black; font-size: 20px; font-weight: bold;">
+                                일반 게시물
+                            </td>
+                        </tr>
+                        <tr >
+                            <th>순서</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>날짜</th>
+                            <th>설정</th>
+                        </tr>
+                        <tr th:if="${boardList}!=null" th:each="n, index:${boardList}"  th:value="${n[board + 'No']}" class="notice-content"> 
+                            <td th:text="${n[board + 'No']}">번호</td>
+                            <td th:text="${n[board + 'Title']}">제목</td>
+                            <td th:text="${n.memberNickname}">작성자</td>
+                            <td th:text="${n[board + 'Date']}">날짜</td>
+                            <td>
+                                <form action="/admin/modifyBoard" method="post">
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                    <input type="hidden" name="boardChoice" value="Y">
+                                    <input type="hidden" name="board" th:value="${board}">
+                                    <input type="hidden" name="boardNo" th:value="${n[board + 'No']}">
+                                    <button>설정</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <table class="community-content" style="width: 700px; border: 1px solid hsl(0, 0%, 56%)">
+                        <tr >
+                            <td colspan="5" style="height: 20px;text-align: center; border: 1px solid black; font-size: 20px; font-weight: bold">
+                                공지 게시물
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>순서</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>날짜</th>
+                            <th>설정</th>
+                        </tr>
+                        <tr th:if="${bestBoardList}!=null" th:each="b, index:${bestBoardList}"  th:value="${b[board + 'No']}" class="notice-content" style="background-color: bisque;"> 
+                            <td th:text="${b[board + 'No']}">번호</td>
+                            <td th:text="${b[board + 'Title']}">제목</td>
+                            <td th:text="${b.memberNo}">작성자</td>
+                            <td th:text="${b[board + 'Date']}">날짜</td>
+                            <td>
+                                <form action="/admin/modifyBoard" method="post">
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                    <input type="hidden" name="boardChoice" value="N">
+                                    <input type="hidden" name="board" th:value="${board}">
+                                    <input type="hidden" name="boardNo" th:value="${b[board + 'No']}">
+                                    <button>설정</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+            <!-- 하단 버튼 영역 -->
+            <div th:if="${#lists.size(boardList) > 0}" class="pagination-area" style="display: flex;">
+                <ul th:unless="${param.query}" class="pagination" id="pagination">
+                    <!-- 첫 페이지로 이동 -->
+                    <li>
+                          <a th:href="@{board(cp=1, board=${board})}">
+                            <!-- <img th:src="@{/images/common/paging/first-page.svg}"> -->
+                            <div>&lt;&lt;</div>
+                        </a>
+                    </li>
+                    <!-- 이전 목록 마지막 번호로 이동 -->
+                    <li>
+                        <a th:href="@{board(cp=${pagination.prevPage}, board=${board})}">
+                            <!-- <img th:src="@{/images/common/paging/prev-page.svg}"> -->
+                            <div>&lt;</div>
+                          </a>
+                    </li>
+                    <!-- 특정 페이지로 이동 -->
+                    <!-- #numbers.sequence(시작, 끝 [, step]) 시작 이상 , 끝 이하 까지 step만큼 증가하는 숫자를 발생-->
+                    <th:block th:each=" i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+                    <!-- 현재 보고 있는 페이지 -->
+                    <li th:if="${i == pagination.currentPage}">
+                        <a class="current" th:text="${i}">현재페이지</a>
+                    </li>
+                    <li th:unless="${i == pagination.currentPage}">
+                        <a th:href="@{board(cp=${i}, board=${board})}" th:text="${i}">현재페이지</a>
+                    </li>
+                    
+                    </th:block>
+                    
+                    <!-- 다음 목록 시작 번호로 이동 -->
+                    <li>
+                          <a th:href="@{board(cp=${pagination.nextPage}, board=${board})}">
+                            <!-- <img th:src="@{/images/common/paging/next-page.svg}"> -->
+                            <div>&gt;</div>
+                        </a>	
+                    </li>
+                    
+                    <!-- 끝 페이지로 이동 -->
+                    <li>
+                        <a th:href="@{board(cp=${pagination.maxPage}, board=${board})}">
+                            <!-- <img th:src="@{/images/common/paging/last-page.svg}"> -->
+                            <div>&gt;&gt;</div>
+                        </a>
+                    </li>
+            
+                </ul>
+                <!-- 검색 O인 경우의 페이지네이션 -->
+                <ul th:if="${param.query}" class="pagination" id="pagination">
+                
+                    <!-- 첫 페이지로 이동 -->
+                    <li><a th:href="@{board(cp=1, key=${param.key}, query=${param.query}, board=${board})}">&lt;&lt;</a></li>
+            
+                    <!-- 이전 목록 마지막 번호로 이동 -->
+                    <li><a th:href="@{board(cp=${pagination.prevPage}, key=${param.key}, query=${param.query}, board=${board})}">&lt;</a></li>
+            
+                    <!-- #numbers.sequence(시작, 끝 [,step]) -->
+                    <!-- 특정 페이지로 이동 -->
+                    <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+                        <!-- 현재 보고있는 페이지 -->
+                        <li th:if="${i == pagination.currentPage}">
+                            <a class="current" th:text="${i}">현재 페이지</a>
+                        </li>
+            
+                        <!-- 현재 페이지를 제외한 나머지 -->
+                        <li th:unless="${i == pagination.currentPage}">
+                            <a th:href="@{board(cp=${i}, key=${param.key}, query=${param.query}, board=${board})}" th:text="${i}">현재 페이지</a>
+                        </li>
+                    </th:block>
+            
+                    <!-- 다음 목록 시작 번호로 이동 -->
+                    <li><a th:href="@{board(cp=${pagination.nextPage}, key=${param.key}, query=${param.query}, board=${board})}">&gt;</a></li>
+            
+                    <!-- 끝 페이지로 이동 -->
+                    <li><a th:href="@{board(cp=${pagination.maxPage}, key=${param.key}, query=${param.query}, board=${board})}">&gt;&gt;</a></li>
+                </ul>
+            </div>
+            <!-- 검색창 -->
+            <form action="/admin/board" method="get" id="boardSearch">
+                <select name="board" id="" th:value="${board}">
+                    <option value="verses">말씀</option>
+                    <option value="column">컬럼</option>
+                    <option value="reference">신앙자료실</option>
+                    <option value="nations">열방을 위한 기도</option>
+                    <option value="family">기도노트</option>
+                    <option value="notice">공지사항</option>
+                    <option value="sharing">나눔게시판</option>
+                    <option value="free">자유게시판</option>
+                </select>
+                <select name="key" id="searchKey">
+                    <option value="t">제목</option>
+                    <option value="c">내용</option>
+                    <option value="tc">제목+내용</option>
+                </select>
+                <input type="text" name="query" id="searchQuery" >
+                <button>검색</button>
+            </form>
+        </div>
+    </section>
+    <th:block th:replace="~{top/bottom.html}"></th:block>
+</body>
+<script src="/js/admin/admin.js"></script>
+</html>

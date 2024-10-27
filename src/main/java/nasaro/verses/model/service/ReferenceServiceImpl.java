@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import nasaro.common.utility.Pagination;
+import nasaro.verses.model.dto.Column;
 import nasaro.verses.model.dto.Reference;
 import nasaro.verses.model.dto.Verses;
 import nasaro.verses.model.mapper.VersesMapper;
@@ -33,10 +34,13 @@ public class ReferenceServiceImpl implements ReferenceService {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		List<Reference> referenceList = mapper.referenceList(rowBounds);
+		List<Reference> referenceBestList = mapper.bestReferenceList();
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("pagination", pagination);
 		resultMap.put("referenceList", referenceList);
+		resultMap.put("referenceBestList", referenceBestList);
+		
 		
 		return resultMap;
 	}
@@ -57,11 +61,14 @@ public class ReferenceServiceImpl implements ReferenceService {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		List<Reference> referenceList = mapper.searchReferenceList(paramMap, rowBounds);
+		List<Reference> referenceBestList = mapper.bestReferenceList();
 		
 		// 4. pagination, boardList를 Map에 담아서 반환
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
 		map.put("referenceList", referenceList);
+		map.put("referenceBestList", referenceBestList);
+		
 		return map;
 	}
 

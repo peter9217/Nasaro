@@ -7,7 +7,6 @@ li{
 body{
     margin: 0;
 }
-/* 슬라이드 부분 */
 #middleSlide{
 }
 
@@ -105,6 +104,74 @@ body{
 }
 
 
+#home-slide{
+  width: 100%;
+  height: 1000px;
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  user-select: none;
+  
+}
+
+.slide-contents{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+
+
+  /* transition */
+  transition: left 0.15s;
+  transition-duration: 1s;
+}
+.slide-img-contents{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+
+
+  /* transition */
+  transition: left 0.15s;
+  transition-duration: 1s;
+}
+
+.swiper {
+  margin-top: 15px;
+  width: 100%;
+  height: 1000px;
+}
+
+.slideText{
+  position: absolute;
+  display: flex;
+  font-size: 32px;
+  color: hwb(0 16% 84%);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 2s, transform 2s;
+  background: border-box;
+  border: 0px;
+  resize: none; /* 크기 조정 비활성화 */
+  /* text-shadow: -0.5px 0 #000000, 0 0.5px #000000, 0.5px 0 #000000, 0 -0.5px #000000; */
+}
+.show{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.swiper-img{
+  margin: 0 auto;
+  width: 1300px;
+  overflow: hidden;
+}
+
+
 #middleContent{
   margin: 0 auto;
   text-align: center;
@@ -112,16 +179,22 @@ body{
 /* 중간 타이틀 */
 #middleTitle > div:nth-child(1){
   margin-top: 50px;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
 }
 #middleTitle > div:nth-child(2){
   margin-top: 20px;
   font-size: 20px;
-  margin-bottom: 30px;
 }
-
+.middleContentBtn{
+  border: 1px solid #ccc;
+  margin:30px;
+  padding:10px 30px;
+  color: hwb(0 100% 0%);
+  background-color: #F29661;
+}
 #middleTag{
+  margin-top: 30px;
   width: 100%;
   display: flex;
 }
@@ -149,8 +222,11 @@ body{
 }
 
 #middleImg{
-  margin: 0 auto;
+  margin: 50px auto;
+  padding: 50px 0;
   text-align: center;
+  border-top:1px  solid #ccc;
+  border-bottom:1px  solid #ccc;
 }
 .iw_inner{
   font-size: 10px;
@@ -160,10 +236,8 @@ body{
 }
 /* 중간 타이틀 */
 #middleImg > div:nth-child(1){
-  margin-top: 50px;
   font-size: 30px;
   font-weight: bold;
-  border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
 }
 #middleImg > div:nth-child(2){
@@ -171,17 +245,64 @@ body{
 }
 .middleImg-img{
   margin: 13px 13px;
-  width: 18.5%;
-  height: 250px;
+  width: 300px;
+  height: 200px;
 }
 
 #middleImgContent{
+  margin: auto;
   display: flex;
-  flex-wrap: wrap;
-  border-bottom: 1px solid #ccc;
   justify-content: flex-start;
   padding-bottom: 20px;
+  width: 80%;
+  height: 500px;
+  overflow: hidden;
 }
+#middleImgContents{
+  transition-duration: 1s;
+
+}
+#middleImgContents>div:nth-child(1){
+  position: absolute;
+  left: 180px;
+}
+#middleImgContents>div:nth-child(2){
+  position: absolute;
+  left: 85%;
+}
+#modal-set{
+  height: 0;
+  transition-duration: 1s;
+}
+
+.modal{
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+#modal-set.show{
+  transition-duration: 1s;
+  opacity: 1;
+  height: 200px;
+}
+.modal-content {
+  top: 150px;
+  margin: 0 10px;
+  display: flex;
+  width: 10%;
+  transition-duration: 1s;
+}
+
+.close-button {
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  right: 25px;
+  cursor: pointer;
+}
+
+
+
 
 #bottomContent{
   padding-top: 80px;
@@ -195,7 +316,7 @@ body{
   margin: 0 30px 30px 30px;
   display: block;
   justify-content: center;
-  min-width: 600px;
+  min-width: 600px;;
 }
 #bottomLeft>div:nth-child(1){
   display: flex;
@@ -204,20 +325,21 @@ body{
 .bottom-LeftMenu{
   font-size: 25px;
   font-weight: bold;
-  background-color: #fafafa;
+  background-color: hsl(330, 52%, 68%);
+  color: white;
   display: flex;
   text-align: center;
   justify-content: center;
   width: 50%;
-  height: 100px;
+  height: 70px;
   align-items: center;
 }
 .bottom-LeftMenu:nth-child(1){
-  border-right: 1px solid #ccc;
-  border-top: 1px solid #ccc;
+  border-right: 1px solid hsl(0, 0%, 0%);
+  border-top: 1px solid hsl(0, 0%, 0%);
 }
 .bottom-LeftMenu:nth-child(2){
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid hsl(0, 0%, 0%);
 }
 #bottomLeftMenuNotice > div{
   padding: 15px;

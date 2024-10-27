@@ -11,32 +11,29 @@
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="introMain">
-			<img src="../../img/middleBanner/2.jpg" alt="">
+		<div id="introMain" class="topbanner">
+			<img  style="width: 100%; height: 100px;" src="../../img/middleBanner/2.jpg" alt="">
 			<div>상담방문안내</div>
 		</div>
 	</section>
 	<section id="introMiddle">
 		<div id="introContents">
-			<a class="intro-introMenu" href="/intro/home">나사로의 집 소개</a>
+			<a class="intro-introMenu" href="/intro/intro">나사로의 집 소개</a>
 			<a class="intro-introMenu-cho" href="/intro/consultation">상담예약안내</a>
-			<a class="intro-introMenu" href="/intro/map">교통안내</a>
+			<a class="intro-introMenu" href="/intro/guide">교통안내</a>
 		</div>
 		<div id="introMiddleContent">
 			<div id="introPic">
-				<img src="../../img/sideBanner/1.png" alt="">
-				<img src="../../img/sideBanner/2.png" alt="">
-				<img src="../../img/sideBanner/3.png" alt="">
-				<img src="../../img/sideBanner/4.png" alt="">
-				<img src="../../img/sideBanner/5.png" alt="">
-				<img src="../../img/sideBanner/6.png" alt="">
+				<img th:src="${consultation.consultationImg}" alt="" >
 			</div>
 			<div id="introContent">
 				<!-- <div class="intro-content">교통 안내</div> -->
-				<img id="introContentImg" src="../../img/상담방문안내본문.png" alt="">
+				<div id="consultationContentImg" th:utext="${consultation.consultationContent}" readonly></div>
+				<!-- <img id="introContentImg" src="../../img/나사로의집소개본문.png" alt=""> -->
 			</div>
 		</div>
 	</section>
+	<th:block th:replace="~{top/bottom.html}"></th:block>
 </body>
 <script>
 	</script>

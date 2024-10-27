@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import nasaro.common.utility.Pagination;
+import nasaro.community.model.dto.Notice;
 import nasaro.verses.model.dto.Verses;
 import nasaro.verses.model.mapper.VersesMapper;
 
@@ -31,10 +32,12 @@ public class VersesServiceImpl implements VersesService {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		List<Verses> versesList = mapper.versesList(rowBounds);
+		List<Notice> versesBestList = mapper.bestVersesList();
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("pagination", pagination);
 		resultMap.put("versesList", versesList);
+		resultMap.put("versesBestList", versesBestList);
 		
 		return resultMap;
 	}
@@ -55,12 +58,13 @@ public class VersesServiceImpl implements VersesService {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		List<Verses> versesList = mapper.searchVersesList(paramMap, rowBounds);
-		
+		List<Notice> versesBestList = mapper.bestVersesList();
 		// 4. pagination, boardList를 Map에 담아서 반환
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pagination", pagination);
-		map.put("versesList", versesList);
-		return map;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("pagination", pagination);
+		resultMap.put("versesList", versesList);
+		resultMap.put("versesBestList", versesBestList);
+		return resultMap;
 	}
 
 	/** verses 상세조회

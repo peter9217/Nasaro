@@ -42,9 +42,12 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		List<Notice> noticeList = mapper.noticeList(rowBounds);
 		
+		
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("pagination", pagination);
 		resultMap.put("noticeList", noticeList);
+		List<Notice> noticeBestList = mapper.bestNoticeList();
+		resultMap.put("noticeBestList", noticeBestList);
 		
 		return resultMap;
 	}
@@ -64,12 +67,14 @@ public class NoticeServiceImpl implements NoticeService {
 		// 2) Rowbounds 객체 생성
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
+		List<Notice> noticeBestList = mapper.bestNoticeList();
 		List<Notice> noticeList = mapper.searchNoticeList(paramMap, rowBounds);
 		
 		// 4. pagination, boardList를 Map에 담아서 반환
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
 		map.put("noticeList", noticeList);
+		map.put("noticeBestList", noticeBestList);
 		return map;
 	}
 	@Override

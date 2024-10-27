@@ -8,37 +8,43 @@
 	<link rel="stylesheet" href="../../css/button.css">
 	<title>나사로의 집</title>
 </head>
-<body id="asd" th:with="pagination=${resultMap.pagination}, referenceList=${resultMap.referenceList}">
+<body id="asd" th:with="pagination=${resultMap.pagination}, referenceList=${resultMap.referenceList}, bestNoticeList=${resultMap.referenceBestList}">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="versesMain">
+		<div id="versesMain" class="topbanner">
 			<img src="../../img/middleBanner/6.jpg" alt="">
 			<div>신앙자료실</div>
 		</div>
-	</section>
-	<section id="referenceMiddle">
 		<div id="versesContents">
 			<a href="/verses/verses" class="verses-versesMenu">말씀</a>
 			<a href="/verses/column" class="verses-versesMenu">컬럼</a>
 			<a href="/verses/reference" class="verses-versesMenu-cho">신앙자료실</a>
 		</div>
+	</section>
+	<section id="referenceMiddle">
 		<div id="referenceMiddleContent">
 			<table class="reference-content">
 				<th>순서</th>
 				<th>제목</th>
 				<th>작성자</th>
 				<th>날짜</th>
-				<tr th:each="r, index:${referenceList}"  th:value="${r.referenceNo}" class="reference-content">
+				<tr  th:each="b, index:${bestNoticeList}"  th:value="${b.referenceNo}" class="reference-content" style="height: 30px;background-color:  bisque;"> 
+					<td th:text="${b.referenceNo}">번호</td>
+					<td th:text="${b.referenceTitle}" style="text-align: left;padding-left: 30px;">제목</td>
+					<td th:text="${b.memberNickname}">작성자</td>
+					<td th:text="${b.referenceDate}">날짜</td>
+				</tr>
+				<tr th:each="r, index:${referenceList}"  th:value="${r.referenceNo}" class="reference-content" style="height: 30px;">
 					<td th:text="${r.referenceNo}"></td>
-					<td th:text="${r.referenceTitle}"></td>
-					<td th:text="${r.memberName}"></td>
+					<td th:text="${r.referenceTitle}" style="text-align: left;padding-left: 30px;"></td>
+					<td th:text="${r.memberNickname}"></td>
 					<td th:text="${r.referenceDate}"></td>
 				</tr>
 			</table>
 		</div>
 		<div id="referenceButton">
 			<button > <a href="/verses/reference">목록</a></button>
-			<div>
+			<div th:if="${session.loginMember?.memberRank=='A'}">
 				<button><a href="/verses/referenceWrite">글쓰기</a></button>
 			</div>
 		</div>
@@ -130,6 +136,7 @@
 			<button>검색</button>
 		</form>
 	</section>
+	<th:block th:replace="~{top/bottom.html}"></th:block>
 </body>
 <script>
 	</script>

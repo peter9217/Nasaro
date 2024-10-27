@@ -7,6 +7,7 @@
         SELECT count(*) 
         FROM `REFERENCE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
         WHERE reference_delete_fl='N' 
+        	AND REFERENCE_notice='N'
     </select>
     
     <!-- 검색어를 포함한 전체 목록 조회(count)-->
@@ -15,6 +16,7 @@
 		FROM `REFERENCE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
 		<!-- 작성자 검색 -->
 		WHERE reference_delete_fl='N'
+			AND REFERENCE_notice='N'
 		<choose>
 			<when test='key=="t"'>
 				AND reference_title LIKE '%${query}%'
@@ -32,12 +34,14 @@
     <select id="referenceList" resultType="reference">
         SELECT m.MEMBER_NO, 
 			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
 			v.reference_NO, 
 			v.reference_TITLE, 
 			v.reference_CONTENT, 
 			DATE_FORMAT(v.reference_DATE, '%m-%d') reference_DATE 
         FROM `REFERENCE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
         WHERE reference_delete_fl='N' 
+        	AND REFERENCE_notice='N'
         ORDER BY reference_NO DESC;
     </select>
     
@@ -45,6 +49,7 @@
     <select id="searchReferenceList" resultType="reference">
         SELECT m.MEMBER_NO, 
 			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
 			v.reference_NO, 
 			v.reference_TITLE, 
 			v.reference_CONTENT, 
@@ -52,6 +57,7 @@
         FROM `REFERENCE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
 		<!-- 작성자 검색 -->
 		WHERE reference_delete_fl='N'
+			AND REFERENCE_notice='N'
 		<choose>
 			<when test='key=="t"'>
 				AND reference_title LIKE '%${query}%'
@@ -65,14 +71,37 @@
 		</choose> 
 		ORDER BY reference_NO DESC;
     </select>
+    
+        	<!--베스트 공지 조회-->
+    <select id="bestReferenceList" resultType="Reference">
+        SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
+			v.REFERENCE_NO, 
+			v.REFERENCE_TITLE, 
+			v.REFERENCE_CONTENT, 
+			DATE_FORMAT(v.REFERENCE_DATE, '%m-%d') REFERENCE_DATE 
+        FROM `REFERENCE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+        WHERE REFERENCE_delete_fl='N'
+        	AND REFERENCE_notice='Y'
+        ORDER BY REFERENCE_NO DESC;
+    </select>
 	
 	<select id="detailedReference">
-		SELECT * FROM `REFERENCE` WHERE reference_no = #{No};
+		SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
+			v.reference_NO, 
+			v.reference_TITLE, 
+			v.reference_CONTENT, 
+			DATE_FORMAT(v.reference_DATE, '%m-%d') reference_DATE 
+        FROM `REFERENCE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO  
+        WHERE reference_no = #{No};
 	</select>
 	
 		<!-- reference 작성 -->
     <insert id="insertReference" parameterType="reference" >
-        INSERT INTO REFERENCE VALUES (default, #{memberNo}, #{referenceTitle}, #{referenceContent}, DEFAULT, DEFAULT)
+        INSERT INTO REFERENCE VALUES (default, #{memberNo}, #{referenceTitle}, #{referenceContent}, DEFAULT, DEFAULT, DEFAULT)
     </insert>
 
 

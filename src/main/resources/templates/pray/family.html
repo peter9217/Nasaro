@@ -9,7 +9,7 @@
 	<title>나사로의 집</title>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
-<body id="asd"  th:with="pagination=${resultMap.pagination}, familyList=${resultMap.familyList}">
+<body id="asd"  th:with="pagination=${resultMap.pagination}, familyList=${resultMap.familyList}, bestNoticeList=${resultMap.familyBestList}">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
 		<div id="prayMain">
@@ -33,28 +33,33 @@
 			<a  class="pray-prayMenu" href="/pray/nations">열방을 위한 기도</a>
 			<a class="pray-prayMenu-cho" href="/pray/family">기도노트</a>
 		</div>
+		
 		<div id="prayMiddleContent">
 			<table class="pray-content">
-				<th>순서</th>
-				<th>제목</th>
-				<th>기도자</th>
+				<th style="width: 5%;">순서</th>
+				<th style="width: 30%;">제목</th>
 				<th>작성자</th>
 				<th>날짜</th>
-				<tr th:each="f, index:${familyList}"  th:value="${f.familyNo}" class="family-content"> 
+				<tr  th:each="b, index:${bestNoticeList}"  th:value="${b.familyNo}" class="family-content" style="height: 30px;background-color: bisque;"> 
+					<td th:text="${b.familyNo}">번호</td>
+					<td th:text="${b.familyTitle}" style="text-align: left; padding-left: 30px;">제목</td>
+					<td th:text="${b.memberNickname}">작성자</td>
+					<td th:text="${b.familyDate}">날짜</td>
+				</tr>
+				<tr th:each="f, index:${familyList}"  th:value="${f.familyNo}" class="family-content" style="height: 30px;"> 
 					<td th:text="${f.familyNo}">번호</td>
-					<td th:text="${f.familyTitle}">제목</td>
-					<td th:text="${f.memberNo}">작성자</td>
-					<td th:text="${f.memberNo}">작성자</td>
+					<td th:text="${f.familyTitle}" style="text-align: left;padding-left: 30px;">제목</td>
+					<td th:text="${f.memberNickname}">작성자</td>
 					<td th:text="${f.familyDate}">날짜</td>
 				</tr>
 			</table>
-			<div id="familyButton">
-				<button > <a href="/pray/family">목록</a></button>
-				<div>
-					<button><a href="/pray/familyWrite">글쓰기</a></button>
-				</div>
-			</div>
 		</div>	
+		<div id="familyButton">
+			<button > <a href="/pray/family">목록</a></button>
+			<div  th:if="${session.loginMember?.memberRank=='A'}">
+				<button><a href="/pray/familyWrite">글쓰기</a></button>
+			</div>
+		</div>
 		<!-- 하단 버튼 영역 -->
 		<div th:if="${#lists.size(familyList) > 0}" class="pagination-area" >
 			<ul th:unless="${param.query}" class="pagination" id="pagination">
@@ -143,6 +148,7 @@
 			<button>검색</button>
 		</form>
 	</section>
+	<th:block th:replace="~{top/bottom.html}"></th:block>
 </body>
 <script src="../js/pray/family.js"></script>
 </html>

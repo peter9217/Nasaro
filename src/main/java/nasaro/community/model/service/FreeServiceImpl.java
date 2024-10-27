@@ -47,6 +47,8 @@ public class FreeServiceImpl implements FreeService {
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("pagination", pagination);
 		resultMap.put("freeList", freeList);
+		List<Free> freeBestList = mapper.bestFreeList();
+		resultMap.put("freeBestList", freeBestList);
 		
 		return resultMap;
 	}
@@ -69,10 +71,12 @@ public class FreeServiceImpl implements FreeService {
 		List<Free> freeList = mapper.searchFreeList(paramMap, rowBounds);
 		
 		// 4. pagination, boardList를 Map에 담아서 반환
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pagination", pagination);
-		map.put("freeList", freeList);
-		return map;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("pagination", pagination);
+		resultMap.put("freeList", freeList);
+		List<Free> freeBestList = mapper.bestFreeList();
+		resultMap.put("freeBestList", freeBestList);
+		return resultMap;
 	}
 
 	@Override

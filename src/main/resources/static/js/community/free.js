@@ -3,7 +3,9 @@ for(let n of free) {
     /* 공지 게시글 클릭시 */
     n.addEventListener('click', e => {
       const no = e.target.parentElement.getAttribute("value");
-      document.location.href="/community/freeDetail/"+no
+      if (no!=null) {
+        document.location.href="/community/freeDetail/"+no
+      }
     });
   
 };
@@ -25,7 +27,14 @@ if (document.getElementById("freeDelete") != null) {
   document.getElementById("freeDelete").addEventListener("click", e=>{
     const freeNo = e.target.value;
     if (confirm("삭제하시겠습니까?")) {
-      fetch("/free/delete?freeNo="+freeNo)  
+      fetch("/free/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          [csrfHeader]: csrfToken
+        },
+        body: JSON.stringify(freeNo), // JSON 형식으로 데이터 변환
+    })
       .then(response => response.text()) 
       .then(() => {
       }) 

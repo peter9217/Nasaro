@@ -49,6 +49,8 @@ public class SharingServiceImpl implements SharingService {
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("pagination", pagination);
 		resultMap.put("sharingList", sharingList);
+		List<Sharing> sharingBestList = mapper.bestSharingList();
+		resultMap.put("sharingBestList", sharingBestList);
 		
 		return resultMap;
 	}
@@ -74,6 +76,8 @@ public class SharingServiceImpl implements SharingService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
 		map.put("sharingList", sharingList);
+		List<Sharing> sharingBestList = mapper.bestSharingList();
+		map.put("sharingBestList", sharingBestList);
 		return map;
 	}
 

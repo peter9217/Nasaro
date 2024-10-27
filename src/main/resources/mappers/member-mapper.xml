@@ -8,9 +8,17 @@
 		  FROM `MEMBER`
 		  WHERE MEMBER_DEL_FL = 'N'
 		  AND MEMBER_ID = #{memberId}
-		  AND MEMBER_PW = #{memberPw}
      </select>
 
+	<update id="signOut">
+		UPDATE `MEMBER` 
+		SET member_del_fl = 'Y',
+			member_name = '탈퇴한 회원입니다.',
+			member_tel = '탈퇴한 회원입니다.',
+			member_id = '탈퇴한 회원입니다.',
+			member_nickname = '탈퇴한 회원입니다.'
+		WHERE member_No = #{memberNo}
+    </update>
 	
 </mapper>
 

@@ -30,7 +30,6 @@
   border: 1px solid #ccc;
   width: 20%;
   height: 30px;
-  background-color: bisque;
 }
 #communityContents{
   margin: 50px 20%;
@@ -70,13 +69,16 @@
   width: 90%;
   border: 0.5px solid #ccc;
 }
+.free-content{
+  width: 90%;
+  border: 0.5px solid #ccc;
+}
 
 .community-content th{
   background-color: hsl(0, 4%, 84%);
 }
 .community-content td{
   text-align: center;
-  background-color: beige;
 }
 .community-content th:nth-child(1){
   width: 8%;
@@ -113,7 +115,7 @@
   justify-content: center;
 }
 #freeDetail{
-  width: 800px;
+  width: 1000px;
   border : 1px solid #ccc;
   border-radius: 10px;
 }

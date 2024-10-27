@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -62,8 +64,8 @@ public class nationsController {
 		return "pray/nationsWrite";
 	}
 	
-	@GetMapping("/nations/insert")
-	public String versesInsert(
+	@PostMapping("/nations/insert")
+	public String nationsInsert(
 			@SessionAttribute(name="loginMember", required = false) Member loginMember
 			,Nations nations
 			) {
@@ -78,11 +80,11 @@ public class nationsController {
 	
 	
 	// 공지사항 삭제
-	@GetMapping(value="/nations/delete",produces = "application/text; charset=UTF-8")
+	@PostMapping(value="/nations/delete",produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public String delete(
 			RedirectAttributes ra
-			,@RequestParam(name="nationsNo") long nationsNo
+			,@RequestBody long nationsNo
 			){
 		int i=service.deleteNations(nationsNo);
 		if(i==1) {
@@ -92,7 +94,7 @@ public class nationsController {
 	}
 	
 	// 공지사항 수정페이지
-	@GetMapping("/nations/modify/{no:[0-9]+}")
+	@PostMapping("/nations/modify/{no:[0-9]+}")
 	public String modify(@PathVariable(name="no") String no
 			,Model model) {
 		Nations nations = service.detailedNations(no);
@@ -101,7 +103,7 @@ public class nationsController {
 	}
 
 	// 공지사항 수정
-	@GetMapping("/nations/update")
+	@PostMapping("/nations/update")
 	public String update(Nations nations,
 			Model model
 			){

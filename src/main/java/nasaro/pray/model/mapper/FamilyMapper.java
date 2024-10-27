@@ -48,5 +48,7 @@ public interface FamilyMapper {
 
 	int updateFamily(Family family);
 
+	List<Family> bestFamilyList();
+
 }
 

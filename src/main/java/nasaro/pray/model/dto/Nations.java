@@ -9,6 +9,7 @@ import lombok.*;
 public class Nations {
 	private long nationsNo;
 	private long memberNo;
+	private String memberNickname;
 	private String memberName;
 	private String nationsTitle;
 	private String nationsContent;

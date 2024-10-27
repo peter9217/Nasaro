@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -58,21 +59,33 @@ public class MemberController {
 		status.setComplete(); 
 	    return "redirect:/";
 	}
-//	
-//	// 비밀번호 찾기 페이지 이동
-//	@GetMapping("/findpw")
-//	public String findPw() {
-//		return "member/findPw";
-//	}
-//	
-//	// 소셜 로그인 회원 회원 정보 등록 페이지 이동
-//	@GetMapping("/mypage/setinfo")
-//	public String socialLoginSetInfo(){
-//		return "member/socialLoginInfo";
-//	}
-//	
-//	
-//	
+	
+	@GetMapping("myPage/modifySignUp")
+	public String modifySignUp(
+			@SessionAttribute(name="loginMember", required = false) Member loginMember 
+			) {
+			
+		return "sign/modifySignUp";
+	}
+	@GetMapping("myPage/modifyPassword")
+	public String modifyPassword(
+			@SessionAttribute(name="loginMember", required = false) Member loginMember 
+			) {
+		System.out.println("asd");
+		return "sign/modifyPassword";
+	}
+	@GetMapping("myPage/signOut")
+	public String signOutPage(
+			@SessionAttribute(name="loginMember", required = false) Member loginMember 
+			) {
+		
+		return "sign/signOut";
+	}
+	@PostMapping("signUp/signOut")
+	public String signOut( Member member) {
+		service.signOut(member);
+		return "redirect:/";
+	}
 //	// 로그인 기능
 //	@PostMapping("/login")
 //	public String login(Member inputMember, Model model

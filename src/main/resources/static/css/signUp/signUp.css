@@ -1,0 +1,220 @@
+table{
+  border-spacing: 0;
+  border-collapse: collapse
+}
+#signUpFrame input{
+  border: 0 solid black;
+  height: 50px;
+  font-size: 20px;
+  
+}
+#signUpFrom > input:focus {outline:none;}
+ul{
+    padding-inline-start: 0;
+}
+li{
+    list-style: none;
+}
+body{
+    margin: 0;
+}
+/* 중앙정렬 */
+#topFrame{
+    z-index: 250;
+    height: 120px;
+}
+
+#topMain{
+    display: flex;
+    justify-content: space-between;
+}
+/* 로고 */
+#topLogo{
+  margin-top: 40px;
+    z-index: 999;
+    position:absolute;
+    left:100px;
+    width: 250px;
+    height: 75px;
+}
+#topRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* 회원탭 */
+#topSign{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.top-nav{
+    width: 100%;
+     z-index:200;
+    display: flex;
+    position: absolute;
+    background-color: white;
+    top: 69px;
+    left:0;
+    justify-content: flex-end;
+    border-bottom: 1px solid #ccc;
+}
+.top-nav > div{
+    display: flex;
+    padding-right: 100px;
+}
+.top-nav-menu{
+    font-size: 17px;
+    font-weight: bold;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+
+}
+/* 메뉴 */
+.top-nav-menu > li{
+    padding-bottom: 20px;
+}
+
+/* 하위 메뉴 */
+.top-menu-hover{
+    display: inline-block;
+    width: 100%;
+    font-weight: normal;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+.top-menu-content:hover{
+    transition-duration: 1s;
+    color: aqua;
+}
+.top-nav>div:hover .top-menu-hover {
+  opacity: 1;
+  height: 100px;
+}
+
+.top-menu-content{
+    font-size: 20px;
+}
+
+#signUpFrame{
+  display: flex;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+#signUpTitle{
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+#signUpForm{
+  width: 600px;
+  margin-top: 30px;
+}
+.signUp-menu{
+  width: 100px;
+  height: 60px;
+  border: 1px solid #ccc;
+}
+#signUpForm th{
+  text-align: center;
+}
+#signUpForm td{
+  padding-left: 15px;
+}
+/* 회원가입 목록 */
+#signUpId{
+  border: 1px solid #ccc;
+  text-align: left;
+}
+#signUpName{
+  border: 1px solid #ccc;
+  text-align: left;
+}
+#signUpNickname{
+  border: 1px solid #ccc;
+  text-align: left;
+}
+#signUpPassword{
+  border: 1px solid #ccc;
+}
+#signUpPasswordConfirm{
+  border: 1px solid #ccc;
+}
+#signUpTel{
+  border: 1px solid #ccc;
+}
+#signUpEmail{
+  border: 1px solid #ccc;
+}
+#signUpBtn{
+  width: 600px;
+  margin:0 auto;
+  display: flex;
+  justify-content: center;
+}
+#signUpConfirm{
+  width: 200px;
+  height: 50px;
+  margin-top: 10px;
+}
+
+#signUp-topbanner{
+  position: relative;
+  margin: 10px auto;
+  display: flex;
+	justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100px
+}
+
+#signUp-topbanner-text{
+  position: absolute;
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100px;
+  font-size: 40px;
+  color: white;
+
+}
+#signUp-button{
+  display: flex;
+  justify-content: center;
+}
+#signUp-button > div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+  margin: 0 20px;
+  background-color: #fafafa;
+ border: 1px solid #ccc;
+ transition-duration: 1s;
+}
+#signUp-button > div:hover{
+  cursor: pointer;
+  background-color: hsl(0, 100%, 97%);
+
+}
+
+.confirm{
+  color: green;
+}
+
+.error{
+  color: red;
+}

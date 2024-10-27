@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -63,7 +65,7 @@ public class ReferenceController {
 		return "verses/referenceWrite";
 	}
 	
-	@GetMapping("/reference/insert")
+	@PostMapping("/reference/insert")
 	public String referenceInsert(
 			@SessionAttribute(name="loginMember", required = false) Member loginMember
 			,Reference reference
@@ -71,16 +73,16 @@ public class ReferenceController {
 		reference.setMemberNo(loginMember.getMemberNo());
 		System.out.println(loginMember);
 		int i = service.insertReference(reference);
-		String path = "redirect:reference";
+		String path = "redirect:/verses/reference";
 		return path;
 	}
 	
 	// 공지사항 삭제
-	@GetMapping(value="/reference/delete",produces = "application/text; charset=UTF-8")
+	@PostMapping(value="/reference/delete",produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public String delete(
 			RedirectAttributes ra
-			,@RequestParam(name="referenceNo") long referenceNo
+			,@RequestBody long referenceNo
 			){
 		int i=service.deleteReference(referenceNo);
 		if(i==1) {
@@ -90,7 +92,7 @@ public class ReferenceController {
 	}
 	
 	// 공지사항 수정페이지
-	@GetMapping("/reference/modify/{no:[0-9]+}")
+	@PostMapping("/reference/modify/{no:[0-9]+}")
 	public String modify(@PathVariable(name="no") String no
 			,Model model) {
 		Reference reference = service.detailedReference(no);
@@ -99,7 +101,7 @@ public class ReferenceController {
 	}
 
 	// 공지사항 수정
-	@GetMapping("/reference/update")
+	@PostMapping("/reference/update")
 	public String update(Reference reference,
 			Model model
 			){

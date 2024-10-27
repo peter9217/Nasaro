@@ -33,7 +33,6 @@
   border: 1px solid #ccc;
   width: 20%;
   height: 30px;
-  background-color: bisque;
 }
 #prayContents{
   margin: 50px 20%;
@@ -73,13 +72,16 @@
   width: 90%;
   border: 0.5px solid #ccc;
 }
+.family-content{
+  width: 90%;
+  border: 0.5px solid #ccc;
+}
 
 .pray-content th{
   background-color: hsl(0, 4%, 84%);
 }
 .pray-content td{
   text-align: center;
-  background-color: beige;
 }
 .pray-content th:nth-child(1){
   width: 8%;
@@ -119,4 +121,42 @@
   width: 22px;
   height: 22px;
   border-radius: 5px
+}
+
+
+#versesContent{
+  display: flex;
+  justify-content: center;
+}
+#versesDetail{
+  width: 1000px;
+  border : 1px solid #ccc;
+  border-radius: 10px;
+}
+#versesDetail td{
+  border : 1px solid #ccc;
+  
+}
+
+#versesDetail tr > td:nth-child(1){
+  text-align: center;
+  width: 150px;
+  height: 50px;
+  background-color: antiquewhite;
+}
+#versesDetail tr > td:nth-child(2){
+  padding-left: 30px;
+}
+#versesDetail tr:nth-child(5) > td{
+  padding-left: 30px;
+  text-align: left;
+  background-color: white;
+}
+#versesButton{
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+#versesButton > button{
+  margin-right: 600px;
 }

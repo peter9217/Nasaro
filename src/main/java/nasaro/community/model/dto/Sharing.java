@@ -9,6 +9,7 @@ import lombok.*;
 public class Sharing {
 	private long sharingNo;
 	private long memberNo;
+	private String memberNickname;
 	private String memberName;
 	private String sharingTitle;
 	private String sharingContent;

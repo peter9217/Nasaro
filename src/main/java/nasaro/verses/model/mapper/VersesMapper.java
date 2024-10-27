@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
+import nasaro.community.model.dto.Notice;
 import nasaro.verses.model.dto.Verses;
 
 @Mapper
@@ -48,6 +49,8 @@ public interface VersesMapper {
 	int deleteVerses(long versesNo);
 
 	int updateVerses(Verses verses);
+
+	List<Notice> bestVersesList();
 
 }
 

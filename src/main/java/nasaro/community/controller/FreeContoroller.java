@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -53,7 +55,7 @@ public class FreeContoroller {
 		return "community/freeDetail";
 	}
 	
-	@GetMapping("/community/freeWrite")
+	@PostMapping("/community/freeWrite")
 	public String freeWrite(@SessionAttribute(name="loginMember", required = false) Member loginMember
 			,RedirectAttributes ra
 			) {
@@ -83,7 +85,7 @@ public class FreeContoroller {
 	@ResponseBody
 	public String deleteFree(
 			RedirectAttributes ra
-			,@RequestParam(name="freeNo") long freeNo
+			,@RequestBody long freeNo
 			){
 		int i=service.deleteFree(freeNo);
 		if(i==1) {

@@ -9,10 +9,10 @@
 	<title>나사로의 집</title>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
-<body id="asd"  th:with="pagination=${resultMap.pagination}, freeList=${resultMap.freeList}">
+<body id="asd"  th:with="pagination=${resultMap.pagination}, freeList=${resultMap.freeList}, bestNoticeList=${resultMap.freeBestList}">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="communityMain">
+		<div id="communityMain" class="topbanner">
 			<img src="../../img/middleBanner/15.jpg" alt="">
 			<div>자유게시판</div>
 		</div>
@@ -26,7 +26,7 @@
 		<div id="communityContents">
 			<a class="community-communityMenu" href="/community/notice">공지사항</a>
 			<a class="community-communityMenu" href="/community/sharing">나눔게시판</a>
-			<a class="community-communityMenu-cho" href="/community/free">자유게시판</a>
+			<!-- <a class="community-communityMenu-cho" href="/community/free">자유게시판</a> -->
 		</div>
 		<div id="communityMiddleContent">
 			<table class="community-content">
@@ -34,18 +34,24 @@
 				<th>제목</th>
 				<th>작성자</th>
 				<th>날짜</th>
-				<tr th:each="f, index:${freeList}"  th:value="${f.freeNo}" class="free-content"> 
+				<tr  th:each="b, index:${bestNoticeList}"  th:value="${b.freeNo}" class="free-content" style="height: 30px;background-color: bisque;"> 
+					<td th:text="${b.freeNo}">번호</td>
+					<td th:text="${b.freeTitle}">제목</td>
+					<td th:text="${b.memberNickname}">작성자</td>
+					<td th:text="${b.freeDate}">날짜</td>
+				</tr>
+				<tr th:each="f, index:${freeList}"  th:value="${f.freeNo}" class="free-content" style="height: 30px;"> 
 					<td th:text="${f.freeNo}">번호</td>
 					<td th:text="${f.freeTitle}">제목</td>
-					<td th:text="${f.memberNo}">작성자</td>
+					<td th:text="${f.memberNickname}">작성자</td>
 					<td th:text="${f.freeDate}">날짜</td>
 				</tr>
 			</table>
 		</div>
 		<div id="freeButton">
 			<button > <a href="/community/free">목록</a></button>
-			<div>
-				<button><a href="/community/freeWrite">글쓰기</a></button>
+			<div  th:if="${session.loginMember?.memberRank=='A'}">
+				<button ><a href="/community/freeWrite">글쓰기</a></button>
 			</div>
 		</div>
 		<!-- 하단 버튼 영역 -->
@@ -136,6 +142,7 @@
 			<button>검색</button>
 		</form>
 	</section>
+	<th:block th:replace="~{top/bottom.html}"></th:block>
 </body>
 <script src="../js/community/free.js"></script>
 </html>

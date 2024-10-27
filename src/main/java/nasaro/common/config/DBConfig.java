@@ -45,6 +45,7 @@ public class DBConfig {
 		sessionFactoryBean.setTypeAliasesPackage(
 				  "nasaro.verses.model.dto,"
 				+ "nasaro.pray.model.dto,"
+				+ "nasaro.admin.model.dto,"
 				+ "nasaro.member.model.dto,"
 				+ "nasaro.intro.model.dto,"
 				+ "nasaro.gallery.model.dto,"

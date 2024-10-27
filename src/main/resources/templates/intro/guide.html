@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../css/intro/guide.css">
+	<link rel="stylesheet" href="../../css/button.css">
+	<title>나사로의 집</title>
+	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
+</head>
+<body id="asd">
+	<th:block th:replace="~{top/top.html}"></th:block>
+	<section>
+		<div id="introMain" class="topbanner">
+			<img  style="width: 100%; height: 100px;" src="../../img/middleBanner/3.jpg" alt="">
+			<div>교통안내</div>
+		</div>
+	</section>
+	<section id="introMiddle">
+		<div id="introContents">
+			<a class="intro-introMenu" href="/intro/intro">나사로의 집 소개</a>
+			<a class="intro-introMenu" href="/intro/consultation">상담예약안내</a>
+			<a class="intro-introMenu-cho" href="/intro/guide">교통안내</a>
+		</div>
+		<div id="introMiddleContent">
+			<div id="introPic">
+				<img th:src="${guide.guideImg}" alt="" >
+			</div>
+			<div id="guideContent">
+				<!-- <div class="intro-content">교통 안내</div> -->
+				<div id="guideContentImg" th:utext="${guide.guideContent}" readonly></div>
+			</div>
+		</div>
+	</section>
+	<th:block th:replace="~{top/bottom.html}"></th:block>
+</body>
+<script>
+	</script>
+</html>

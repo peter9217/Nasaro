@@ -7,6 +7,7 @@
         SELECT count(*) 
         FROM `FREE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
         WHERE free_delete_fl='N' 
+        	AND FREE_notice='N'
     </select>
     
     <!-- 검색어를 포함한 전체 목록 조회(count)-->
@@ -15,6 +16,7 @@
 		FROM `FREE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
 		<!-- 작성자 검색 -->
 		WHERE free_delete_fl='N'
+			AND FREE_notice='N'
 		<choose>
 			<when test='key=="t"'>
 				AND free_title LIKE '%${query}%'
@@ -32,12 +34,14 @@
     <select id="freeList" resultType="free">
         SELECT m.MEMBER_NO, 
 			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
 			v.free_NO, 
 			v.free_TITLE, 
 			v.free_CONTENT, 
 			DATE_FORMAT(v.free_DATE, '%m-%d') free_DATE 
         FROM `FREE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
         WHERE free_delete_fl='N' 
+        	AND FREE_notice='N'
         ORDER BY free_NO DESC;
     </select>
     
@@ -45,6 +49,7 @@
     <select id="searchfreeList" resultType="free">
         SELECT m.MEMBER_NO, 
 			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
 			v.free_NO, 
 			v.free_TITLE, 
 			v.free_CONTENT, 
@@ -52,6 +57,7 @@
         FROM `FREE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
 		<!-- 작성자 검색 -->
 		WHERE free_delete_fl='N'
+			AND FREE_notice='N'
 		<choose>
 			<when test='key=="t"'>
 				AND free_title LIKE '%${query}%'
@@ -66,16 +72,40 @@
 		ORDER BY free_NO DESC;
     </select>
     
+
+    	<!--베스트 공지 조회-->
+    <select id="bestFreeList" resultType="Free">
+        SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
+			v.FREE_NO, 
+			v.FREE_TITLE, 
+			v.FREE_CONTENT, 
+			DATE_FORMAT(v.FREE_DATE, '%m-%d') FREE_DATE 
+        FROM `FREE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+        WHERE FREE_delete_fl='N'
+        	AND FREE_notice='Y'
+        ORDER BY FREE_NO DESC;
+    </select>
+    
     
 
 	<select id="detailedFree">
-		SELECT * FROM `FREE` WHERE free_no = #{No};
+		SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
+			v.FREE_NO, 
+			v.FREE_TITLE, 
+			v.FREE_CONTENT, 
+			DATE_FORMAT(v.FREE_DATE, '%m-%d') FREE_DATE 
+        FROM `FREE` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO  
+        WHERE free_no = #{No};
 	</select>
 	
 			<!-- 작성 -->
     <insert id="insertFree" parameterType="Free" >
         INSERT INTO `FREE` 
-        VALUES (default, #{memberNo}, #{freeTitle}, #{freeContent}, DEFAULT, DEFAULT)
+        VALUES (default, #{memberNo}, #{freeTitle}, #{freeContent}, DEFAULT, DEFAULT, DEFAULT)
     </insert>
 
 

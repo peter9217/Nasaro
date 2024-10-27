@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -61,7 +63,7 @@ public class NoticeController {
 		return "community/noticeWrite";
 	}
 	
-	@GetMapping("/notice/insert")
+	@PostMapping("/notice/insert")
 	public String noticeInsert(
 			@SessionAttribute(name="loginMember", required = false) Member loginMember
 			,Notice notice
@@ -76,11 +78,11 @@ public class NoticeController {
 	}
 
 	// 공지사항 삭제
-	@GetMapping(value="/notice/delete",produces = "application/text; charset=UTF-8")
+	@PostMapping(value="/notice/delete",produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public String deleteNotice(
 			RedirectAttributes ra
-			,@RequestParam(name="noticeNo") long noticeNo
+			,@RequestBody long noticeNo
 			){
 		int i=service.deleteNotice(noticeNo);
 		if(i==1) {
@@ -90,7 +92,7 @@ public class NoticeController {
 	}
 	
 	// 공지사항 수정페이지
-	@GetMapping("/notice/modify/{no:[0-9]+}")
+	@PostMapping("/notice/modify/{no:[0-9]+}")
 	public String modify(@PathVariable(name="no") String no
 			,Model model) {
 		Notice notice = service.detailedNotice(no);
@@ -99,7 +101,7 @@ public class NoticeController {
 	}
 
 	// 공지사항 수정
-	@GetMapping("/notice/update")
+	@PostMapping("/notice/update")
 	public String update(Notice notice,
 			Model model
 			){

@@ -8,37 +8,43 @@
 	<link rel="stylesheet" href="../../css/button.css">
 	<title>나사로의 집</title>
 </head>
-<body id="asd" th:with="pagination=${resultMap.pagination}, columnList=${resultMap.columnList}">
+<body id="asd" th:with="pagination=${resultMap.pagination}, columnList=${resultMap.columnList}, bestNoticeList=${resultMap.columnBestList}">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="versesMain">
+		<div id="versesMain" class="topbanner">
 			<img src="../../img/middleBanner/5.jpg" alt="">
 			<div>컬럼</div>
 		</div>
 	</section>
+	<div id="versesContents">
+		<a href="/verses/verses" class="verses-versesMenu">말씀</a>
+		<a href="/verses/column" class="verses-versesMenu-cho">컬럼</a>
+		<a href="/verses/reference" class="verses-versesMenu">신앙자료실</a>
+	</div>
 	<section id="prayMiddle">
-		<div id="versesContents">
-			<a href="/verses/verses" class="verses-versesMenu">말씀</a>
-			<a href="/verses/column" class="verses-versesMenu-cho">컬럼</a>
-			<a href="/verses/reference" class="verses-versesMenu">신앙자료실</a>
-		</div>
 		<div id="columnMiddleContent">
 			<table class="column-content">
 				<th>순서</th>
 				<th>제목</th>
 				<th>작성자</th>
 				<th>날짜</th>
-				<tr th:each="c, index:${columnList}"  th:value="${c.columnNo}" class="column-content"> 
+				<tr  th:each="b, index:${bestNoticeList}"  th:value="${b.columnNo}" class="column-content" style="height: 30px;background-color: bisque;"> 
+					<td th:text="${b.columnNo}">번호</td>
+					<td th:text="${b.columnTitle}" style="text-align: left;padding-left: 30px;">제목</td>
+					<td th:text="${b.memberNickname}">작성자</td>
+					<td th:text="${b.columnDate}">날짜</td>
+				</tr>
+				<tr th:each="c, index:${columnList}"  th:value="${c.columnNo}" class="column-content" style="height: 30px;"> 
 					<td th:text="${c.columnNo}"></td>
-					<td th:text="${c.columnTitle}"></td>
-					<td th:text="${c.memberName}"></td>
+					<td th:text="${c.columnTitle}" style="text-align: left;padding-left: 30px;"></td>
+					<td th:text="${c.memberNickname}"></td>
 					<td th:text="${c.columnDate}"></td>
 				</tr>
 			</table>
 		</div>
 		<div id="columnButton">
 			<button > <a href="/verses/column">목록</a></button>
-			<div>
+			<div th:if="${session.loginMember?.memberRank=='A'}">
 				<button><a href="/verses/columnWrite">글쓰기</a></button>
 			</div>
 		</div>
@@ -130,6 +136,7 @@
 			<button>검색</button>
 		</form>
 	</section>
+	<th:block th:replace="~{top/bottom.html}"></th:block>
 </body>
 <script>
 	</script>

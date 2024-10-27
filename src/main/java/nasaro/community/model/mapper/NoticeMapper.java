@@ -11,6 +11,8 @@ import nasaro.community.model.dto.Notice;
 @Mapper
 public interface NoticeMapper {
 
+	
+	List<Notice> bestNoticeList();
 	/** 공지사항 count
 	 * @return
 	 */
@@ -43,6 +45,8 @@ public interface NoticeMapper {
 	int deleteNotice(long noticeNo);
 
 	int updateNotice(Notice notice);
+
+
 
 }
 

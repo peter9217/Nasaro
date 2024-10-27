@@ -4,15 +4,20 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../../css/verses/verses.css">
+	<link rel="stylesheet" href="../../css/button.css">
 	<title>나사로의 집</title>
-	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="versesMain">
+		<div id="versesMain" class="topbanner">
 			<img src="../../img/middleBanner/5.jpg" alt="">
 			<div>컬럼</div>
+		</div>
+		<div id="versesContents">
+			<a href="/verses/verses" class="verses-versesMenu">말씀</a>
+			<a href="/verses/column" class="verses-versesMenu-cho">컬럼</a>
+			<a href="/verses/reference" class="verses-versesMenu">신앙자료실</a>
 		</div>
 	</section>
 	<section id="prayMiddle" th:with="column=${column}">
@@ -24,7 +29,7 @@
 				</tr>
 				<tr>
 					<td>글쓴이</td>
-					<td th:text="${column.memberNo}">d</td>
+					<td th:text="${column.memberNickname}">d</td>
 				</tr>
 				<tr>
 					<td>작성시간</td>
@@ -35,7 +40,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<pre  th:text="${column.columnContent}">내용</pre>
+						<pre  th:utext="${column.columnContent}">내용</pre>
 					</td>
 				</tr>
 			</table>
@@ -43,11 +48,14 @@
 		<div id="versesButton">
 			<button > <a href="/verses/verses">목록</a></button>
 			<div th:if="${column.memberNo==session.loginMember?.memberNo ||session.loginMember?.memberGrade=='A'}">
+				<input id="csrf" type="hidden" th:value="${_csrf.token}">
+				<input id="csrfName" type="hidden" th:value="${_csrf.parameterName}">
 				<button id="columnModify" type="button" th:value="${column.columnNo}">수정</button>
 				<button id="columnDelete" type="button" th:value="${column.columnNo}">삭제</button>
 			</div>
 		</div>
 	</section>
+	<th:block th:replace="~{top/bottom.html}"></th:block>
 </body>
 <script src="../../js/verses/column.js"></script>
 </html>

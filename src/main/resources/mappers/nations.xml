@@ -7,6 +7,7 @@
         SELECT count(*) 
         FROM `NATIONS` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
         WHERE nations_delete_fl='N' 
+        	AND NATIONS_notice='N'
     </select>
     
     <!-- 검색어를 포함한 전체 목록 조회(count)-->
@@ -15,6 +16,7 @@
 		FROM `NATIONS` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
 		<!-- 작성자 검색 -->
 		WHERE nations_delete_fl='N'
+			AND NATIONS_notice='N'
 		<choose>
 			<when test='key=="t"'>
 				AND nations_title LIKE '%${query}%'
@@ -32,12 +34,14 @@
     <select id="nationsList" resultType="nations">
         SELECT m.MEMBER_NO, 
 			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
 			v.nations_NO, 
 			v.nations_TITLE, 
 			v.nations_CONTENT, 
 			DATE_FORMAT(v.nations_DATE, '%m-%d') nations_DATE 
         FROM `NATIONS` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
         WHERE nations_delete_fl='N' 
+        	AND NATIONS_notice='N'
         ORDER BY nations_NO DESC;
     </select>
     
@@ -45,6 +49,7 @@
     <select id="searchNationsList" resultType="nations">
         SELECT m.MEMBER_NO, 
 			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
 			v.nations_NO, 
 			v.nations_TITLE, 
 			v.nations_CONTENT, 
@@ -52,6 +57,7 @@
         FROM `NATIONS` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
 		<!-- 작성자 검색 -->
 		WHERE nations_delete_fl='N'
+			AND NATIONS_notice='N'
 		<choose>
 			<when test='key=="t"'>
 				AND nations_title LIKE '%${query}%'
@@ -66,28 +72,55 @@
 		ORDER BY nations_NO DESC;
     </select>
 
+
+
+    	<!--베스트 공지 조회-->
+    <select id="bestNationsList" resultType="Nations">
+        SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
+			v.NATIONS_NO, 
+			v.NATIONS_TITLE, 
+			v.NATIONS_CONTENT, 
+			DATE_FORMAT(v.NATIONS_DATE, '%m-%d') NATIONS_DATE 
+        FROM `NATIONS` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO 
+        WHERE NATIONS_delete_fl='N'
+        	AND NATIONS_notice='Y'
+        ORDER BY NATIONS_NO DESC;
+    </select>
+    
+    
 	<select id="detailedNations">
-		SELECT * FROM `NATIONS` WHERE nations_no = #{no};
+		SELECT m.MEMBER_NO, 
+			m.MEMBER_NAME, 
+			m.MEMBER_NICKNAME, 
+			v.NATIONS_NO, 
+			v.NATIONS_TITLE, 
+			v.NATIONS_CONTENT, 
+			DATE_FORMAT(v.NATIONS_DATE, '%m-%d') NATIONS_DATE 
+        FROM `NATIONS` v join `MEMBER` m on v.MEMBER_NO =m.MEMBER_NO  
+        WHERE nations_no = #{no};
 	</select>
 	
 			<!-- 작성 -->
     <insert id="insertNations" parameterType="Nations" >
         INSERT INTO `NATIONS` 
-        VALUES (default, #{memberNo}, #{nationTitle}, #{nationContent}, DEFAULT, DEFAULT)
+        VALUES (default, #{memberNo}, #{nationsTitle}, #{nationsContent}, DEFAULT, DEFAULT, DEFAULT)
     </insert>
     
     			<!-- 삭제 -->
     <update id="deleteNations" parameterType="Nations" >
 		UPDATE `NATIONS` 
-		SET nation_delete_fl ='Y' 
-		WHERE nation_no=#{nationNo}
+		SET nations_delete_fl ='Y' 
+		WHERE nations_no=#{nationNo}
     </update>
 	
 		<!-- 수정 -->
     <update id="updateNations" parameterType="Nations" >
 		UPDATE `NATIONS` 
-		SET nation_title = #{nationTitle}, nation_content=#{nationContent} 
-		WHERE nation_no=#{nationNo}
+		SET nations_title = #{nationsTitle}, 
+			nations_content=#{nationsContent} 
+		WHERE nations_no=#{nationsNo}
     </update>
 	
 </mapper>

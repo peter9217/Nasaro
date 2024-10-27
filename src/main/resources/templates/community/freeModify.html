@@ -4,13 +4,19 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../../css/community/free.css">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+	<script src="/js/summernote/summernote-lite.js"></script>
+	<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 	<title>나사로의 집</title>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
 </head>
 <body id="asd">
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="communityMain">
+		<div id="communityMain" class="topbanner">
 			<img src="../../img/middleBanner/15.jpg" alt="">
 			<div>자유게시판</div>
 		</div>
@@ -32,7 +38,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" > 
-							<textarea id="myTextarea" style="height:300px; width: 99%; border:none" name="freeContent" th:text="${free.freeContent}" oninput="autoResize(this)" required></textarea>
+							<textarea id="summernote" name="freeContent" th:utext="${free.freeContent}" required></textarea>
 						</td>
 					</tr>
 				</table>
@@ -40,11 +46,14 @@
 			<div id="freeButton">
 				<button > <a href="/community/free">목록</a></button>
 				<div th:if="${free.memberNo==session.loginMember?.memberNo ||session.loginMember?.memberGrade=='A'}">
-					<button id="freeModify" type="button" th:value="${free.freeNo}">수정</button>
+					<input id="csrf" type="hidden" th:value="${_csrf.token}">
+					<input id="csrfName" type="hidden" th:value="${_csrf.parameterName}">
+					<button id="freeModify" th:value="${free.freeNo}">수정</button>
 					<button id="freeDelete" type="button" th:value="${free.freeNo}">삭제</button>
 				</div>
 			</div>
 		</section>
+		<th:block th:replace="~{top/bottom.html}"></th:block>
 	</form>
 </body>
 <script src="../../js/community/free.js"></script>

@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../../css/gallery.css">
+	<link rel="stylesheet" href="../../css/button.css">
 	<link rel="stylesheet" href="../../css/utility/pagination.css">
 	<title>나사로의 집</title>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e8v32dthve"></script>
@@ -11,20 +12,36 @@
 <body id="asd"  th:with="pagination=${resultMap.pagination}, galleryList=${resultMap.galleryList}" >
 	<th:block th:replace="~{top/top.html}"></th:block>
 	<section>
-		<div id="galleryMain">
+		<div id="galleryMain" class="topbanner">
 			<img src="../../img/middleBanner/6.jpg" alt="">
 			<div>갤러리</div>
 		</div>
 	</section>
 	<section id="galleryMiddle">
-		<div id="galleryContents">
+		<div id="galleryContents">.
 			<div>
-				<select name="" id="category" onchange="categoryChange(this.value)">
-					<option th:selected="${categoryNo == '4'}" value="4">전체보기</option>
-					<option th:selected="${categoryNo == '1'}" value="1">나사로의집 풍경</option>
-					<option th:selected="${categoryNo == '2'}" value="2">거금도 풍경</option>
-					<option th:selected="${categoryNo == '3'}" value="3">농특산물 소개</option>
-				</select>
+				<div th:if="${categoryNo=='1'}" style="margin: 50px 20%;display: flex;justify-content: center;">
+					<a class="sign-signMenu-cho" href="/gallery/gallery/1" >나사로의집 풍경</a>
+					<a class="sign-signMenu" href="/gallery/gallery/2">거금도 풍경</a>
+					<a class="sign-signMenu" href="/gallery/gallery/3">거금도 특산물</a>
+				</div>
+				<div th:if="${categoryNo=='2'}" style="margin: 50px 20%;display: flex;justify-content: center;">
+					<a class="sign-signMenu" href="/gallery/gallery/1" >나사로의집 풍경</a>
+					<a class="sign-signMenu-cho" href="/gallery/gallery/2">거금도 풍경</a>
+					<a class="sign-signMenu" href="/gallery/gallery/3">거금도 특산물</a>
+				</div>
+				<div th:if="${categoryNo=='3'}" style="margin: 50px 20%;display: flex;justify-content: center;">
+					<a class="sign-signMenu" href="/gallery/gallery/1" >나사로의집 풍경</a>
+					<a class="sign-signMenu" href="/gallery/gallery/2">거금도 풍경</a>
+					<a class="sign-signMenu-cho" href="/gallery/gallery/3">거금도 특산물</a>
+				</div>
+			</div>
+			<!-- <select name="" id="category" onchange="categoryChange(this.value)">
+				<option th:selected="${categoryNo == '4'}" value="4">전체보기</option>
+				<option th:selected="${categoryNo == '1'}" value="1">나사로의집 풍경</option>
+				<option th:selected="${categoryNo == '2'}" value="2">거금도 풍경</option>
+				<option th:selected="${categoryNo == '3'}" value="3">거금도 특산물</option>
+			</select> -->
 				<!-- <div class="gallery-galleryMenu">나사로의집 풍경</div> -->
 				<div class="gallery-content">
 					<div th:each="g:${galleryList}">
@@ -36,13 +53,13 @@
 					</div>
 
 				</div>
-
+			</div>	
 
 			<div th:if="${#lists.size(galleryList) > 0}" class="pagination-area">
 				<ul th:unless="${param.query}" class="pagination" id="pagination">
 					<!-- 첫 페이지로 이동 -->
 					<li>
-					<a th:href="@{/gallery/gallery/{categoryNo}(categoryNo=${categoryNo}, cp=1, category=${param.category}, key=${param.key}, query=${param.query})}">
+					<a th:href="@{{categoryNo}(categoryNo=${categoryNo}, cp=1, category=${param.category}, key=${param.key}, query=${param.query})}">
 						<div>&lt;&lt;</div>
 					</a>
 					</li>
@@ -57,10 +74,10 @@
 					<th:block th:each=" i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
 						<!-- 현재 보고 있는 페이지 -->
 						<li th:if="${i == pagination.currentPage}">
-						<a class="current" th:text="${i}">현재페이지</a>
+							<a class="current" th:text="${i}">현재페이지</a>
 						</li>
 						<li th:unless="${i == pagination.currentPage}">
-						<a th:href="@{gallery/gallery/{categoryNo}(categoryNo=${categoryNo}, cp=${i}, category=${param.category}, key=${param.key}, query=${param.query})}" th:text="${i}">다른페이지</a>
+							<a th:href="@{/gallery/gallery/{categoryNo}(categoryNo=${categoryNo}, cp=${i}, category=${param.category}, key=${param.key}, query=${param.query})}" th:text="${i}">다른페이지</a>
 						</li>
 					</th:block>
 					<!-- 다음 목록 시작 번호로 이동 -->
@@ -80,9 +97,9 @@
 				<!-- 검색 O인 경우의 페이지네이션 -->
 				<ul th:if="${param.query}" class="pagination" id="pagination">
 					<!-- 첫 페이지로 이동 -->
-					<li><a th:href="@{/gallery/gallery/{categoryNo}(categoryNo=${categoryNo}, cp=${pagination.nextPage}, category=${param.category}, key=${param.key}, query=${param.query})}">&lt;&lt;</a></li>
+					<li><a th:href="@{/gallery/gallery/{categoryNo}(categoryNo=${categoryNo}, cp=1, category=${param.category}, key=${param.key}, query=${param.query})}">&lt;&lt;</a></li>
 					<!-- 이전 목록 마지막 번호로 이동 -->
-					<li><a th:href="@{/gallery/gallery/{categoryNo}(categoryNo=${categoryNo}, cp=${pagination.nextPage}, category=${param.category}, key=${param.key}, query=${param.query})}">&lt;</a></li>
+					<li><a th:href="@{/gallery/gallery/{categoryNo}(categoryNo=${categoryNo}, cp=${pagination.prevPage}, category=${param.category}, key=${param.key}, query=${param.query})}">&lt;</a></li>
 					<!-- #numbers.sequence(시작, 끝 [,step]) -->
 					<!-- 특정 페이지로 이동 -->
 					<th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
@@ -90,7 +107,7 @@
 					<li th:if="${i == pagination.currentPage}"><a class="current" th:text="${i}">현재 페이지</a></li>
 					<!-- 현재 페이지를 제외한 나머지 -->
 					<li th:unless="${i == pagination.currentPage}">
-						<a th:href="@{/gallery/gallery/{categoryNo}(categoryNo=${categoryNo}, cp=${pagination.nextPage}, category=${param.category}, key=${param.key}, query=${param.query})}" th:text="${i}">현재 페이지</a>
+						<a th:href="@{/gallery/gallery/{categoryNo}(categoryNo=${categoryNo}, cp=${i}, category=${param.category}, key=${param.key}, query=${param.query})}" th:text="${i}">현재 페이지</a>
 					</li>
 					</th:block>
 	
@@ -98,11 +115,11 @@
 					<li><a th:href="@{/gallery/gallery/{categoryNo}(categoryNo=${categoryNo}, cp=${pagination.nextPage}, category=${param.category}, key=${param.key}, query=${param.query})}">&gt;</a></li>
 	
 					<!-- 끝 페이지로 이동 -->
-					<li><a th:href="@{/gallery/gallery/{categoryNo}(categoryNo=${categoryNo}, cp=${pagination.nextPage}, category=${param.category}, key=${param.key}, query=${param.query})}">&gt;&gt;</a></li>
+					<li><a th:href="@{/gallery/gallery/{categoryNo}(categoryNo=${categoryNo}, cp=${pagination.maxPage}, category=${param.category}, key=${param.key}, query=${param.query})}">&gt;&gt;</a></li>
 				</ul>
-				</div>
+			</div>
 				<!-- 검색창 -->
-				<div id="boardSearch">
+			<div id="boardSearch">
 				<select name="key" id="searchKey">
 					<option value="t">제목</option>
 					<option value="c">내용</option>
@@ -110,14 +127,15 @@
 				</select>
 				<input type="text" name="query" id="searchQuery" >
 				<button type="submit" >검색</button>
-				</div>
 			</div>
+			
 		</div>
-	<div>
+	<div  th:if="${session.loginMember?.memberRank=='A'}">
 		<button><a href="/gallery/write">글쓰기</a> </button>
 	</div>
 
 	</section>
+	<th:block th:replace="~{top/bottom.html}"></th:block>
 </body>
 <script>
 	</script>

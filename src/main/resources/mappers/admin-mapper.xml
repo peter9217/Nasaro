@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nasaro.admin.model.mapper.AdminMapper">
+	
+	
+	<!--슬라이드 목록 조회-->
+    <select id="slideList" resultType="Slide">
+        SELECT *
+        FROM `SLIDE` 
+    </select>
+    
+    <!--슬라이드 목록 조회-->
+    <update id="modifySlide">
+		UPDATE `SLIDE`	
+		SET slide_Text= #{slideText}
+			,slide_Text_Top=#{slideTextTop}
+			,slide_Text_Left=#{slideTextLeft}
+			,slide_Text_Color=#{slideTextColor}
+			<if test="slideImgPath.length() > 0">
+		        , slide_Img_Path = #{slideImgPath}
+		    </if>
+		WHERE SLIDE_NO=#{slideNo}
+	</update>
+    
+
+	<select id="intro">
+		SELECT * 
+		FROM `INTRO` 
+		WHERE intro_fl= 'Y';
+	</select>
+	
+	<!-- 수정 -->
+    <update id="modifyIntro" parameterType="Intro" >
+		UPDATE `INTRO` 
+		SET intro_content = #{introContent}
+    </update>
+	<!-- 수정 -->
+    <insert id="insertImage" parameterType="Intro" >
+		UPDATE `INTRO`  
+		SET intro_img = #{introImg}
+    </insert>
+	
+	
+	
+	<select id="consultation">
+		SELECT * 
+		FROM `CONSULTATION` 
+		WHERE consultation_fl= 'Y';
+	</select>
+	
+	<!-- 수정 -->
+    <update id="modifyConsultation" parameterType="Consultation" >
+		UPDATE `CONSULTATION` 
+		SET consultation_content = #{consultationContent}
+    </update>
+    	<!-- 수정 -->
+    <insert id="insertConsultationImage" parameterType="Consultation" >
+		UPDATE `CONSULTATION`  
+		SET consultation_img = #{consultationImg}
+    </insert>
+    
+    
+	<select id="guide">
+		SELECT * 
+		FROM `GUIDE` 
+		WHERE guide_fl= 'Y';
+	</select>
+	
+	<!-- 수정 -->
+    <update id="modifyGuide" parameterType="Guide" >
+		UPDATE `GUIDE` 
+		SET guide_content = #{guideContent}
+    </update>
+        	<!-- 수정 -->
+    <insert id="insertGuideImage" parameterType="Guide" >
+		UPDATE `GUIDE`  
+		SET guide_img = #{guideImg}
+    </insert>
+    
+    
+    
+	<select id="prayer">
+		SELECT * 
+		FROM `PRAYER` 
+		WHERE prayer_fl= 'Y';
+	</select>
+	
+	<!-- 수정 -->
+    <update id="modifyPrayer" parameterType="Prayer" >
+		UPDATE `PRAYER` 
+		SET prayer_content = #{prayerContent}
+    </update>
+            	<!-- 수정 -->
+    <insert id="insertPrayerImage" parameterType="Prayer" >
+		UPDATE `PRAYER`  
+		SET prayer_img = #{prayerImg}
+    </insert>
+    
+    
+    <select id="member">
+		SELECT * 
+		FROM `MEMBER`
+		WHERE member_rank!='A' 
+	</select>
+	
+	<!-- 공지사항 count-->
+    <select id="memberListCount">
+        SELECT count(*) 
+        FROM `MEMBER`
+        WHERE member_rank!='A'
+    </select>
+    
+    <!-- 검색어를 포함한 전체 목록 조회(count)-->
+    <select id="memberListCountSearch" resultType="_int">
+		SELECT COUNT(*) 
+		FROM `MEMBER` 
+		<!-- 작성자 검색 -->
+		WHERE member_rank!='A'
+		<choose>
+			<when test='key=="t"'>
+				AND member_id LIKE '%${query}%'
+			</when> 
+			<when test='key=="c"'>
+				AND member_name LIKE '%${query}%' 
+			</when>
+			<when test='key=="tc"'>
+				AND (member_id LIKE '%${query}%' OR member_name LIKE '%${query}%')
+			</when>
+		</choose> 
+	</select>
+	
+	<!--공지사항 목록 조회-->
+    <select id="memberList" resultType="Member">
+        SELECT *
+        FROM `MEMBER` 
+        WHERE member_rank!='A' 
+		ORDER BY FIELD(member_rank,'M', 'F', 'N') ;
+    </select>
+
+    
+    <!-- 검색어를 포함한  공지사항 조회결과  -->
+    <select id="searchMemberList" resultType="Member">
+        SELECT *
+        FROM `MEMBER`
+		<!-- 작성자 검색 -->
+		WHERE member_rank!='A'
+		<choose>
+			<when test='key=="t"'>
+				AND member_id LIKE '%${query}%'
+			</when> 
+			<when test='key=="c"'>
+				AND member_name LIKE '%${query}%' 
+			</when>
+			<when test='key=="tc"'>
+				AND (member_id LIKE '%${query}%' OR member_name LIKE '%${query}%')
+			</when>
+		</choose> 
+        ORDER BY FIELD(member_rank,'M', 'F', 'N') ;
+    </select>
+    
+    <update id="modifyMember">
+		UPDATE `MEMBER` 
+		SET member_rank = #{memberRank},
+			member_Del_Fl = #{memberDelFl}
+		WHERE member_No = #{memberNo}
+    </update>
+		
+    <update id="modifyBoard">
+		<choose>
+        <when test='board == "verses"'>
+            UPDATE `VERSES` 
+            SET verses_notice = #{boardChoice}
+            WHERE verses_No = #{boardNo}
+        </when>
+        <when test='board == "column"'>
+            UPDATE `COLUMN` 
+            SET COLUMN_notice = #{boardChoice}
+            WHERE COLUMN_No = #{boardNo}
+        </when>
+        <when test='board == "reference"'>
+            UPDATE `REFERENCE` 
+            SET REFERENCE_notice = #{boardChoice}
+            WHERE REFERENCE_No = #{boardNo}
+        </when>
+        <when test='board == "nations"'>
+            UPDATE `NATIONS` 
+            SET NATIONS_notice = #{boardChoice}
+            WHERE NATIONS_No = #{boardNo}
+        </when>
+        <when test='board == "family"'>
+            UPDATE `FAMILY` 
+            SET FAMILY_notice = #{boardChoice}
+            WHERE FAMILY_No = #{boardNo}
+        </when>
+        <when test='board == "notice"'>
+            UPDATE `NOTICE` 
+            SET NOTICE_notice = #{boardChoice}
+            WHERE NOTICE_No = #{boardNo}
+        </when>
+        <when test='board == "sharing"'>
+            UPDATE `SHARING` 
+            SET SHARING_notice = #{boardChoice}
+            WHERE SHARING_No = #{boardNo}
+        </when>
+        <when test='board == "free"'>
+            UPDATE `FREE` 
+            SET FREE_notice = #{boardChoice}
+            WHERE FREE_No = #{boardNo}
+        </when>
+    </choose>
+    </update>
+		
+</mapper>
+

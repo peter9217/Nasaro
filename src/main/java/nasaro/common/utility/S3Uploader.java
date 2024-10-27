@@ -36,6 +36,12 @@ public class S3Uploader {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
+	@Value("${board.summernote.webpath}")
+	private String webPath;
+	
+	@Value("${board.summernote.location}")
+	private String filePath;
+    
     // MultipartFile을 전달받아 File로 전환한 후 S3에 업로드
     public String upload(MultipartFile multipartFile, String dirName) throws IOException {
         File uploadFile = convert(multipartFile)
@@ -111,5 +117,22 @@ public class S3Uploader {
 	public void remove(String path) {
 		amazonS3.deleteObject(new DeleteObjectRequest(bucket, path));
 	}
+	
+	public String uploadImage(MultipartFile file) throws IOException {
+        File convertedFile = convertMultipartFileToFile(file);
+        String fileName = generateFileName(file.getOriginalFilename());
+        amazonS3.putObject(new PutObjectRequest(bucket, fileName, convertedFile));
+        return amazonS3.getUrl(bucket, fileName).toString();
+    }
+
+    private File convertMultipartFileToFile(MultipartFile file) throws IOException {
+        File convertedFile = new File(file.getOriginalFilename());
+        file.transferTo(convertedFile);
+        return convertedFile;
+    }
+
+    private String generateFileName(String originalFileName) {
+        return System.currentTimeMillis() + "-" + originalFileName;
+    }
    
 }
