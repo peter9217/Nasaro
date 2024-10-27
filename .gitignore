@@ -28,6 +28,7 @@ settings.json
 config.properties
 db.properties
 application-prod.properties
+application-local.properties
 keystore.p12
 
 ### IntelliJ IDEA ###
