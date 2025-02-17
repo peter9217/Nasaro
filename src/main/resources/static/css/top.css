@@ -78,6 +78,9 @@ textarea{
     justify-content: space-between;
     background-color: white;
 }
+#topMenuButton{
+    display:none;
+}
 /* 로고 */
 #topLogo{
     
@@ -203,6 +206,26 @@ textarea{
         margin-top: 50px;
     }
 
+    .topbanner{
+        padding-top: 50px;
+    }
+}
+@media screen and (max-width:500px) {
+    #topMenuButton{
+        display:block;
+    }
+    #topLogo{
+        position: absolute;
+        left:20%;
+    }
+    .top-nav{
+        justify-content: flex-start;
+        display:none;
+    }
+    .top-nav>div{
+        flex-direction: column;
+    }
+    
     .topbanner{
         padding-top: 50px;
     }

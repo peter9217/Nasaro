@@ -14,6 +14,9 @@
 				<a href="/">
 					<img id="topLogo" src="../../img/main/나사로로그.bmp" alt="">
 				</a>
+				<div >
+					<button id="topMenuButton">메뉴</button>
+				</div>
 			</div>
 			<div id="topRight">
 				<div id="topSign" th:unless="${session.loginMember}">
@@ -101,6 +104,9 @@
 <script th:inline="javascript">
 	const message = /*[[${message}]]*/ "message";
 	if(message !=null ) alert(message);
+	document.getElementById("topMenuButton").addEventListener("click", function () {
+		document.querySelector(".top-nav").classList.toggle("active");
+	});
 </script>
 <script src="/../js/top.js"></script>
 </html>
