@@ -45,7 +45,6 @@ public class ColumnController {
 		}else {
 			Map<String, Object> resultMap = service.columnList(paramMap, cp);
 			model.addAttribute("resultMap", resultMap);
-			System.out.println(resultMap);
 		}
 		return "verses/column";
 	}
@@ -54,7 +53,6 @@ public class ColumnController {
 	public String detail(@PathVariable(name="no") String no, Model model) {
 		Column column = service.detailedColumn(no);
 		model.addAttribute("column", column);
-		System.out.println(column);
 		return "verses/columnDetail";
 		
 	}
@@ -79,7 +77,6 @@ public class ColumnController {
 			,Column column
 			) {
 		column.setMemberNo(loginMember.getMemberNo());
-		System.out.println(loginMember);
 		int i = service.insertColumn(column);
 		String path = "redirect:/verses/column";
 		return path;
@@ -113,7 +110,6 @@ public class ColumnController {
 	public String update(Column column,
 			Model model
 			){
-		System.out.println("asd");
 		int i = service.updateColumn(column);
 		if(i==0) {
 			

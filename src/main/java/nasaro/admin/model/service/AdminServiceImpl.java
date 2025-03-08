@@ -18,10 +18,8 @@ import nasaro.admin.model.dto.Slide;
 import nasaro.admin.model.mapper.AdminMapper;
 import nasaro.common.utility.Pagination;
 import nasaro.common.utility.S3Uploader;
-import nasaro.gallery.model.dto.GalleryImg;
 import nasaro.intro.model.dto.Intro;
 import nasaro.member.model.dto.Member;
-import nasaro.pray.model.dto.Nations;
 import nasaro.pray.model.dto.Prayer;
 import nasaro.intro.model.dto.Consultation;
 import nasaro.intro.model.dto.Guide;
@@ -120,14 +118,11 @@ public class AdminServiceImpl implements AdminService {
 				img.setGuideImg(filePath +guide.getGuideNo()+fileName);
 				img.setGuideNo(guide.getGuideNo());
 //				img.setIntroImgOrder(i);
-				System.out.println(img);
 				insertList.add(img);
 				result=mapper.insertGuideImage(img);
 				size+=1;
 			}
 		}
-		System.out.println(images.size());
-		System.out.println(insertList.size());
 		if(!insertList.isEmpty()) {
 			if(insertList.size()==size) {
 				for(int i=0; i<insertList.size(); i++) {
@@ -183,8 +178,6 @@ public class AdminServiceImpl implements AdminService {
 				size+=1;
 			}
 		}
-		System.out.println(images.size());
-		System.out.println(insertList.size());
 		if(!insertList.isEmpty()) {
 			if(insertList.size()==size) {
 				for(int i=0; i<insertList.size(); i++) {
@@ -234,14 +227,11 @@ public class AdminServiceImpl implements AdminService {
 				img.setPrayerImg(filePath +prayer.getPrayerNo()+fileName);
 				img.setPrayerNo(prayer.getPrayerNo());
 //				img.setIntroImgOrder(i);
-				System.out.println(img);
 				insertList.add(img);
 				result=mapper.insertPrayerImage(img);
 				size+=1;
 			}
 		}
-		System.out.println(images.size());
-		System.out.println(insertList.size());
 		if(!insertList.isEmpty()) {
 			if(insertList.size()==size) {
 				for(int i=0; i<insertList.size(); i++) {
@@ -322,8 +312,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public int modifySlide(MultipartFile images, Slide slide) throws FileUploadException {
-		int no = 1;
-		int result = 0;
 		String fileName = "";
 		fileName = images.getOriginalFilename();
 		if (images.getSize()>0) {
@@ -335,7 +323,7 @@ public class AdminServiceImpl implements AdminService {
 				e.printStackTrace();
 			}
 		}
-		result=mapper.modifySlide(slide);
+		mapper.modifySlide(slide);
 		
 		return 0;
 	}

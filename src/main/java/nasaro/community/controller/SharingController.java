@@ -1,7 +1,5 @@
 package nasaro.community.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import nasaro.community.model.dto.Notice;
 import nasaro.community.model.dto.Sharing;
 import nasaro.community.model.service.SharingService;
 import nasaro.member.model.dto.Member;
-import nasaro.verses.model.dto.Verses;
 
 @Controller
 public class SharingController {
@@ -40,7 +36,6 @@ public class SharingController {
 		}else {
 			Map<String, Object> resultMap = service.sharingList(paramMap, cp);
 			model.addAttribute("resultMap", resultMap);
-			System.out.println(resultMap);
 		}
 		return "community/sharing";
 	}
@@ -49,7 +44,6 @@ public class SharingController {
 	public String board(@PathVariable(name="no") String no, Model model) {
 		Sharing sharing = service.detailedSharing(no);
 		model.addAttribute(sharing);
-		System.out.println(no);
 		return "community/sharingDetail";
 	}
 	
@@ -70,10 +64,7 @@ public class SharingController {
 			,Sharing sharing
 			) {
 		sharing.setMemberNo(loginMember.getMemberNo());
-		System.out.println("로그인멤버");
-		System.out.println(loginMember);
-		System.out.println(sharing);
-		int i = service.insertSharing(sharing);
+		service.insertSharing(sharing);
 		String path = "redirect:/community/sharing";
 		return path;
 	}
@@ -106,10 +97,8 @@ public class SharingController {
 	public String update(Sharing sharing,
 			Model model
 			){
-		int i = service.updateSharing(sharing);
-		if(i==0) {
-			
-		}
+		service.updateSharing(sharing);
+		
 		return "redirect:/community/sharing";
 	}
 }

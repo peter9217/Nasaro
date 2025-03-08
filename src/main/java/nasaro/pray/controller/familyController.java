@@ -1,7 +1,5 @@
 package nasaro.pray.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import nasaro.member.model.dto.Member;
 import nasaro.pray.model.dto.Family;
 import nasaro.pray.model.service.FamilyService;
-import nasaro.verses.model.dto.Verses;
 
 @Controller
 public class familyController {
@@ -70,10 +67,7 @@ public class familyController {
 			,Family family
 			) {
 		family.setMemberNo(loginMember.getMemberNo());
-		System.out.println("로그인멤버");
-		System.out.println(loginMember);
-		System.out.println(family);
-		int i = service.insertFamily(family);
+		service.insertFamily(family);
 		String path = "redirect:/pray/family";
 		return path;
 	}

@@ -6,10 +6,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
-import nasaro.community.model.dto.Free;
 import nasaro.gallery.model.dto.Gallery;
 import nasaro.gallery.model.dto.GalleryImg;
-import nasaro.member.model.dto.Member;
 
 @Mapper
 public interface GalleryMapper {

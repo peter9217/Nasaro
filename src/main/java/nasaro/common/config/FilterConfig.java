@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 import nasaro.common.filter.AdminFilter;
 import nasaro.common.filter.LoginFilter;
-import nasaro.common.filter.PageFilter;
 
 
 @Configuration

@@ -6,9 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import nasaro.intro.model.dto.Consultation;
-import nasaro.intro.model.dto.Intro;
 import nasaro.intro.model.service.ConsultationService;
-import nasaro.intro.model.service.IntroService;
 
 @Controller
 public class ConsultationController {

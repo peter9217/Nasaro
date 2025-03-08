@@ -1,28 +1,15 @@
 package nasaro.signUp.model.service;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import nasaro.common.utility.RandomUtil;
-import nasaro.common.utility.RedisUtil;
 import nasaro.common.utility.SmsUtil;
 import nasaro.member.model.dto.Member;
-import nasaro.member.model.mapper.MemberMapper;
-import nasaro.pray.model.dto.Family;
-import nasaro.pray.model.dto.Nations;
-import nasaro.pray.model.mapper.FamilyMapper;
-import nasaro.pray.model.mapper.NationsMapper;
 import nasaro.signUp.model.dto.Sms;
 import nasaro.signUp.model.mapper.SignUpMapper;
-import nasaro.verses.model.dto.Column;
-import nasaro.verses.model.dto.Reference;
-import nasaro.verses.model.dto.Verses;
-import nasaro.verses.model.mapper.VersesMapper;
-import nasaro.verses.model.mapper.ColumnMapper;
-import nasaro.verses.model.mapper.ReferenceMapper;
 
 @Service
 public class SignUpServiceImpl implements SignUpService {
@@ -36,8 +23,6 @@ public class SignUpServiceImpl implements SignUpService {
     private RandomUtil randomUtil;
     @Autowired
     private SmsUtil smsUtil;
-	@Autowired
-	private MemberMapper MemberMapper;
 	
 	@Override
 	public int checkNickname(String nick) {
@@ -47,6 +32,7 @@ public class SignUpServiceImpl implements SignUpService {
 
 	@Override
 	public int modifyNickname(Member loginMember) {
+		System.out.println(loginMember);
 		return mapper.modifyNickname(loginMember);
 	}
 

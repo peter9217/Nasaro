@@ -7,9 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import nasaro.pray.model.dto.Family;
-import nasaro.pray.model.dto.Nations;
-import nasaro.verses.model.dto.Column;
-import nasaro.verses.model.dto.Verses;
 
 @Mapper
 public interface FamilyMapper {

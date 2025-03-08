@@ -19,7 +19,7 @@
     
 	<update id="modifyNickname">
 		UPDATE `MEMBER` 
-		SET member_nickname = ${memberNickname}
+		SET MEMBER_NICKNAME = ${memberNickname}
 		WHERE member_No = #{memberNo}
     </update>
 	<update id="modifyTel">

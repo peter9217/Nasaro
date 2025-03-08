@@ -1,7 +1,5 @@
 package nasaro.community.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +15,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nasaro.community.model.dto.Free;
-import nasaro.community.model.dto.Notice;
 import nasaro.community.model.service.FreeService;
 import nasaro.member.model.dto.Member;
-import nasaro.verses.model.dto.Verses;
 
 @Controller
 public class FreeContoroller {
@@ -50,8 +46,6 @@ public class FreeContoroller {
 	public String board(@PathVariable(name="no") String no, Model model) {
 		Free free = service.detailedFree(no);
 		model.addAttribute("free", free);
-		System.out.println(free);
-		System.out.println(no);
 		return "community/freeDetail";
 	}
 	
@@ -72,10 +66,7 @@ public class FreeContoroller {
 			,Free free
 			) {
 		free.setMemberNo(loginMember.getMemberNo());
-		System.out.println("로그인멤버");
-		System.out.println(loginMember);
-		System.out.println(free);
-		int i = service.insertFree(free);
+		service.insertFree(free);
 		String path = "redirect:/community/free";
 		return path;
 	}
@@ -108,10 +99,7 @@ public class FreeContoroller {
 	public String update(Free free,
 			Model model
 			){
-		int i = service.updateFree(free);
-		if(i==0) {
-			
-		}
+		service.updateFree(free);
 		return "redirect:/community/free";
 	}
 }

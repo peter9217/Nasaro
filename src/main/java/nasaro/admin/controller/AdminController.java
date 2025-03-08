@@ -3,7 +3,6 @@ package nasaro.admin.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,17 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import nasaro.admin.model.dto.Slide;
 import nasaro.admin.model.service.AdminService;
@@ -33,7 +28,6 @@ import nasaro.intro.model.dto.Intro;
 import nasaro.intro.model.dto.Consultation;
 import nasaro.intro.model.dto.Guide;
 import nasaro.member.model.dto.Member;
-import nasaro.pray.model.dto.Family;
 import nasaro.pray.model.dto.Prayer;
 import nasaro.pray.model.service.FamilyService;
 import nasaro.pray.model.service.NationsService;
@@ -83,8 +77,8 @@ public class AdminController {
 			, Model model
 			, Slide slide
 			) throws FileUploadException{
-		System.out.println(slide);
-		int i = service.modifySlide(image, slide);
+		
+		service.modifySlide(image, slide);
 		return "redirect:/admin/slide";
 	}
 	
@@ -104,11 +98,8 @@ public class AdminController {
 	public String introModify(Intro intro
 			, Model model
 			){
-		int i = service.modifyIntro(intro);
-		System.out.println(intro);
-		if(i==0) {
-			
-		}
+		service.modifyIntro(intro);
+		
 		return "redirect:/admin/intro";
 	}
 	
@@ -117,11 +108,8 @@ public class AdminController {
 	public String introImgModify(Intro intro
 			, Model model, @RequestParam("images") List<MultipartFile> images
 			)throws IllegalStateException, IOException{
-		int i = service.modifyImgIntro(intro, images);
-		System.out.println(intro);
-		if(i==0) {
-			
-		}
+		service.modifyImgIntro(intro, images);
+		
 		return "redirect:/admin/intro";
 	}
 	
@@ -143,11 +131,9 @@ public class AdminController {
 	public String consultationModify(Consultation consultation
 			, Model model
 			){
-		int i = service.modifyConsultation(consultation);
-		System.out.println(consultation);
-		if(i==0) {
-			
-		}
+		service.modifyConsultation(consultation);
+		
+		
 		return "redirect:/admin/consultation";
 	}
 	// 공지사항 수정
@@ -155,11 +141,8 @@ public class AdminController {
 	public String consultationImgModify(Consultation consultation
 			, Model model, @RequestParam("images") List<MultipartFile> images
 			)throws IllegalStateException, IOException{
-		int i = service.modifyImgConsultation(consultation, images);
-		System.out.println(consultation);
-		if(i==0) {
-			
-		}
+		service.modifyImgConsultation(consultation, images);
+		
 		return "redirect:/admin/consultation";
 	}
 	
@@ -182,11 +165,8 @@ public class AdminController {
 	public String guideModify(Guide guide
 			, Model model
 			){
-		int i = service.modifyGuide(guide);
-		System.out.println(guide);
-		if(i==0) {
-			
-		}
+		service.modifyGuide(guide);
+		
 		return "redirect:/admin/guide";
 	}
 	// 공지사항 수정
@@ -194,11 +174,8 @@ public class AdminController {
 	public String guideImgModify(Guide guide
 			, Model model, @RequestParam("images") List<MultipartFile> images
 			)throws IllegalStateException, IOException{
-		int i = service.modifyImgGuide(guide, images);
-		System.out.println(guide);
-		if(i==0) {
-			
-		}
+		service.modifyImgGuide(guide, images);
+		
 		return "redirect:/admin/guide";
 	}
 	
@@ -221,11 +198,7 @@ public class AdminController {
 	public String prayerModify(Prayer prayer
 			, Model model
 			){
-		int i = service.modifyPrayer(prayer);
-		System.out.println(prayer);
-		if(i==0) {
-			
-		}
+		service.modifyPrayer(prayer);
 		return "redirect:/admin/prayer";
 	}
 	// 공지사항 수정
@@ -234,7 +207,6 @@ public class AdminController {
 			, Model model, @RequestParam("images") List<MultipartFile> images
 			)throws IllegalStateException, IOException{
 		int i = service.modifyImgPrayer(prayer, images);
-		System.out.println(prayer);
 		if(i==0) {
 			
 		}
@@ -256,7 +228,6 @@ public class AdminController {
 		}else {
 			Map<String, Object> resultMap = service.memberList(paramMap, cp);
 			model.addAttribute("resultMap", resultMap);
-			System.out.println(resultMap);
 		}
 		return "admin/member";
 	}
@@ -277,9 +248,6 @@ public class AdminController {
 			, @RequestParam(value="boardNo", required=false) int boardNo
 			, @RequestParam(value="boardChoice", required=false) String boardChoice
 			) {
-		System.out.println(board);
-		System.out.println(boardNo);
-		System.out.println(boardChoice);
 		int i = service.modifyBoard(board, boardNo, boardChoice);
 		attributes.addAttribute("board", board);
 		return "redirect:/admin/board";
@@ -292,7 +260,6 @@ public class AdminController {
 			, @RequestParam Map<String, Object> paramMap
 			, @RequestParam(value="board", required=false, defaultValue="verses") String board
 			) {
-		System.out.println(board);
 		if(paramMap.get("key") == null) { 
 			Map<String, Object> resultMap =new HashMap<>();
 			switch (board) {
@@ -330,7 +297,6 @@ public class AdminController {
 				}
 			}
 			model.addAttribute("resultMap", resultMap);
-			System.out.println(resultMap);
 		//검색어 있을 때
 		}else {
 			Map<String, Object> resultMap = new HashMap<>();
@@ -369,7 +335,6 @@ public class AdminController {
 				}
 			}
 			model.addAttribute("resultMap", resultMap);
-			System.out.println(resultMap);
 		}
 		model.addAttribute("board",board);
 		return "admin/board";

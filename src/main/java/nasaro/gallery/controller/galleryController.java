@@ -33,14 +33,10 @@ public class GalleryController {
 		if(categoryNo.equals("4")) {
 			categoryNo= null;
 		};
-		System.out.println("페이지 접속");
-		System.out.println(cp);
 		paramMap.put("galleryCategory", categoryNo);
 		if(paramMap.get("query") == "" || paramMap.get("query") == null) { 
 			Map<String, Object> resultMap = service.galleryList(paramMap, cp);
 			model.addAttribute("resultMap", resultMap);
-			System.out.println("검색어 없ㅇ므");
-			System.out.println(resultMap.get("pagination"));
 			
 		//검색어 있을 때
 		}else {
@@ -68,8 +64,6 @@ public class GalleryController {
 	@PostMapping(value="/gallery/insert", produces = "application/json; charset=UTF-8")
 	public String insert(Gallery gallery, @RequestParam("images") List<MultipartFile> images)
 			throws IllegalStateException, IOException {
-		System.out.println(images);
-		System.out.println(gallery);
 		for (MultipartFile multipartFile : images) {
 		    if (multipartFile.getSize() > 0) {
 		        System.out.println("0보다 큼");

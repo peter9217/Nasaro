@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
-import org.springframework.web.multipart.MultipartFile;
 
 import nasaro.intro.model.dto.Intro;
 import nasaro.member.model.dto.Member;
@@ -14,7 +13,6 @@ import nasaro.pray.model.dto.Prayer;
 import nasaro.admin.model.dto.Slide;
 import nasaro.intro.model.dto.Consultation;
 import nasaro.intro.model.dto.Guide;
-import nasaro.verses.model.dto.Verses;
 
 @Mapper
 public interface AdminMapper {

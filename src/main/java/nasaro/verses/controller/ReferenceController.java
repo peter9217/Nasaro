@@ -1,8 +1,6 @@
 package nasaro.verses.controller;
 
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nasaro.member.model.dto.Member;
 import nasaro.verses.model.dto.Reference;
-import nasaro.verses.model.dto.Verses;
 import nasaro.verses.model.service.ReferenceService;
 
 @Controller
@@ -41,7 +38,6 @@ public class ReferenceController {
 		}else {
 			Map<String, Object> resultMap = service.referenceList(paramMap, cp);
 			model.addAttribute("resultMap", resultMap);
-			System.out.println(resultMap);
 		}
 		return "verses/reference";
 	}
@@ -50,7 +46,6 @@ public class ReferenceController {
 	public String detail(@PathVariable(name="no") String no, Model model) {
 		Reference reference = service.detailedReference(no);
 		model.addAttribute("reference", reference);
-		System.out.println(reference);
 		return "verses/referenceDetail";
 		
 	}
@@ -71,8 +66,7 @@ public class ReferenceController {
 			,Reference reference
 			) {
 		reference.setMemberNo(loginMember.getMemberNo());
-		System.out.println(loginMember);
-		int i = service.insertReference(reference);
+		service.insertReference(reference);
 		String path = "redirect:/verses/reference";
 		return path;
 	}

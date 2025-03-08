@@ -27,7 +27,6 @@ public class RandomUtil {
 
         // 생성된 랜덤 문자열 출력
         String randomString = stringBuilder.toString();
-        System.out.println("Random String: " + randomString);
         return randomString;
     }
 }

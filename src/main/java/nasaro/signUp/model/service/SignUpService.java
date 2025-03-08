@@ -1,7 +1,5 @@
 package nasaro.signUp.model.service;
 
-import java.util.List;
-
 import nasaro.member.model.dto.Member;
 import nasaro.signUp.model.dto.Sms;
 

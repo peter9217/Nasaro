@@ -1,7 +1,5 @@
 package nasaro.pray.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import nasaro.member.model.dto.Member;
 import nasaro.pray.model.dto.Nations;
 import nasaro.pray.model.service.NationsService;
-import nasaro.verses.model.dto.Verses;
 
 @Controller
 public class nationsController {
@@ -70,10 +67,7 @@ public class nationsController {
 			,Nations nations
 			) {
 		nations.setMemberNo(loginMember.getMemberNo());
-		System.out.println("로그인멤버");
-		System.out.println(loginMember);
-		System.out.println(nations);
-		int i = service.insertNations(nations);
+		service.insertNations(nations);
 		String path = "redirect:/pray/nations";
 		return path;
 	}

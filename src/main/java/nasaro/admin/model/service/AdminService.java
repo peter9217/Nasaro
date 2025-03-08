@@ -12,9 +12,6 @@ import nasaro.pray.model.dto.Prayer;
 import nasaro.admin.model.dto.Slide;
 import nasaro.intro.model.dto.Consultation;
 import nasaro.intro.model.dto.Guide;
-import nasaro.verses.model.dto.Column;
-import nasaro.verses.model.dto.Reference;
-import nasaro.verses.model.dto.Verses;
 
 public interface AdminService {
 

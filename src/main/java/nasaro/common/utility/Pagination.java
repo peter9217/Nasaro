@@ -166,11 +166,7 @@ public class Pagination {
 		else
 			//prevPage = (currentPage - 1) / pageSize * pageSize;
 			prevPage = currentPage - 1;
-		System.out.println(endPage);
-		System.out.println(maxPage);
-		System.out.println(currentPage);
 		if(currentPage+1 >= maxPage) nextPage = maxPage;
 		else				   nextPage = currentPage + 1;
-		System.out.println("next :"+nextPage);
 	}
 }

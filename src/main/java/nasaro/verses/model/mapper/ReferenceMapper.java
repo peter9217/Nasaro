@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import nasaro.verses.model.dto.Reference;
-import nasaro.verses.model.dto.Verses;
 
 @Mapper
 public interface ReferenceMapper {

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import nasaro.intro.model.dto.Consultation;
 import nasaro.intro.model.dto.Guide;
 import nasaro.intro.model.service.GuideService;
 

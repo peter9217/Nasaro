@@ -35,7 +35,6 @@ public class signUpController {
 	@ResponseBody
 	@PostMapping("signUp/sendSms")
 	public String sendSms(@RequestBody String memberTel) {
-		System.out.println(memberTel);
 		smsUtil.sendOne(memberTel);
 		
 		return "문자를 확인해주세요";
@@ -44,15 +43,12 @@ public class signUpController {
 	@ResponseBody
 	@PostMapping(value="signUp/smsConfirm" )
 	public String smsConfirm(@RequestBody Sms sms) {
-		System.out.println("smsConfirm");
-		System.out.println(sms);
 		String r = smsUtil.checkCode(sms);
 		return r;
 	}
 	@PostMapping("signUp/signUp")
 	public String signUp(Member member) {
-		System.out.println(member);
-		int i = service.signUp(member);
+		service.signUp(member);
 		return "redirect:/";
 	}
 
@@ -66,12 +62,16 @@ public class signUpController {
 	}
 	@ResponseBody
 	@PostMapping("signUp/checkNickname")
-	public String checkNickname(@RequestBody String nick) {
-		System.out.println(nick);
+	public String checkNickname(@RequestBody String nick
+			,@SessionAttribute(name="loginMember", required = false) Member loginMember) {
+		loginMember.setMemberNickname(nick);
 		int i = service.checkNickname(nick);
-		String message = "true";
+		String message = "";
 		if(i==1) {
 			message = "이미 있는 닉네임입니다.";
+		}else {
+			service.modifyNickname(loginMember);
+			
 		}
 		return message;
 	}
@@ -82,7 +82,7 @@ public class signUpController {
 	public String modifyNickname(@RequestBody String nick
 			,@SessionAttribute(name="loginMember", required = false) Member loginMember) {
 		loginMember.setMemberNickname(nick);
-		int i = service.modifyNickname(loginMember);
+		service.modifyNickname(loginMember);
 		String message = "true";
 		return message;
 	}
@@ -98,8 +98,7 @@ public class signUpController {
 	}
 	@PostMapping("signUp/findMember")
 	public String findMember(Member member) {
-		System.out.println(member);
-		int i = service.findMember(member);
+		service.findMember(member);
 		return "redirect:/";
 	}
 	
